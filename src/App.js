@@ -4,14 +4,17 @@ import {
   Box,
   theme,
 } from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
+import { BrowserRouter as Router, Switch, Route,  } from 'react-router-dom';
+import LoginPage from './pages/login'
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-          <ColorModeSwitcher justifySelf="flex-end" />        
-      </Box>
+      <Router>
+        <Switch>
+          <Route path="/login" component={LoginPage} />
+        </Switch>
+      </Router>
     </ChakraProvider>
   );
 }
