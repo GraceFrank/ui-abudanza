@@ -1,14 +1,93 @@
-import { Box, Flex, HStack, Link } from '@chakra-ui/layout';
-import React from 'react';
+import { Image } from '@chakra-ui/image';
+import { Container, HStack, VStack } from '@chakra-ui/layout';
+import { Box, Flex, Link, Heading } from '@chakra-ui/layout';
+import React, { useState } from 'react';
+import logo from '../../images/logo.png';
+import { PRIMARY, HIGHLIGHT, BACKGROUND } from '../../constants/colors.json';
+import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
+import { useMediaQuery } from '@chakra-ui/media-query';
 
-const MainNav = () => {
+const NavMenu = ({ nav_items, path }) => {
+  return nav_items.map(item => {
+    const color = item.path === path ? HIGHLIGHT : PRIMARY;
+    return (
+      <Link key={item.label} href={item.path}>
+        <Heading as="h6" size="xs" color={color}>
+          {item.label}
+        </Heading>
+        {item.path === path && (
+          <Box mt="2" height="3px" background={HIGHLIGHT}></Box>
+        )}
+      </Link>
+    );
+  });
+};
+
+const MenuToggle = ({ toggle, isOpen }) => {
   return (
-    <Box>
-      <Flex>
-        <HStack>
-          <Link></Link>
-        </HStack>
-      </Flex>
+    <Box display={{ base: 'block', md: 'none' }} p="2" onClick={toggle}>
+      {isOpen ? <CloseIcon /> : <HamburgerIcon />}
     </Box>
   );
 };
+
+const MobileMenuItems = ({ nav_items, path }) => {
+  const menuItems = nav_items.map(item => (
+    <Link href={item.path} key={item.label}>
+      <Heading
+        as="h6"
+        size="xs"
+        color={path === item.path ? HIGHLIGHT : PRIMARY}
+      >
+        {item.label}
+      </Heading>
+    </Link>
+  ));
+  return (
+    <Box>
+      <VStack
+        border="1px"
+        borderColor="gray.200"
+        px="5"
+        py="3"
+        spacing={3.5}
+        align="flex-end"
+      >
+        {menuItems}
+      </VStack>
+    </Box>
+  );
+};
+
+const NAV_ITEMS = [
+  { label: 'HOME', href: '/home' },
+  { label: 'SERVICES', href: '/services' },
+  { label: 'CONTACT', href: '/contact' },
+];
+
+const MainNav = props => {
+  const [isMobileView] = useMediaQuery('(max-width: 600px)');
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
+  return (
+    <>
+      <Box pt="3" boxShadow="md" background={BACKGROUND}>
+        <Container minW="80%">
+          <Flex justifyContent="space-between">
+            <Image src={logo} alt="logo" />
+            <HStack spacing="6" display="flex" alignSelf="flex-end">
+              {isMobileView ? (
+                <MenuToggle isOpen={isOpen} toggle={toggle} />
+              ) : (
+                <NavMenu nav_items={NAV_ITEMS} />
+              )}
+            </HStack>
+          </Flex>
+        </Container>
+      </Box>
+      {isMobileView && isOpen && <MobileMenuItems nav_items={NAV_ITEMS} />}
+    </>
+  );
+};
+
+export default MainNav;

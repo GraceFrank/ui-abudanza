@@ -1,11 +1,7 @@
 import React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  theme,
-} from '@chakra-ui/react';
-import { BrowserRouter as Router, Switch, Route,  } from 'react-router-dom';
-import LoginPage from './pages/login'
+import { ChakraProvider, theme } from '@chakra-ui/react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import LoginPage from './pages/login';
 
 function App() {
   return (
