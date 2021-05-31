@@ -6,6 +6,7 @@ import logo from '../../images/logo.png';
 import { PRIMARY, HIGHLIGHT, BACKGROUND } from '../../constants/colors.json';
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { useMediaQuery } from '@chakra-ui/media-query';
+import { useLocation } from 'react-router-dom';
 
 const NavMenu = ({ nav_items, path }) => {
   return nav_items.map(item => {
@@ -59,33 +60,47 @@ const MobileMenuItems = ({ nav_items, path }) => {
   );
 };
 
-const NAV_ITEMS = [
-  { label: 'HOME', href: '/home' },
-  { label: 'SERVICES', href: '/services' },
-  { label: 'CONTACT', href: '/contact' },
-];
-
-const MainNav = props => {
+const MainNav = () => {
+  const { pathname } = useLocation();
   const [isMobileView] = useMediaQuery('(max-width: 600px)');
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+  const NAV_ITEMS = [
+    { label: 'HOME', href: '/home' },
+    { label: 'SERVICES', href: '/services' },
+    { label: 'CONTACT', href: '/contact' },
+    {
+      label: pathname === '/login' ? 'SIGNUP' : 'LOGIN',
+      href: pathname === '/login' ? '/signup' : '/login',
+    },
+  ];
+
   return (
     <>
-      <Box pt="3" boxShadow="md" background={BACKGROUND}>
+      <Box
+        position="absolute"
+        zIndex="1"
+        width="100%"
+        pt="3"
+        boxShadow="xl"
+        background={BACKGROUND}
+      >
         <Container minW="80%">
-          <Flex justifyContent="space-between">
+          <Flex justifyContent="space-between" mb="2">
             <Image src={logo} alt="logo" />
             <HStack spacing="6" display="flex" alignSelf="flex-end">
               {isMobileView ? (
                 <MenuToggle isOpen={isOpen} toggle={toggle} />
               ) : (
-                <NavMenu nav_items={NAV_ITEMS} />
+                <NavMenu nav_items={NAV_ITEMS} path={pathname} />
               )}
             </HStack>
           </Flex>
         </Container>
       </Box>
-      {isMobileView && isOpen && <MobileMenuItems nav_items={NAV_ITEMS} />}
+      {isMobileView && isOpen && (
+        <MobileMenuItems nav_items={NAV_ITEMS} path={pathname} />
+      )}
     </>
   );
 };

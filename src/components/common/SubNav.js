@@ -7,7 +7,6 @@ import {
   WrapItem,
   Text,
   Link,
-  Center,
   Container,
 } from '@chakra-ui/layout';
 import { IoIosMail, IoLogoWhatsapp } from 'react-icons/io';
