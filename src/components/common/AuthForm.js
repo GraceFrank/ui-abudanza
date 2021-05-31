@@ -5,7 +5,14 @@ import React from 'react';
 
 const AuthForm = () => {
   return (
-    <Box py="6" background="white" borderRadius="md" boxShadow="xl">
+    <Box
+      w="100%"
+      px="4"
+      py="6"
+      background="white"
+      borderRadius="md"
+      boxShadow="xl"
+    >
       <form>
         <VStack spacing="6">
           <FormControl id="phoneNumber" isRequired>

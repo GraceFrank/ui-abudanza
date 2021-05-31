@@ -6,8 +6,12 @@ import bannerImage from '../images/wocintech.jpg';
 import colors from '../constants/colors.json';
 import { Button } from '@chakra-ui/button';
 import AuthForm from '../components/common/AuthForm';
+import happyCoupleImage from '../images/happy-couple.jpeg';
+import logo from '../images/logo_md.png';
+import { useMediaQuery } from '@chakra-ui/media-query';
 
 const LoginPage = props => {
+  const isMobile = useMediaQuery('(min-width: 1280px)');
   return (
     <>
       <Nav {...props} />
@@ -40,10 +44,34 @@ const LoginPage = props => {
         </section>
       </header>
       <main>
-        <section>
-          <Box background={colors.HIGHLIGHT} h="120px"></Box>
-          <Flex position="absolute" top="700" id="login">
-            <AuthForm />
+        <section
+          style={{
+            background: 'rgb(255,101,1)',
+            background:
+              'linear-gradient(180deg, rgba(255,101,1,1) 14%, rgba(250,250,250,1) 15%)',
+          }}
+        >
+          <Flex
+            py="6"
+            position="relative"
+            direction={['column', 'row']}
+            id="login"
+            justifyContent="space-around"
+          >
+            <Box maxWidth="40%">
+              <Heading as="h4" size="md" color="white">
+                Get Started to Financial Freedom
+              </Heading>
+              {!isMobile && (
+                <VStack mt="20">
+                  <Image width="50%" src={logo} my="5" />
+                  <Image src={happyCoupleImage} borderRadius="lg" />
+                </VStack>
+              )}
+            </Box>
+            <Flex minWidth="30%" mx="10" my="5" maxWidth="80%">
+              <AuthForm />
+            </Flex>
           </Flex>
         </section>
       </main>
