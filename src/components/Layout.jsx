@@ -3,18 +3,21 @@ import { Flex } from '@chakra-ui/layout';
 
 import { useMediaQuery } from '@chakra-ui/media-query';
 import React from 'react';
-import Header from './Header';
-import SideMenu, { MobileMenu } from './SideMenu';
+import Header from './Header.jsx';
+import SideMenu from './SideMenu.jsx';
 
 const Layout = ({ children }) => {
   const [isMobileView] = useMediaQuery('(max-width: 600px)');
 
   return (
     <Box>
-      <Box back>
+      <Box>
         <Flex>
           {!isMobileView && <SideMenu />}
-          <Header />
+          <Box w="100%">
+            <Header />
+            {children}
+          </Box>
         </Flex>
       </Box>
     </Box>

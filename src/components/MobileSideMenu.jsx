@@ -9,7 +9,7 @@ import {
   DrawerBody,
   DrawerFooter,
 } from '@chakra-ui/modal';
-import { MenuItems } from './SideMenu';
+import { MenuItems } from './SideMenu.jsx';
 import logo from '../images/logo_md.png';
 import Icon from '@chakra-ui/icon';
 import { BiLogOut } from 'react-icons/bi';
