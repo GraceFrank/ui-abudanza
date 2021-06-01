@@ -1,41 +1,54 @@
-import { Button } from '@chakra-ui/button'
-import { HamburgerIcon } from '@chakra-ui/icons'
-import { Drawer, DrawerOverlay, DrawerCloseButton, DrawerHeader DrawerContent, DrawerBody, DrawerFooter } from '@chakra-ui/modal'
-import React from 'react'
+import { Button } from '@chakra-ui/button';
+import { Image } from '@chakra-ui/image';
+import {
+  Drawer,
+  DrawerOverlay,
+  DrawerCloseButton,
+  DrawerHeader,
+  DrawerContent,
+  DrawerBody,
+  DrawerFooter,
+} from '@chakra-ui/modal';
+import { MenuItems } from './SideMenu';
+import logo from '../images/logo_md.png';
+import Icon from '@chakra-ui/icon';
+import { BiLogOut } from 'react-icons/bi';
 
-const MobileSideMenu =()=> {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = React.useRef()
-
+function MobileSideMenu({ ref, isOpen, onClose }) {
   return (
     <>
-     <Button ref={btnRef} onClick={onOpen} rightIcon={<HamburgerIcon />} colorScheme="white" variant="outline">
-  </Button>
       <Drawer
         isOpen={isOpen}
-        placement="right"
+        placement="left"
         onClose={onClose}
-        finalFocusRef={btnRef}
+        finalFocusRef={ref}
       >
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent background="#e9f3f8">
           <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
+          <DrawerHeader>
+            <Image src={logo} width="80%" alignSelf="start" />
+          </DrawerHeader>
 
           <DrawerBody>
-            <Input placeholder="Type here..." />
+            <MenuItems />
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Cancel
+            <Button
+              leftIcon={<Icon as={BiLogOut} />}
+              variant="outline"
+              colorScheme="blue"
+              mr={3}
+              onClick={onClose}
+            >
+              Logout
             </Button>
-            <Button colorScheme="blue">Save</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>
-  )
+  );
 }
 
-export default MobileSideMenu
+export default MobileSideMenu;

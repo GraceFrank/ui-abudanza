@@ -1,20 +1,23 @@
-import { Grid } from '@chakra-ui/layout';
-import { GridItem } from '@chakra-ui/layout';
+import { Box } from '@chakra-ui/layout';
+import { Flex } from '@chakra-ui/layout';
+
+import { useMediaQuery } from '@chakra-ui/media-query';
 import React from 'react';
 import Header from './Header';
-import SideMenu from './SideMenu';
+import SideMenu, { MobileMenu } from './SideMenu';
 
 const Layout = ({ children }) => {
+  const [isMobileView] = useMediaQuery('(max-width: 600px)');
+
   return (
-    <Grid templateRows="repeat(2, 1fr)" templateColumns="repeat(5, 1fr)">
-      <GridItem rowSpan={2} colSpan={1} bg="rgba(190, 226, 242, 0.28)">
-        <SideMenu />
-      </GridItem>
-      <GridItem colSpan={4}>
-        <Header />
-        {children}
-      </GridItem>
-    </Grid>
+    <Box>
+      <Box back>
+        <Flex>
+          {!isMobileView && <SideMenu />}
+          <Header />
+        </Flex>
+      </Box>
+    </Box>
   );
 };
 

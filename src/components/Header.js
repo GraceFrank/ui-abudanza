@@ -1,20 +1,41 @@
 import React from 'react';
 import { PRIMARY } from '../constants/colors.json';
 import { Flex, Text, HStack, Badge, Box } from '@chakra-ui/layout';
-import { Icon } from '@chakra-ui/icons';
+import { HamburgerIcon, Icon } from '@chakra-ui/icons';
 import { Image } from '@chakra-ui/image';
 import { FaUserAlt } from 'react-icons/fa';
 import { MdNotificationsNone } from 'react-icons/md';
 import { Divider } from '@chakra-ui/layout';
+import { Button } from '@chakra-ui/button';
+import { useDisclosure } from '@chakra-ui/hooks';
+import MobileMenu from './MobileSideMenu';
+import { useMediaQuery } from '@chakra-ui/media-query';
 
 const Header = () => {
+  const [isMobileView] = useMediaQuery('(max-width: 600px)');
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = React.useRef();
   const user = {};
+
   return (
-    <Box px="5" py="10" bg={PRIMARY}>
+    <Box w="100%" px="5" py="10" bg={PRIMARY}>
       <Flex justifyContent="space-between">
-        <Box color="white">
-          <strong>Account Id: </strong>68997-67
-        </Box>
+        <HStack>
+          {isMobileView && (
+            <Button
+              ref={btnRef}
+              colorScheme="whiteAlpha"
+              onClick={onOpen}
+              variant="outline"
+              size="xs"
+            >
+              <HamburgerIcon color="white" />
+            </Button>
+          )}
+          <Text fontSize={isMobileView && 'xs'} color="white" isTruncated>
+            Account Id: 68997-67
+          </Text>
+        </HStack>
         <HStack spacing="4">
           <Box>
             <Icon as={MdNotificationsNone} color="white" />
@@ -31,6 +52,7 @@ const Header = () => {
         </HStack>
       </Flex>
       <Divider my="2" colorScheme="whiteAlpha" orientation="horizontal" />
+      <MobileMenu ref={btnRef} isOpen={isOpen} onClose={onClose} />
     </Box>
   );
 };
