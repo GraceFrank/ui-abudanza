@@ -11,6 +11,8 @@ import { Image } from '@chakra-ui/image';
 import { Center } from '@chakra-ui/layout';
 import { useLocation } from 'react-router-dom';
 import { Container } from '@chakra-ui/layout';
+import { LinkBox } from '@chakra-ui/layout';
+import { Link } from '@chakra-ui/layout';
 
 const menuOptions = [
   {
@@ -39,8 +41,7 @@ const menuOptions = [
     svg: FaUsers,
   },
 ];
-
-const SideMenu = () => {
+const MenuItems = () => {
   const { pathname } = useLocation();
   const menuItems = menuOptions.map(item => {
     const { path } = item;
@@ -48,21 +49,26 @@ const SideMenu = () => {
     return (
       <Box w="80%" display="flex" justifyContent="start" alignItems="center">
         <Icon as={item.svg} boxSize="6" color={color} />
-        <Heading as="h5" size="sm" mx="4" color={color}>
-          {item.label}
-        </Heading>
+        <Link href={item.path}>
+          <Heading as="h5" size="sm" mx="4" color={color}>
+            {item.label}
+          </Heading>
+        </Link>
         <Icon boxSize="6" color={color} as={IoIosArrowForward} />
       </Box>
     );
   });
 
+  return <VStack spacing="6">{menuItems}</VStack>;
+};
+
+const SideMenu = () => {
   return (
-    <Box h="100vh" background="rgba(190, 226, 242, 0.28);">
+    <Box boxShadow="lg" h="100vh" background="rgba(190, 226, 242, 0.28);">
       <Center py="12">
         <Image src={logo} width="80%" alignSelf="start" />
       </Center>
-
-      <VStack spacing="6">{menuItems}</VStack>
+      <MenuItems />
     </Box>
   );
 };
