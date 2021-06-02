@@ -8,7 +8,6 @@ import HighlightButton from '../../components/common/HighlightButton';
 import { Image } from '@chakra-ui/image';
 import EmptyDeliverySvg from '../../images/empty_delivery.svg';
 import { Flex } from '@chakra-ui/layout';
-import { Spacer } from '@chakra-ui/layout';
 
 const MainTabs = () => {
   return (
@@ -30,7 +29,6 @@ const MainTabs = () => {
               <Text my="3">You don't have any funded set</Text>
               <HighlightButton>Fund an Asset</HighlightButton>
             </Box>
-            <Spacer />
             <Image src={EmptyDeliverySvg} />
           </Flex>
         </TabPanel>

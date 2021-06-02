@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
       <Box>
         <Flex>
           {!isMobileView && <SideMenu />}
-          <Box w="100%">
+          <Box w={isMobileView ? '100%' : '78%'}>
             <Header />
             {children}
             <Footer2 />
