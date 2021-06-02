@@ -1,6 +1,6 @@
 import { Center, Flex, Spacer, HStack, Text, Heading } from '@chakra-ui/layout';
 import { PRIMARY, BACKGROUND } from '../../constants/colors.json';
-import { GiFamilyHouse } from 'react-icons/gi';
+import { GiFamilyHouse, GiCash } from 'react-icons/gi';
 import HighlightButton from '../../components/common/HighlightButton';
 import Card from '../../components/common/Card';
 import Icon from '@chakra-ui/icon';
@@ -15,7 +15,7 @@ const SummaryCards = () => {
           </Heading>
 
           <Spacer />
-          <Icon as={GiFamilyHouse} color={PRIMARY} />
+          <Icon as={GiFamilyHouse} boxSize="10" color={PRIMARY} />
         </HStack>
         <HStack my="4">
           <Text>&#8358;</Text>
@@ -33,7 +33,7 @@ const SummaryCards = () => {
           </Heading>
 
           <Spacer />
-          <Icon as={GiFamilyHouse} color={PRIMARY} />
+          <Icon as={GiCash} boxSize="10" color={PRIMARY} />
         </HStack>
         <HStack my="4">
           <Text>&#8358;</Text>

@@ -8,11 +8,10 @@ import { Image } from '@chakra-ui/image';
 import HighlightButton from '../../components/common/HighlightButton';
 import AssetSvg from '../../images/deliveries';
 import Icon from '@chakra-ui/icon';
-import SwiperCore, { Navigation, Pagination, Autoplay, A11y } from 'swiper';
+import SwiperCore, { Pagination, Autoplay } from 'swiper';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import React, { useRef, useState } from 'react';
 // Import Swiper styles
 import 'swiper/swiper.min.css';
 import 'swiper/components/pagination/pagination.min.css';
@@ -68,10 +67,7 @@ const AdvertBanners = () => {
 
       <SwiperSlide>
         {/*pay 60% and get asset in 90 days*/}
-        <Card
-          background="rgb(190,226,242)"
-          background="linear-gradient(45deg, rgba(190,226,242,1) 50%, rgba(7,69,99,1) 50%)"
-        >
+        <Card background="linear-gradient(45deg, rgba(190,226,242,1) 50%, rgba(7,69,99,1) 50%)">
           <Flex>
             <Heading size="sm">Pay 60% and get Asset in 90 days</Heading>
             <Icon as={AssetSvg} />
