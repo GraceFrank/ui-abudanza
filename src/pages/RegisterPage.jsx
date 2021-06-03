@@ -1,17 +1,17 @@
 import { Image } from '@chakra-ui/image';
 import { Box, Flex, Heading, Link, Text, VStack } from '@chakra-ui/layout';
 import React from 'react';
-import Nav from '../../components/common/Nav';
-import bannerImage from '../../images/wocintech.jpg';
-import colors from '../../constants/colors.json';
+import Nav from '../components/common/Nav';
+import bannerImage from '../images/wocintech.jpg';
+import colors from '../constants/colors.json';
 import { Button } from '@chakra-ui/button';
-import AuthForm from '../../components/AuthForm';
-import happyCoupleImage from '../../images/happy-couple.jpeg';
-import logo from '../../images/logo_md.png';
+import RegisterForm from '../components/RegisterForm';
+import happyCoupleImage from '../images/happy-couple.jpeg';
+import logo from '../images/logo_md.png';
 import { useMediaQuery } from '@chakra-ui/media-query';
-import { Footer } from '../../components/common/Footer';
+import { Footer } from '../components/common/Footer';
 
-const LoginPage = props => {
+const RegisterPage = props => {
   const [isMobileView] = useMediaQuery('(max-width: 600px)');
   return (
     <>
@@ -76,7 +76,7 @@ const LoginPage = props => {
               )}
             </Box>
             <Flex minWidth="30%" mx="10" my="5" maxWidth="80%">
-              <AuthForm />
+              <RegisterForm />
             </Flex>
           </Flex>
         </section>
@@ -88,4 +88,4 @@ const LoginPage = props => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

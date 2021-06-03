@@ -9,7 +9,8 @@ import React, { useState } from 'react';
 import 'react-phone-number-input/style.css';
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import HighlightButton from './common/HighlightButton';
-import { useLocation } from 'react-router';
+import { Redirect, useLocation } from 'react-router-dom';
+import { register, login } from '../services/api/api';
 
 const AuthForm = () => {
   const { pathname } = useLocation();
@@ -32,13 +33,16 @@ const AuthForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const errors = validateForm({ ...userDetails, phone });
+    const details = { ...userDetails, phone };
+    const errors = validateForm(details);
     if (errors) {
       setErrors(errors);
       return;
     } else {
       setErrors({});
     }
+
+    register(details).then(() => <Redirect to="/login" />);
   };
 
   return (
@@ -52,51 +56,46 @@ const AuthForm = () => {
     >
       <Center mb="10">
         <Heading size="lg" color="abudanza.highlight">
-          {isLogin ? 'Login' : 'Register'}
+          Register
         </Heading>
       </Center>
       <form onSubmit={handleSubmit}>
         <VStack spacing="6">
-          {!isLogin && (
-            <>
-              <FormControl id="phoneNumber" isRequired>
-                <FormLabel>Phone Number</FormLabel>
-                <PhoneInput
-                  international
-                  countryCallingCodeEditable={false}
-                  defaultCountry="NG"
-                  value={phone}
-                  onChange={setPhone}
-                />
-                <FormHelperText color="red" fontSize="xs">
-                  {errors.phone}
-                </FormHelperText>
-              </FormControl>
+          <FormControl id="phoneNumber" isRequired>
+            <FormLabel>Phone Number</FormLabel>
+            <PhoneInput
+              international
+              countryCallingCodeEditable={false}
+              defaultCountry="NG"
+              value={phone}
+              onChange={setPhone}
+            />
+            <FormHelperText color="red" fontSize="xs">
+              {errors.phone}
+            </FormHelperText>
+          </FormControl>
 
-              <FormControl id="firstName" isRequired>
-                <FormLabel>First Name</FormLabel>
-                <Input
-                  variant="flushed"
-                  placeholder="First Name"
-                  id="firstName"
-                  value={userDetails.firstName}
-                  onChange={handleChange}
-                />
-              </FormControl>
+          <FormControl id="firstName" isRequired>
+            <FormLabel>First Name</FormLabel>
+            <Input
+              variant="flushed"
+              placeholder="First Name"
+              id="firstName"
+              value={userDetails.firstName}
+              onChange={handleChange}
+            />
+          </FormControl>
 
-              <FormControl id="lastName" isRequired>
-                <FormLabel>Last Name</FormLabel>
-                <Input
-                  variant="flushed"
-                  placeholder="Last Name"
-                  id="lastName"
-                  value={userDetails.lastName}
-                  onChange={handleChange}
-                />
-              </FormControl>
-            </>
-          )}
-
+          <FormControl id="lastName" isRequired>
+            <FormLabel>Last Name</FormLabel>
+            <Input
+              variant="flushed"
+              placeholder="Last Name"
+              id="lastName"
+              value={userDetails.lastName}
+              onChange={handleChange}
+            />
+          </FormControl>
           <FormControl id="email" isRequired>
             <FormLabel>Email</FormLabel>
             <Input
@@ -134,8 +133,8 @@ const AuthForm = () => {
 
         <Text mt="5" fontSize="sm">
           Already Have an account? &nbsp;
-          <Link color="blue.500" href={`/${nextPath}`}>
-            {nextPath.toUpperCase()}
+          <Link color="blue.500" href="/login">
+            Login{' '}
           </Link>
         </Text>
       </form>
@@ -172,9 +171,6 @@ function validateForm(data) {
 
   for (const validation of schema) {
     const { label } = validation;
-
-    if (!data[label]) continue;
-
     if (!validation.validation(data[label])) {
       errors = errors || {};
       errors[label] = validation.message;
