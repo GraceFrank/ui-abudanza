@@ -1,5 +1,5 @@
 import { Image } from '@chakra-ui/image';
-import { Box, Flex, Heading, Link, VStack } from '@chakra-ui/layout';
+import { Box, Flex, Heading, Link, Text, VStack } from '@chakra-ui/layout';
 import React from 'react';
 import Nav from '../../components/common/Nav';
 import bannerImage from '../../images/wocintech.jpg';
@@ -64,9 +64,13 @@ const LoginPage = props => {
                 </Heading>
               </Box>
               {!isMobileView && (
-                <VStack mt="20">
+                <VStack mt="20" spacing="5">
                   <Image width="50%" src={logo} my="5" />
                   <Image src={happyCoupleImage} borderRadius="lg" maxW="90%" />
+                  <Text>
+                    Lorem ipsum dolor sit amet, consectetur . Maecenas fermentum
+                    cursus eros, ac convallis
+                  </Text>
                 </VStack>
               )}
             </Box>
