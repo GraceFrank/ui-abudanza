@@ -1,17 +1,17 @@
 import { Image } from '@chakra-ui/image';
 import { Box, Flex, Heading, Link, VStack } from '@chakra-ui/layout';
 import React from 'react';
-import Nav from '../components/common/Nav';
-import bannerImage from '../images/wocintech.jpg';
-import colors from '../constants/colors.json';
+import Nav from '../../components/common/Nav';
+import bannerImage from '../../images/wocintech.jpg';
+import colors from '../../constants/colors.json';
 import { Button } from '@chakra-ui/button';
-import AuthForm from '../components/common/AuthForm';
-import happyCoupleImage from '../images/happy-couple.jpeg';
-import logo from '../images/logo_md.png';
+import AuthForm from '../../components/AuthForm';
+import happyCoupleImage from '../../images/happy-couple.jpeg';
+import logo from '../../images/logo_md.png';
 import { useMediaQuery } from '@chakra-ui/media-query';
 
 const LoginPage = props => {
-  const isMobile = useMediaQuery('(min-width: 1280px)');
+  const [isMobileView] = useMediaQuery('(max-width: 600px)');
   return (
     <>
       <Nav {...props} />
@@ -46,7 +46,6 @@ const LoginPage = props => {
       <main>
         <section
           style={{
-            background: 'rgb(255,101,1)',
             background:
               'linear-gradient(180deg, rgba(255,101,1,1) 14%, rgba(250,250,250,1) 15%)',
           }}
@@ -58,14 +57,16 @@ const LoginPage = props => {
             id="login"
             justifyContent="space-around"
           >
-            <Box maxWidth="40%">
-              <Heading as="h4" size="md" color="white">
-                Get Started to Financial Freedom
-              </Heading>
-              {!isMobile && (
+            <Box minW="40%">
+              <Box>
+                <Heading as="h4" size="md" color="white" mx="5">
+                  Get Started to Financial Freedom
+                </Heading>
+              </Box>
+              {!isMobileView && (
                 <VStack mt="20">
                   <Image width="50%" src={logo} my="5" />
-                  <Image src={happyCoupleImage} borderRadius="lg" />
+                  <Image src={happyCoupleImage} borderRadius="lg" maxW="90%" />
                 </VStack>
               )}
             </Box>

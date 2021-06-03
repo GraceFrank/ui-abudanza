@@ -1,13 +1,15 @@
 import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { Input } from '@chakra-ui/input';
-import { Box, VStack } from '@chakra-ui/layout';
+import { Box, Heading, HStack, VStack, Link, Spacer } from '@chakra-ui/layout';
 import React from 'react';
+import HighlightButton from './common/HighlightButton';
+import { HIGHLIGHT } from '../constants/colors.json';
 
 const AuthForm = () => {
   return (
     <Box
       w="100%"
-      px="4"
+      px="5"
       py="6"
       background="white"
       borderRadius="md"
@@ -44,6 +46,16 @@ const AuthForm = () => {
             <Input variant="flushed" placeholder="Last Name" id="lastName" />
           </FormControl>
         </VStack>
+
+        <HStack my="10">
+          <Link href="/register">
+            <Heading size="sm" color={HIGHLIGHT}>
+              Login
+            </Heading>
+          </Link>
+          <Spacer />
+          <HighlightButton>Submit</HighlightButton>
+        </HStack>
       </form>
     </Box>
   );

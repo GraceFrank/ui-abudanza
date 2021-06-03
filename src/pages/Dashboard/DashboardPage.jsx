@@ -1,6 +1,6 @@
 import { Box, Heading } from '@chakra-ui/layout';
 import React from 'react';
-import Layout from '../../components/Layout';
+import Layout from '../../components/common/Layout';
 import { PRIMARY, BACKGROUND } from '../../constants/colors.json';
 import AdvertBanners from './AdvertBanners.jsx';
 import MainTabs from './MainTabs';

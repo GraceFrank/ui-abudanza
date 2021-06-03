@@ -3,10 +3,10 @@ import { Flex } from '@chakra-ui/layout';
 
 import { useMediaQuery } from '@chakra-ui/media-query';
 import React from 'react';
-import { Footer2 } from './common/Footer.jsx';
-import Header from './Header.jsx';
-import SideMenu from './SideMenu.jsx';
-import { BACKGROUND } from '../constants/colors.json';
+import { Footer2 } from './Footer.jsx';
+import Header from '../Header.jsx';
+import SideMenu from '../SideMenu.jsx';
+import { BACKGROUND } from '../../constants/colors.json';
 
 const Layout = ({ children }) => {
   const [isMobileView] = useMediaQuery('(max-width: 600px)');
