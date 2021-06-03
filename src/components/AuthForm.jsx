@@ -9,8 +9,14 @@ import React, { useState } from 'react';
 import 'react-phone-number-input/style.css';
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import HighlightButton from './common/HighlightButton';
+import { useLocation } from 'react-router';
 
 const AuthForm = () => {
+  const { pathname } = useLocation();
+  const isLogin = pathname === '/login' ? true : false;
+  const nextPath = isLogin ? 'register' : 'login';
+
+  const [errors, setErrors] = useState({});
   const [phone, setPhone] = useState();
   const [userDetails, setUserDetails] = useState({
     email: '',
@@ -19,8 +25,6 @@ const AuthForm = () => {
     lastName: '',
   });
 
-  const [errors, setErrors] = useState({});
-
   const handleChange = ({ target }) => {
     const { id, value } = target;
     setUserDetails({ ...userDetails, [id]: value });
@@ -28,7 +32,6 @@ const AuthForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-
     const errors = validateForm({ ...userDetails, phone });
     if (errors) {
       setErrors(errors);
@@ -49,46 +52,50 @@ const AuthForm = () => {
     >
       <Center mb="10">
         <Heading size="lg" color="abudanza.highlight">
-          Register
+          {isLogin ? 'Login' : 'Register'}
         </Heading>
       </Center>
       <form onSubmit={handleSubmit}>
         <VStack spacing="6">
-          <FormControl id="phoneNumber" isRequired>
-            <FormLabel>Phone Number</FormLabel>
-            <PhoneInput
-              international
-              countryCallingCodeEditable={false}
-              defaultCountry="NG"
-              value={phone}
-              onChange={setPhone}
-            />
-            <FormHelperText color="red" fontSize="xs">
-              {errors.phone}
-            </FormHelperText>
-          </FormControl>
+          {!isLogin && (
+            <>
+              <FormControl id="phoneNumber" isRequired>
+                <FormLabel>Phone Number</FormLabel>
+                <PhoneInput
+                  international
+                  countryCallingCodeEditable={false}
+                  defaultCountry="NG"
+                  value={phone}
+                  onChange={setPhone}
+                />
+                <FormHelperText color="red" fontSize="xs">
+                  {errors.phone}
+                </FormHelperText>
+              </FormControl>
 
-          <FormControl id="firstName" isRequired>
-            <FormLabel>First Name</FormLabel>
-            <Input
-              variant="flushed"
-              placeholder="First Name"
-              id="firstName"
-              value={userDetails.firstName}
-              onChange={handleChange}
-            />
-          </FormControl>
+              <FormControl id="firstName" isRequired>
+                <FormLabel>First Name</FormLabel>
+                <Input
+                  variant="flushed"
+                  placeholder="First Name"
+                  id="firstName"
+                  value={userDetails.firstName}
+                  onChange={handleChange}
+                />
+              </FormControl>
 
-          <FormControl id="lastName" isRequired>
-            <FormLabel>Last Name</FormLabel>
-            <Input
-              variant="flushed"
-              placeholder="Last Name"
-              id="lastName"
-              value={userDetails.lastName}
-              onChange={handleChange}
-            />
-          </FormControl>
+              <FormControl id="lastName" isRequired>
+                <FormLabel>Last Name</FormLabel>
+                <Input
+                  variant="flushed"
+                  placeholder="Last Name"
+                  id="lastName"
+                  value={userDetails.lastName}
+                  onChange={handleChange}
+                />
+              </FormControl>
+            </>
+          )}
 
           <FormControl id="email" isRequired>
             <FormLabel>Email</FormLabel>
@@ -127,8 +134,8 @@ const AuthForm = () => {
 
         <Text mt="5" fontSize="sm">
           Already Have an account? &nbsp;
-          <Link color="blue.500" href="/register">
-            Login
+          <Link color="blue.500" href={`/${nextPath}`}>
+            {nextPath.toUpperCase()}
           </Link>
         </Text>
       </form>
@@ -165,7 +172,8 @@ function validateForm(data) {
 
   for (const validation of schema) {
     const { label } = validation;
-    console.log(label);
+
+    if (!data[label]) continue;
 
     if (!validation.validation(data[label])) {
       errors = errors || {};
