@@ -5,13 +5,18 @@ import {
 } from '@chakra-ui/form-control';
 import { Input } from '@chakra-ui/input';
 import { Box, Heading, VStack, Link, Center, Text } from '@chakra-ui/layout';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import 'react-phone-number-input/style.css';
 import HighlightButton from './common/HighlightButton';
-import { Redirect } from 'react-router-dom';
 import { login } from '../services/api/api';
+import { AuthContext } from '../context/AuthContext';
+import { useToast } from '@chakra-ui/toast';
+import { useHistory } from 'react-router';
 
 const AuthForm = () => {
+  const history = useHistory();
+  const [user, setUser] = useContext(AuthContext);
+  const toast = useToast();
   const [errors, setErrors] = useState({});
   const [userDetails, setUserDetails] = useState({
     email: '',
@@ -33,7 +38,29 @@ const AuthForm = () => {
       setErrors({});
     }
 
-    login(userDetails).then(() => <Redirect to="/dashboard" />);
+    login(userDetails)
+      .then(data => {
+        toast({
+          title: 'Login Successful 🎊',
+          status: 'success',
+          duration: 1500,
+          isClosable: true,
+          position: 'top-right',
+        });
+        setUser(data.payload);
+        localStorage.setItem('user', JSON.stringify(data.payload));
+        history.push('/dashboard');
+      })
+      .catch(err => {
+        toast({
+          title: 'Error Logging In',
+          description: 'Invalid email or password 😔',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+          position: 'top-right',
+        });
+      });
   };
 
   return (

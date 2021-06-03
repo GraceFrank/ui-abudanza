@@ -1,6 +1,18 @@
 import axios from 'axios';
-
 const API_URL = process.env.REACT_APP_API_URL;
+
+axios.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+  function (error) {
+    if (error.response.status === 401) {
+      logout();
+      window.location.reload(false);
+    }
+    return Promise.reject(error.response.data);
+  }
+);
 
 export const register = data => {
   return axios
@@ -12,27 +24,8 @@ export const register = data => {
 export const login = data => {
   return axios
     .post(`${API_URL}/auth/login`, data)
-    .then(data => console.log(data))
-    .catch(error => console.log(error));
+    .then(response => response.data);
 };
-
-export function handleResponse(response) {
-  return response.text().then(text => {
-    const data = text && JSON.parse(text);
-    if (!response.ok) {
-      if (response.status === 401) {
-        // auto logout if 401 response returned from api
-        logout();
-        // location.reload(true);
-      }
-
-      const error = (data && data.message) || response.statusText;
-      return Promise.reject(error);
-    }
-
-    return data;
-  });
-}
 
 function logout() {
   // remove user from local storage to log user out
