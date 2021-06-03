@@ -1,19 +1,43 @@
-import { FormControl, FormLabel } from '@chakra-ui/form-control';
-import { Input } from '@chakra-ui/input';
 import {
-  Box,
-  Heading,
-  HStack,
-  VStack,
-  Link,
-  Spacer,
-  Center,
-} from '@chakra-ui/layout';
-import React from 'react';
+  FormControl,
+  FormHelperText,
+  FormLabel,
+} from '@chakra-ui/form-control';
+import { Input } from '@chakra-ui/input';
+import { Box, Heading, VStack, Link, Center, Text } from '@chakra-ui/layout';
+import React, { useState } from 'react';
+import 'react-phone-number-input/style.css';
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import HighlightButton from './common/HighlightButton';
-import { HIGHLIGHT } from '../constants/colors.json';
 
 const AuthForm = () => {
+  const [phone, setPhone] = useState();
+  const [userDetails, setUserDetails] = useState({
+    email: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleChange = ({ target }) => {
+    const { id, value } = target;
+    setUserDetails({ ...userDetails, [id]: value });
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    const errors = validateForm({ ...userDetails, phone });
+    if (errors) {
+      setErrors(errors);
+      return;
+    } else {
+      setErrors({});
+    }
+  };
+
   return (
     <Box
       w="100%"
@@ -28,50 +52,125 @@ const AuthForm = () => {
           Register
         </Heading>
       </Center>
-      <form>
+      <form onSubmit={handleSubmit}>
         <VStack spacing="6">
           <FormControl id="phoneNumber" isRequired>
             <FormLabel>Phone Number</FormLabel>
-            <Input
-              variant="flushed"
-              placeholder="Phone Number"
-              id="phoneNumber"
+            <PhoneInput
+              international
+              countryCallingCodeEditable={false}
+              defaultCountry="NG"
+              value={phone}
+              onChange={setPhone}
             />
+            <FormHelperText color="red" fontSize="xs">
+              {errors.phone}
+            </FormHelperText>
           </FormControl>
 
           <FormControl id="firstName" isRequired>
             <FormLabel>First Name</FormLabel>
-            <Input variant="flushed" placeholder="First Name" id="firstName" />
+            <Input
+              variant="flushed"
+              placeholder="First Name"
+              id="firstName"
+              value={userDetails.firstName}
+              onChange={handleChange}
+            />
           </FormControl>
 
           <FormControl id="lastName" isRequired>
             <FormLabel>Last Name</FormLabel>
-            <Input variant="flushed" placeholder="Last Name" id="lastName" />
+            <Input
+              variant="flushed"
+              placeholder="Last Name"
+              id="lastName"
+              value={userDetails.lastName}
+              onChange={handleChange}
+            />
           </FormControl>
 
           <FormControl id="email" isRequired>
             <FormLabel>Email</FormLabel>
-            <Input variant="flushed" placeholder="Email" id="email" />
+            <Input
+              variant="flushed"
+              placeholder="Email"
+              id="email"
+              type="email"
+              value={userDetails.email}
+              onChange={handleChange}
+            />
+            <FormHelperText color="red" fontSize="xs">
+              {errors.email}
+            </FormHelperText>
           </FormControl>
 
-          <FormControl id="password" isRequired>
+          <FormControl id="password" isRequired validate>
             <FormLabel>Password</FormLabel>
-            <Input variant="flushed" placeholder="Password" id="password" />
+            <Input
+              variant="flushed"
+              placeholder="Password"
+              id="password"
+              type="password"
+              value={userDetails.password}
+              onChange={handleChange}
+            />
+            <FormHelperText color="red" fontSize="xs">
+              {errors.password}
+            </FormHelperText>
           </FormControl>
+
+          <HighlightButton width="100%" type="submit">
+            Submit
+          </HighlightButton>
         </VStack>
 
-        <HStack my="5">
-          <Link href="/register">
-            <Heading size="sm" color={HIGHLIGHT}>
-              Login
-            </Heading>
+        <Text mt="5" fontSize="sm">
+          Already Have an account? &nbsp;
+          <Link color="blue.500" href="/register">
+            Login
           </Link>
-          <Spacer />
-          <HighlightButton>Submit</HighlightButton>
-        </HStack>
+        </Text>
       </form>
     </Box>
   );
 };
 
 export default AuthForm;
+
+function validateForm(data) {
+  const schema = [
+    {
+      label: 'email',
+      message: 'Please provide a valid email address',
+      validation: value =>
+        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+          value
+        ),
+    },
+
+    {
+      label: 'password',
+      message:
+        'Password must contain : at least 8 characters, a number and a string ',
+      validation: value => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value),
+    },
+    {
+      label: 'phone',
+      message: 'provide a valid phone number',
+      validation: value => isValidPhoneNumber(value),
+    },
+  ];
+  let errors;
+
+  for (const validation of schema) {
+    const { label } = validation;
+    console.log(label);
+
+    if (!validation.validation(data[label])) {
+      errors = errors || {};
+      errors[label] = validation.message;
+    }
+  }
+  return errors;
+}
