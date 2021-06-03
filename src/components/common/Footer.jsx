@@ -4,7 +4,7 @@ import { BACKGROUND } from '../../constants/colors.json';
 export const Footer2 = () => {
   return (
     <footer>
-      <Box p="5" background={BACKGROUND}>
+      <Box p="5" background="abudanza.background">
         <Divider />
         <HStack mt="2">
           <Text>
