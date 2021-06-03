@@ -9,14 +9,10 @@ import React, { useState } from 'react';
 import 'react-phone-number-input/style.css';
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import HighlightButton from './common/HighlightButton';
-import { Redirect, useLocation } from 'react-router-dom';
-import { register, login } from '../services/api/api';
+import { Redirect } from 'react-router-dom';
+import { register } from '../services/api/api';
 
 const AuthForm = () => {
-  const { pathname } = useLocation();
-  const isLogin = pathname === '/login' ? true : false;
-  const nextPath = isLogin ? 'register' : 'login';
-
   const [errors, setErrors] = useState({});
   const [phone, setPhone] = useState();
   const [userDetails, setUserDetails] = useState({
