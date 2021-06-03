@@ -44,8 +44,9 @@ const MobileMenuItems = ({ nav_items, path }) => {
       </Heading>
     </Link>
   ));
+  console.log(menuItems);
   return (
-    <Box>
+    <Box zIndex="2">
       <VStack
         border="1px"
         borderColor="gray.200"

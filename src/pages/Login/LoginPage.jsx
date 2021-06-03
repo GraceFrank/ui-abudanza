@@ -9,6 +9,7 @@ import AuthForm from '../../components/AuthForm';
 import happyCoupleImage from '../../images/happy-couple.jpeg';
 import logo from '../../images/logo_md.png';
 import { useMediaQuery } from '@chakra-ui/media-query';
+import { Footer } from '../../components/common/Footer';
 
 const LoginPage = props => {
   const [isMobileView] = useMediaQuery('(max-width: 600px)');
@@ -80,6 +81,9 @@ const LoginPage = props => {
           </Flex>
         </section>
       </main>
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 };

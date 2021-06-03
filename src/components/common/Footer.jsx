@@ -1,5 +1,4 @@
 import { HStack, Divider, Text, Spacer, Box, Link } from '@chakra-ui/layout';
-import { BACKGROUND } from '../../constants/colors.json';
 
 export const Footer2 = () => {
   return (
@@ -18,4 +17,8 @@ export const Footer2 = () => {
       </Box>
     </footer>
   );
+};
+
+export const Footer = () => {
+  return <Box bg="abudanza.primary" h="100px"></Box>;
 };
