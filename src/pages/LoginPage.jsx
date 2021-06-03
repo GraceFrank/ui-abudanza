@@ -65,7 +65,7 @@ const LoginPage = props => {
                 </Heading>
               </Box>
               {!isMobileView && (
-                <VStack mt="20" spacing="5">
+                <VStack mx="5" mt="20" spacing="5">
                   <Image maxW="40%" src={logo} my="5" />
                   <Image src={happyCoupleImage} borderRadius="lg" maxW="70%" />
                   <Text>
