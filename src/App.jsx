@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/Dashboard/DashboardPage';
 import RegisterPage from './pages/RegisterPage';
 import AuthProvider from './context/AuthContext';
+import { PrivateRoute } from './PrivateRoute';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
           <Switch>
             <Route path="/login" component={LoginPage} />
             <Route path="/register" component={RegisterPage} />
-            <Route path="/dashboard" component={DashboardPage} />
+            <PrivateRoute path="/dashboard" component={DashboardPage} />
           </Switch>
         </Router>
       </AuthProvider>
