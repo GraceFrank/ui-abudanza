@@ -1,0 +1,6 @@
+@media only screen and (max-width: 600px) {
+  .rotated {
+    transform: rotate(65deg);
+    margin: 15px;
+  }
+}

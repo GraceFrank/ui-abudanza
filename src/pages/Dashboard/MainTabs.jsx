@@ -1,13 +1,11 @@
-import { HStack } from '@chakra-ui/layout';
-import { Text } from '@chakra-ui/layout';
-import { Box } from '@chakra-ui/layout';
-import { Heading } from '@chakra-ui/layout';
+import { Box, Text, Heading, Spacer } from '@chakra-ui/layout';
 import { TabPanels, Tab, Tabs, TabList, TabPanel } from '@chakra-ui/tabs';
 import { HIGHLIGHT } from '../../constants/colors.json';
 import HighlightButton from '../../components/common/HighlightButton';
 import { Image } from '@chakra-ui/image';
 import EmptyDeliverySvg from '../../images/empty_delivery.svg';
 import { Flex } from '@chakra-ui/layout';
+import HowItWorks from '../../components/HowItWorks';
 
 const MainTabs = () => {
   return (
@@ -25,12 +23,15 @@ const MainTabs = () => {
         {/* Finance Asset */}
         <TabPanel>
           <Flex direction={['column', 'row']}>
-            <Box>
+            <Box px="5">
               <Text my="3">You don't have any funded set</Text>
               <HighlightButton>Fund an Asset</HighlightButton>
             </Box>
+
+            <Spacer />
             <Image src={EmptyDeliverySvg} />
           </Flex>
+          <HowItWorks />
         </TabPanel>
 
         {/* investment */}

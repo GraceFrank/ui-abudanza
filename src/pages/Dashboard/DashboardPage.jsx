@@ -5,6 +5,7 @@ import { PRIMARY, BACKGROUND } from '../../constants/colors.json';
 import AdvertBanners from './AdvertBanners.jsx';
 import MainTabs from './MainTabs';
 import SummaryCards from './SummaryCards';
+import './style.css';
 
 const Dashboard = () => {
   return (
