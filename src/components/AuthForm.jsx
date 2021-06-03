@@ -112,7 +112,7 @@ const AuthForm = () => {
             </FormHelperText>
           </FormControl>
 
-          <FormControl id="password" isRequired validate>
+          <FormControl id="password" isRequired>
             <FormLabel>Password</FormLabel>
             <Input
               variant="flushed"

@@ -11,6 +11,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/login" component={LoginPage} />
+          <Route path="/register" component={LoginPage} />
           <Route path="/dashboard" component={DashboardPage} />
         </Switch>
       </Router>
