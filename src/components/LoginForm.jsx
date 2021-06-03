@@ -51,7 +51,7 @@ const AuthForm = () => {
         </Heading>
       </Center>
       <form onSubmit={handleSubmit}>
-        <VStack spacing="6">
+        <VStack spacing="8">
           <FormControl id="email" isRequired>
             <FormLabel>Email</FormLabel>
             <Input
@@ -87,7 +87,7 @@ const AuthForm = () => {
           </HighlightButton>
         </VStack>
 
-        <Text mt="5" fontSize="sm">
+        <Text mt="10" fontSize="sm">
           Don't Have an account? &nbsp;
           <Link color="blue.500" href="/register">
             Register

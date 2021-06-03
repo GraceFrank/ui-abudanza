@@ -66,8 +66,8 @@ const LoginPage = props => {
               </Box>
               {!isMobileView && (
                 <VStack mt="20" spacing="5">
-                  <Image width="50%" src={logo} my="5" />
-                  <Image src={happyCoupleImage} borderRadius="lg" maxW="90%" />
+                  <Image maxW="40%" src={logo} my="5" />
+                  <Image src={happyCoupleImage} borderRadius="lg" maxW="70%" />
                   <Text>
                     Lorem ipsum dolor sit amet, consectetur . Maecenas fermentum
                     cursus eros, ac convallis
