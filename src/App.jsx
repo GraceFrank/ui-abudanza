@@ -7,6 +7,8 @@ import DashboardPage from './pages/Dashboard/DashboardPage';
 import RegisterPage from './pages/RegisterPage';
 import AuthProvider from './context/AuthContext';
 import { PrivateRoute } from './PrivateRoute';
+import RegistrationSuccessfulPage from './pages/RegistrationSuccessfulPage';
+import VerificationPage from './pages/Email_Verification';
 
 function App() {
   return (
@@ -16,6 +18,12 @@ function App() {
           <Switch>
             <Route path="/login" component={LoginPage} />
             <Route path="/register" component={RegisterPage} />
+            <Route path="/verification" component={VerificationPage} />
+            <Route
+              path="/register-success"
+              component={RegistrationSuccessfulPage}
+            />
+
             <PrivateRoute path="/dashboard" component={DashboardPage} />
           </Switch>
         </Router>
