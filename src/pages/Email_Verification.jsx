@@ -31,39 +31,42 @@ const VerificationPage = () => {
     <>
       <Nav />
       <Flex
+        mx="5"
         mt="100"
+        alignItems="center"
         direction={['column-reverse', 'row']}
         justifyContent="space-around"
-        minHeight="70vh"
+        minHeight="75vh"
       >
-        <Image src={EmailErrorSvg} boxSize={['sm', 'md']} />
-        <VStack mx="10">
+        <Image src={EmailErrorSvg} boxSize={['100', '200']} />
+        <VStack spacing="5">
           <Heading size="lg" textAlign="center" color="abudanza.primary">
             Did Not Receive Confirmation
           </Heading>
           <Text textAlign="center">Send Another</Text>
-          <form>
-            <FormControl id="email" isRequired>
-              <FormLabel>Email</FormLabel>
-              <Input
-                variant="flushed"
-                placeholder="Email"
-                id="email"
-                type="email"
-                value={'email'}
-                onChange={() => console.log()}
-              />
-              <FormHelperText color="red" fontSize="xs">
-                Error
-              </FormHelperText>
-            </FormControl>
-          </form>
+          <Box mt="10" w="100%">
+            <form>
+              <FormControl id="email" isRequired>
+                <Input
+                  variant="filled"
+                  placeholder="Email"
+                  id="email"
+                  type="email"
+                  value={'email'}
+                  onChange={() => console.log()}
+                />
+                <FormHelperText color="red" fontSize="xs">
+                  Error
+                </FormHelperText>
+              </FormControl>
 
-          <Center>
-            <HighlightButton onClick={redirectToHome}>
-              Resend Confirmation Email
-            </HighlightButton>
-          </Center>
+              <Center>
+                <HighlightButton type="submit" onClick={redirectToHome}>
+                  Resend Confirmation Email
+                </HighlightButton>
+              </Center>
+            </form>
+          </Box>
         </VStack>
       </Flex>
       <Footer />
