@@ -18,6 +18,7 @@ const AuthForm = () => {
   const toast = useToast();
   const [errors, setErrors] = useState({});
   const [phone, setPhone] = useState();
+  const [submitting, setSubmitting] = useState(false);
   const [userDetails, setUserDetails] = useState({
     email: '',
     password: '',
@@ -31,6 +32,7 @@ const AuthForm = () => {
   };
 
   const handleSubmit = e => {
+    setSubmitting(true);
     e.preventDefault();
     const details = { ...userDetails, phone };
     const errors = validateForm(details);
@@ -43,19 +45,21 @@ const AuthForm = () => {
 
     register(details)
       .then(data => {
+        setSubmitting(false);
         toast({
           title: 'Registration Successful 🎊',
           status: 'success',
-          duration: 1500,
+          duration: 3000,
           isClosable: true,
           position: 'top-right',
         });
         history.push('/register-success');
       })
       .catch(err => {
+        setSubmitting(false);
         toast({
-          title: 'User with Phone Number or Email Already exiists',
-          description: 'Invalid email or password 😔',
+          title: 'User with Phone Number or Email Already exiists 😔',
+          description: 'If you already signed up try logging in',
           status: 'error',
           duration: 3000,
           isClosable: true,
@@ -145,7 +149,12 @@ const AuthForm = () => {
             </FormHelperText>
           </FormControl>
 
-          <HighlightButton width="100%" type="submit">
+          <HighlightButton
+            isLoading={submitting}
+            loadingText="Submitting"
+            width="100%"
+            type="submit"
+          >
             Submit
           </HighlightButton>
         </VStack>
