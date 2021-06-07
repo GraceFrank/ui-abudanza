@@ -60,11 +60,6 @@ const RegistrationSuccessfulPage = () => {
       });
   };
 
-  const redirectToHome = () => {
-    sessionStorage.removeItem('signUpEmail');
-    history.push('/');
-  };
-
   return (
     <>
       <Nav />
@@ -94,7 +89,9 @@ const RegistrationSuccessfulPage = () => {
             {!openForm && (
               <HStack>
                 <Text>Return to</Text>
-                <HighlightButton onClick={redirectToHome}>Home</HighlightButton>
+                <Link href="/register">
+                  <HighlightButton>Home</HighlightButton>
+                </Link>
                 <Link href="/login">
                   <Button
                     size="sm"
