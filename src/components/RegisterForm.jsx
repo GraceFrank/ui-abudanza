@@ -9,10 +9,13 @@ import React, { useState } from 'react';
 import 'react-phone-number-input/style.css';
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import HighlightButton from './common/HighlightButton';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { register } from '../services/api/api';
+import { useToast } from '@chakra-ui/toast';
 
 const AuthForm = () => {
+  const history = useHistory();
+  const toast = useToast();
   const [errors, setErrors] = useState({});
   const [phone, setPhone] = useState();
   const [userDetails, setUserDetails] = useState({
@@ -38,7 +41,27 @@ const AuthForm = () => {
       setErrors({});
     }
 
-    register(details).then(() => <Redirect to="/login" />);
+    register(details)
+      .then(data => {
+        toast({
+          title: 'Registration Successful 🎊',
+          status: 'success',
+          duration: 1500,
+          isClosable: true,
+          position: 'top-right',
+        });
+        history.push('/register-success');
+      })
+      .catch(err => {
+        toast({
+          title: 'User with Phone Number or Email Already exiists',
+          description: 'Invalid email or password 😔',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+          position: 'top-right',
+        });
+      });
   };
 
   return (

@@ -1,4 +1,6 @@
+import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { Image } from '@chakra-ui/image';
+import { Input } from '@chakra-ui/input';
 import {
   Flex,
   Heading,
@@ -9,17 +11,58 @@ import {
   HStack,
   VStack,
 } from '@chakra-ui/layout';
-import { useEffect, useState } from 'react';
+import { useToast } from '@chakra-ui/toast';
+import { useState } from 'react';
+import { useHistory } from 'react-router';
 import { Footer } from '../components/common/Footer';
 import HighlightButton from '../components/common/HighlightButton';
 import Nav from '../components/common/Nav';
 import HiFiveSvg from '../images/High_five.svg';
+import { resendConfrimationEmail } from '../services/api/api';
 
 const RegistrationSuccessfulPage = () => {
-  const [email, setEmail] = useState();
+  const toast = useToast();
+  const history = useHistory();
+  const [email, setEmail] = useState(sessionStorage.getItem('signUpEmail'));
+  const [sending, setSending] = useState(false);
+  const [openForm, setOpenForm] = useState(false);
 
-  const resendEmail = () => {};
-  const redirectToHome = () => {};
+  const resendEmail = () => {
+    setSending(true);
+    console.log('email', email);
+    resendConfrimationEmail(email)
+      .then(() => {
+        setSending(false);
+        setOpenForm(false);
+        toast({
+          title: `Confirmation Email Sent to ${email}`,
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+          position: 'top-right',
+        });
+      })
+      .catch(err => {
+        setSending(false);
+        console.log('ERRor', err);
+        const message =
+          err.response && err.response.status === 400
+            ? 'Email Already Confirmed'
+            : 'Error Sending email contact admin';
+        toast({
+          title: message,
+          status: 'error',
+          duration: 2500,
+          isClosable: true,
+          position: 'top-right',
+        });
+      });
+  };
+
+  const redirectToHome = () => {
+    sessionStorage.removeItem('signUpEmail');
+    history.push('/');
+  };
 
   return (
     <>
@@ -36,17 +79,48 @@ const RegistrationSuccessfulPage = () => {
             Your Registration was successful Hurray!
           </Heading>
           <Text textAlign="center">
-            Check Your {email} Email to Verify Your Account
+            Check Your Email to Verify Your Account
           </Text>
           <Text textAlign="center" fontSize="sm">
-            If you have not received the email, click
-            <Link onClick={resendEmail}>here</Link> to resend it.
+            If you have not received the email, click &nbsp;
+            <Link color="blue.500" onClick={() => setOpenForm(true)}>
+              here
+            </Link>
+            &nbsp;to resend it.
           </Text>
 
           <Center>
-            <HighlightButton onClick={redirectToHome}>
-              Return to Home Page
-            </HighlightButton>
+            {!openForm && (
+              <HighlightButton onClick={redirectToHome}>
+                Return to Home Page
+              </HighlightButton>
+            )}
+            {openForm && (
+              <form>
+                <FormControl w="100%" id="email" isRequired>
+                  <FormLabel>Email</FormLabel>
+                  <Input
+                    variant="filled"
+                    placeholder="Email"
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                  />
+                </FormControl>
+
+                <HighlightButton
+                  onClick={resendEmail}
+                  my="5"
+                  width="100%"
+                  type="submit"
+                  isLoading={sending}
+                  loadingText="Sending"
+                >
+                  send
+                </HighlightButton>
+              </form>
+            )}
           </Center>
         </VStack>
       </Flex>

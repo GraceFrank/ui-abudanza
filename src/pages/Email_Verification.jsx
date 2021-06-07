@@ -12,7 +12,6 @@ import {
   Text,
   Link,
   Center,
-  HStack,
   VStack,
 } from '@chakra-ui/layout';
 import { useEffect, useState } from 'react';
