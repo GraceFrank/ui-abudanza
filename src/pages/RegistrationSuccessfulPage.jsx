@@ -1,3 +1,4 @@
+import { Button } from '@chakra-ui/button';
 import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { Image } from '@chakra-ui/image';
 import { Input } from '@chakra-ui/input';
@@ -74,7 +75,7 @@ const RegistrationSuccessfulPage = () => {
         minHeight="70vh"
       >
         <Image src={HiFiveSvg} boxSize={['sm', 'md']} />
-        <VStack mx="10">
+        <VStack mx="10" spacing="5">
           <Heading size="lg" textAlign="center" color="abudanza.primary">
             Your Registration was successful Hurray!
           </Heading>
@@ -91,9 +92,19 @@ const RegistrationSuccessfulPage = () => {
 
           <Center>
             {!openForm && (
-              <HighlightButton onClick={redirectToHome}>
-                Return to Home Page
-              </HighlightButton>
+              <HStack>
+                <Text>Return to</Text>
+                <HighlightButton onClick={redirectToHome}>Home</HighlightButton>
+                <Link href="/login">
+                  <Button
+                    size="sm"
+                    background="abudanza.secondary"
+                    variant="solid"
+                  >
+                    Login
+                  </Button>
+                </Link>
+              </HStack>
             )}
             {openForm && (
               <form>
