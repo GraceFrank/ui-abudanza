@@ -58,73 +58,75 @@ const AuthForm = () => {
   };
 
   return (
-    <Box
-      w="100%"
-      px="5"
-      py="5"
-      background="white"
-      borderRadius="md"
-      boxShadow="xl"
-    >
-      <Center mb="8">
-        <Heading size="lg" color="abudanza.highlight">
-          Login
-        </Heading>
-      </Center>
-      {errors.message && (
-        <Text my="4" fontSize="sm" color="red">
-          {errors.message}
-        </Text>
-      )}
-      {errors.status === 401 && <SendConfirmationEmailModal />}
-      <form onSubmit={handleSubmit}>
-        <VStack spacing="8">
-          <FormControl id="email" isRequired>
-            <FormLabel>Email</FormLabel>
-            <Input
-              variant="flushed"
-              placeholder="Email"
-              id="email"
-              type="email"
-              value={loginDetails.email}
-              onChange={handleChange}
-            />
-          </FormControl>
-
-          <FormControl id="password" isRequired>
-            <FormLabel>Password</FormLabel>
-            <Input
-              variant="flushed"
-              placeholder="Password"
-              id="password"
-              type="password"
-              value={loginDetails.password}
-              onChange={handleChange}
-            />
-            <FormHelperText color="red" fontSize="xs">
-              {errors.password}
-            </FormHelperText>
-          </FormControl>
-
-          <HighlightButton
-            isLoading={loggingIn}
-            loadingText="Logging In"
-            width="100%"
-            type="submit"
-          >
-            Submit
-          </HighlightButton>
-        </VStack>
-        <>
-          <Text my="10" fontSize="sm">
-            Don't Have an account? &nbsp;
-            <Link color="blue.500" href="/register">
-              Register
-            </Link>
+    <div data-aos="fade-up">
+      <Box
+        w="100%"
+        px="5"
+        py="5"
+        background="white"
+        borderRadius="md"
+        boxShadow="xl"
+      >
+        <Center mb="8">
+          <Heading size="lg" color="abudanza.highlight">
+            Login
+          </Heading>
+        </Center>
+        {errors.message && (
+          <Text my="4" fontSize="sm" color="red">
+            {errors.message}
           </Text>
-        </>
-      </form>
-    </Box>
+        )}
+        {errors.status === 401 && <SendConfirmationEmailModal />}
+        <form onSubmit={handleSubmit}>
+          <VStack spacing="8">
+            <FormControl id="email" isRequired>
+              <FormLabel>Email</FormLabel>
+              <Input
+                variant="flushed"
+                placeholder="Email"
+                id="email"
+                type="email"
+                value={loginDetails.email}
+                onChange={handleChange}
+              />
+            </FormControl>
+
+            <FormControl id="password" isRequired>
+              <FormLabel>Password</FormLabel>
+              <Input
+                variant="flushed"
+                placeholder="Password"
+                id="password"
+                type="password"
+                value={loginDetails.password}
+                onChange={handleChange}
+              />
+              <FormHelperText color="red" fontSize="xs">
+                {errors.password}
+              </FormHelperText>
+            </FormControl>
+
+            <HighlightButton
+              isLoading={loggingIn}
+              loadingText="Logging In"
+              width="100%"
+              type="submit"
+            >
+              Submit
+            </HighlightButton>
+          </VStack>
+          <>
+            <Text my="10" fontSize="sm">
+              Don't Have an account? &nbsp;
+              <Link color="blue.500" href="/register">
+                Register
+              </Link>
+            </Text>
+          </>
+        </form>
+      </Box>
+    </div>
   );
 };
 

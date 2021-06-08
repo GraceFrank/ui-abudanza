@@ -31,16 +31,21 @@ const LoginPage = props => {
           fit="cover"
           opacity="0.32"
         />
+
         <section style={{ position: 'absolute', top: '250px', zIndex: '1' }}>
           <VStack spacing="6" m="6" maxW="70%">
-            <Heading as="h1" color="white">
-              Make 60% Payment Today and Get Asset in 90 Days
-            </Heading>
-            <Link href="#login">
-              <Button background={colors.HIGHLIGHT} colorScheme="orange">
-                Get Started
-              </Button>
-            </Link>
+            <div data-aos="fade-right">
+              <Heading as="h1" color="white">
+                Make 60% Payment Today and Get Asset in 90 Days
+              </Heading>
+            </div>
+            <div data-aos="fade-left">
+              <Link href="#login">
+                <Button background={colors.HIGHLIGHT} colorScheme="orange">
+                  Get Started
+                </Button>
+              </Link>
+            </div>
           </VStack>
         </section>
       </header>
