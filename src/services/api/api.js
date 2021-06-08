@@ -17,6 +17,10 @@ export const resendConfrimationEmail = email => {
   return axios.post(`${API_URL}/auth/send-verification`, { email });
 };
 
+export const validateConfirmationToken = token => {
+  return axios.post(`${API_URL}/auth/verify`, { token });
+};
+
 function logout() {
   // remove user from local storage to log user out
   localStorage.removeItem('user');

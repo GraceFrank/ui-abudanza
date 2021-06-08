@@ -8,7 +8,7 @@ import RegisterPage from './pages/RegisterPage';
 import AuthProvider from './context/AuthContext';
 import { PrivateRoute } from './PrivateRoute';
 import RegistrationSuccessfulPage from './pages/RegistrationSuccessfulPage';
-import VerificationPage from './pages/Email_Verification';
+import VerificationPage from './pages/EmailVerificationPage';
 
 function App() {
   return (
