@@ -11,7 +11,6 @@ import { useLocation } from 'react-router-dom';
 const NavMenu = ({ nav_items, path }) => {
   return nav_items.map(item => {
     const color = item.href === path ? HIGHLIGHT : PRIMARY;
-    console.log(item);
     return (
       <Link key={item.label} href={item.href}>
         <Heading as="h6" size="xs" color={color}>
@@ -45,7 +44,6 @@ const MobileMenuItems = ({ nav_items, path }) => {
       </Heading>
     </Link>
   ));
-  console.log(menuItems);
   return (
     <Box>
       <VStack

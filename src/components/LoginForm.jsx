@@ -32,6 +32,7 @@ const AuthForm = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    setLoggingIn(true);
     login(loginDetails)
       .then(data => {
         toast({
@@ -46,7 +47,7 @@ const AuthForm = () => {
         history.push('/dashboard');
       })
       .catch(err => {
-        console.log(err.response);
+        setLoggingIn(false);
         if (err.response) {
           setErrors({
             status: err.response.status,

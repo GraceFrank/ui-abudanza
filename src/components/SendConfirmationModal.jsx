@@ -22,7 +22,6 @@ function SendConfirmationEmailModal() {
   const [sending, setSending] = useState(false);
   const [email, setEmail] = useState();
   const [status, setStatus] = useState({});
-  console.log('email', email);
 
   const handleSubmit = e => {
     e.preventDefault();
