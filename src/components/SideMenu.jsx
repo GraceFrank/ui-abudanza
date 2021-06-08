@@ -9,7 +9,7 @@ import { PRIMARY, HIGHLIGHT } from '../constants/colors.json';
 import logo from '../images/logo_md.png';
 import { Image } from '@chakra-ui/image';
 import { Center } from '@chakra-ui/layout';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Link } from '@chakra-ui/layout';
 import { Button } from '@chakra-ui/button';
 import { BiLogOut } from 'react-icons/bi';
@@ -63,6 +63,13 @@ export const MenuItems = () => {
 };
 
 const SideMenu = () => {
+  const history = useHistory();
+
+  const logout = () => {
+    localStorage.removeItem('user');
+    history.push('/login');
+  };
+
   return (
     <Box boxShadow="lg" h="100vh" background="rgba(190, 226, 242, 0.28)">
       <Center py="12">
@@ -71,6 +78,7 @@ const SideMenu = () => {
 
       <MenuItems />
       <Button
+        onClick={logout}
         leftIcon={<Icon as={BiLogOut} />}
         variant="outline"
         colorScheme="blue"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { PRIMARY } from '../constants/colors.json';
 import { Flex, Text, HStack, Badge, Box } from '@chakra-ui/layout';
 import { HamburgerIcon, Icon } from '@chakra-ui/icons';
@@ -10,12 +10,13 @@ import { Button } from '@chakra-ui/button';
 import { useDisclosure } from '@chakra-ui/hooks';
 import MobileMenu from './MobileSideMenu';
 import { useMediaQuery } from '@chakra-ui/media-query';
+import { AuthContext } from '../context/AuthContext';
 
 const Header = () => {
   const [isMobileView] = useMediaQuery('(max-width: 600px)');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
-  const user = {};
+  const [user, setUser] = useContext(AuthContext);
 
   return (
     <Box w="100%" px="5" py="10" bg={PRIMARY}>
