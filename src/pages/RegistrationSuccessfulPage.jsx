@@ -5,7 +5,6 @@ import { Input } from '@chakra-ui/input';
 import {
   Flex,
   Heading,
-  Box,
   Text,
   Link,
   Center,
@@ -14,7 +13,6 @@ import {
 } from '@chakra-ui/layout';
 import { useToast } from '@chakra-ui/toast';
 import { useState } from 'react';
-import { useHistory } from 'react-router';
 import { Footer } from '../components/common/Footer';
 import HighlightButton from '../components/common/HighlightButton';
 import Nav from '../components/common/Nav';
@@ -23,7 +21,6 @@ import { resendConfrimationEmail } from '../services/api/api';
 
 const RegistrationSuccessfulPage = () => {
   const toast = useToast();
-  const history = useHistory();
   const [email, setEmail] = useState(sessionStorage.getItem('signUpEmail'));
   const [sending, setSending] = useState(false);
   const [openForm, setOpenForm] = useState(false);

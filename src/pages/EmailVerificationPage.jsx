@@ -1,8 +1,4 @@
-import {
-  FormControl,
-  FormHelperText,
-  FormLabel,
-} from '@chakra-ui/form-control';
+import { FormControl } from '@chakra-ui/form-control';
 import { Image } from '@chakra-ui/image';
 import { Input } from '@chakra-ui/input';
 import {
