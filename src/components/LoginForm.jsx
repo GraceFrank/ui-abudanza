@@ -12,33 +12,27 @@ import { login } from '../services/api/api';
 import { AuthContext } from '../context/AuthContext';
 import { useToast } from '@chakra-ui/toast';
 import { useHistory } from 'react-router';
+import SendConfirmationEmailModal from './SendConfirmationModal.jsx';
 
 const AuthForm = () => {
   const history = useHistory();
+  const [loggingIn, setLoggingIn] = useState(false);
   const [user, setUser] = useContext(AuthContext);
   const toast = useToast();
   const [errors, setErrors] = useState({});
-  const [userDetails, setUserDetails] = useState({
+  const [loginDetails, setLoginDetails] = useState({
     email: '',
     password: '',
   });
 
   const handleChange = ({ target }) => {
     const { id, value } = target;
-    setUserDetails({ ...userDetails, [id]: value });
+    setLoginDetails({ ...loginDetails, [id]: value });
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    const errors = validateForm(userDetails);
-    if (errors) {
-      setErrors(errors);
-      return;
-    } else {
-      setErrors({});
-    }
-
-    login(userDetails)
+    login(loginDetails)
       .then(data => {
         toast({
           title: 'Login Successful 🎊',
@@ -52,14 +46,13 @@ const AuthForm = () => {
         history.push('/dashboard');
       })
       .catch(err => {
-        toast({
-          title: 'Error Logging In',
-          description: 'Invalid email or password 😔',
-          status: 'error',
-          duration: 3000,
-          isClosable: true,
-          position: 'top-right',
-        });
+        console.log(err.response);
+        if (err.response) {
+          setErrors({
+            status: err.response.status,
+            message: err.response.data.message,
+          });
+        } else setErrors({ message: 'Error Logging in contact Admin' });
       });
   };
 
@@ -72,11 +65,17 @@ const AuthForm = () => {
       borderRadius="md"
       boxShadow="xl"
     >
-      <Center mb="10">
+      <Center mb="8">
         <Heading size="lg" color="abudanza.highlight">
           Login
         </Heading>
       </Center>
+      {errors.message && (
+        <Text my="4" fontSize="sm" color="red">
+          {errors.message}
+        </Text>
+      )}
+      {errors.status === 401 && <SendConfirmationEmailModal />}
       <form onSubmit={handleSubmit}>
         <VStack spacing="8">
           <FormControl id="email" isRequired>
@@ -86,12 +85,9 @@ const AuthForm = () => {
               placeholder="Email"
               id="email"
               type="email"
-              value={userDetails.email}
+              value={loginDetails.email}
               onChange={handleChange}
             />
-            <FormHelperText color="red" fontSize="xs">
-              {errors.email}
-            </FormHelperText>
           </FormControl>
 
           <FormControl id="password" isRequired>
@@ -101,7 +97,7 @@ const AuthForm = () => {
               placeholder="Password"
               id="password"
               type="password"
-              value={userDetails.password}
+              value={loginDetails.password}
               onChange={handleChange}
             />
             <FormHelperText color="red" fontSize="xs">
@@ -109,44 +105,26 @@ const AuthForm = () => {
             </FormHelperText>
           </FormControl>
 
-          <HighlightButton width="100%" type="submit">
+          <HighlightButton
+            isLoading={loggingIn}
+            loadingText="Logging In"
+            width="100%"
+            type="submit"
+          >
             Submit
           </HighlightButton>
         </VStack>
-
-        <Text mt="10" fontSize="sm">
-          Don't Have an account? &nbsp;
-          <Link color="blue.500" href="/register">
-            Register
-          </Link>
-        </Text>
+        <>
+          <Text my="10" fontSize="sm">
+            Don't Have an account? &nbsp;
+            <Link color="blue.500" href="/register">
+              Register
+            </Link>
+          </Text>
+        </>
       </form>
     </Box>
   );
 };
 
 export default AuthForm;
-
-function validateForm(data) {
-  const schema = [
-    {
-      label: 'email',
-      message: 'Please provide a valid email address',
-      validation: value =>
-        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-          value
-        ),
-    },
-  ];
-  let errors;
-
-  for (const validation of schema) {
-    const { label } = validation;
-
-    if (!validation.validation(data[label])) {
-      errors = errors || {};
-      errors[label] = validation.message;
-    }
-  }
-  return errors;
-}

@@ -30,7 +30,6 @@ const RegistrationSuccessfulPage = () => {
 
   const resendEmail = () => {
     setSending(true);
-    console.log('email', email);
     resendConfrimationEmail(email)
       .then(() => {
         setSending(false);
@@ -45,7 +44,6 @@ const RegistrationSuccessfulPage = () => {
       })
       .catch(err => {
         setSending(false);
-        console.log('ERRor', err);
         const message =
           err.response && err.response.status === 400
             ? 'Email Already Confirmed'
