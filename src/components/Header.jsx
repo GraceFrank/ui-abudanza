@@ -11,12 +11,13 @@ import { useDisclosure } from '@chakra-ui/hooks';
 import MobileMenu from './MobileSideMenu';
 import { useMediaQuery } from '@chakra-ui/media-query';
 import { AuthContext } from '../context/AuthContext';
+import { capitalize } from '../utils/utils';
 
 const Header = () => {
   const [isMobileView] = useMediaQuery('(max-width: 600px)');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
-  const [user, setUser] = useContext(AuthContext);
+  const [user] = useContext(AuthContext);
 
   return (
     <Box w="100%" px="5" py="10" bg={PRIMARY}>
@@ -34,7 +35,7 @@ const Header = () => {
             </Button>
           )}
           <Text fontSize={isMobileView && 'xs'} color="white" isTruncated>
-            Account Id: 68997-67
+            Account Id: {user.accountId}
           </Text>
         </HStack>
         <HStack spacing="4">
@@ -49,7 +50,7 @@ const Header = () => {
           ) : (
             <Icon as={FaUserAlt} color="white" />
           )}
-          <Text color="white">Ibrahim</Text>
+          <Text color="white">{capitalize(user.firstName)}</Text>
         </HStack>
       </Flex>
       <Divider my="2" colorScheme="whiteAlpha" orientation="horizontal" />
