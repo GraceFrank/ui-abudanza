@@ -10,7 +10,7 @@ import happyCoupleImage from '../images/happy-couple.jpeg';
 import logo from '../images/logo_md.png';
 import { useMediaQuery } from '@chakra-ui/media-query';
 import { Footer } from '../components/common/Footer';
-
+//ViewIcon ViewOffIcon
 const RegisterPage = props => {
   const [isMobileView] = useMediaQuery('(max-width: 600px)');
   return (

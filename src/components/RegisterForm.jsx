@@ -12,6 +12,9 @@ import HighlightButton from './common/HighlightButton';
 import { useHistory } from 'react-router-dom';
 import { register } from '../services/api/api';
 import { useToast } from '@chakra-ui/toast';
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { InputGroup } from '@chakra-ui/input';
+import { InputRightElement } from '@chakra-ui/input';
 
 const AuthForm = () => {
   const history = useHistory();
@@ -19,6 +22,8 @@ const AuthForm = () => {
   const [errors, setErrors] = useState({});
   const [phone, setPhone] = useState();
   const [submitting, setSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
+
   const [userDetails, setUserDetails] = useState({
     email: '',
     password: '',
@@ -29,6 +34,10 @@ const AuthForm = () => {
   const handleChange = ({ target }) => {
     const { id, value } = target;
     setUserDetails({ ...userDetails, [id]: value });
+  };
+
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
   };
 
   const handleSubmit = e => {
@@ -136,14 +145,24 @@ const AuthForm = () => {
 
           <FormControl id="password" isRequired>
             <FormLabel>Password</FormLabel>
-            <Input
-              variant="flushed"
-              placeholder="Password"
-              id="password"
-              type="password"
-              value={userDetails.password}
-              onChange={handleChange}
-            />
+            <InputGroup>
+              <Input
+                variant="flushed"
+                placeholder="Password"
+                id="password"
+                type={showPassword ? 'text' : 'password'}
+                value={userDetails.password}
+                onChange={handleChange}
+              />
+              <InputRightElement>
+                {showPassword ? (
+                  <ViewOffIcon onClick={togglePassword} />
+                ) : (
+                  <ViewIcon onClick={togglePassword} />
+                )}
+              </InputRightElement>
+            </InputGroup>
+
             <FormHelperText color="red" fontSize="xs">
               {errors.password}
             </FormHelperText>
