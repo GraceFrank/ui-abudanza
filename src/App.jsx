@@ -9,6 +9,7 @@ import AuthProvider from './context/AuthContext';
 import { PrivateRoute } from './PrivateRoute';
 import RegistrationSuccessfulPage from './pages/RegistrationSuccessfulPage';
 import VerificationPage from './pages/EmailVerificationPage';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <AuthProvider>
         <Router>
           <Switch>
+            <Route path="/" exact component={HomePage} />
             <Route path="/login" component={LoginPage} />
             <Route path="/register" component={RegisterPage} />
             <Route path="/verification" component={VerificationPage} />
