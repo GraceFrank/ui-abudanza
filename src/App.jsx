@@ -1,6 +1,11 @@
 import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import theme from './theme';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/Dashboard/DashboardPage';
@@ -10,6 +15,7 @@ import { PrivateRoute } from './PrivateRoute';
 import RegistrationSuccessfulPage from './pages/RegistrationSuccessfulPage';
 import VerificationPage from './pages/EmailVerificationPage';
 import HomePage from './pages/HomePage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   return (
@@ -25,8 +31,9 @@ function App() {
               path="/register-success"
               component={RegistrationSuccessfulPage}
             />
-
             <PrivateRoute path="/dashboard" component={DashboardPage} />
+            <Route path="/404" component={NotFoundPage} />
+            <Redirect to="/404" />
           </Switch>
         </Router>
       </AuthProvider>
