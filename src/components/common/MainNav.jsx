@@ -73,7 +73,7 @@ const MainNav = () => {
     { label: 'CONTACT', href: '/contact' },
     {
       label: pathname === '/login' ? 'SIGNUP' : 'LOGIN',
-      href: pathname === '/login' ? '/signup' : '/login',
+      href: pathname === '/login' ? '/register' : '/login',
     },
   ];
 
