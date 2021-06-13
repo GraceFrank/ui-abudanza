@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { PRIMARY } from '../constants/colors.json';
-import { Flex, Text, HStack, Badge, Box } from '@chakra-ui/layout';
+import { Flex, Text, HStack, Badge, Box, Heading } from '@chakra-ui/layout';
 import { HamburgerIcon, Icon } from '@chakra-ui/icons';
 import { Image } from '@chakra-ui/image';
 import { FaUserAlt } from 'react-icons/fa';
@@ -12,15 +12,17 @@ import MobileMenu from './MobileSideMenu';
 import { useMediaQuery } from '@chakra-ui/media-query';
 import { AuthContext } from '../context/AuthContext';
 import { capitalize } from '../utils/utils';
+import { useLocation } from 'react-router-dom';
 
 const Header = () => {
+  const { pathname } = useLocation();
   const [isMobileView] = useMediaQuery('(max-width: 600px)');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
   const [user] = useContext(AuthContext);
 
   return (
-    <Box w="100%" px="5" py="10" bg={PRIMARY}>
+    <Box w="100%" px="5" py="5" bg={PRIMARY}>
       <Flex justifyContent="space-between">
         <HStack>
           {isMobileView && (
@@ -55,6 +57,9 @@ const Header = () => {
       </Flex>
       <Divider my="2" colorScheme="whiteAlpha" orientation="horizontal" />
       <MobileMenu ref={btnRef} isOpen={isOpen} onClose={onClose} />
+      <Heading pt="5" as="h1" color="white" size="md" mb="4">
+        <Text textTransform="uppercase">{pathname.split('/')[1]}</Text>
+      </Heading>
     </Box>
   );
 };

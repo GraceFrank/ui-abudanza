@@ -12,9 +12,6 @@ const Dashboard = () => {
     <Layout>
       <header>
         <Box background={PRIMARY} p="5" pt="0">
-          <Heading as="h1" color="white" size="md" mb="4">
-            DASHBOARD
-          </Heading>
           <SummaryCards />
         </Box>
       </header>

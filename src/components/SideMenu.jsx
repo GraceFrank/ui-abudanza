@@ -71,7 +71,15 @@ const SideMenu = () => {
   };
 
   return (
-    <Box boxShadow="lg" h="100vh" background="rgba(190, 226, 242, 0.28)">
+    <Box
+      position="fixed"
+      overflow="auto"
+      display="block"
+      boxShadow="lg"
+      h="100vh"
+      w="22%"
+      background="rgba(190, 226, 242, 0.28)"
+    >
       <Center py="12">
         <Image src={logo} width="80%" alignSelf="start" />
       </Center>

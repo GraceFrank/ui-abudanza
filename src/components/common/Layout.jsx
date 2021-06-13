@@ -13,15 +13,11 @@ const Layout = ({ children }) => {
 
   return (
     <Box background={BACKGROUND}>
-      <Box>
-        <Flex>
-          {!isMobileView && <SideMenu />}
-          <Box w={isMobileView ? '100%' : '78%'}>
-            <Header />
-            {children}
-            <Footer2 />
-          </Box>
-        </Flex>
+      {!isMobileView && <SideMenu />}
+      <Box ml={isMobileView ? '0' : '22%'} w={isMobileView ? '100%' : '78%'}>
+        <Header />
+        {children}
+        <Footer2 />
       </Box>
     </Box>
   );
