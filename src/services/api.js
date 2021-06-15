@@ -18,3 +18,27 @@ export const resendConfrimationEmail = email => {
 export const validateConfirmationToken = token => {
   return axios.post(`${API_URL}/auth/verify`, { token });
 };
+
+export const getProfile = token => {
+  return axios.get(`${API_URL}/profile`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const creatProfile = (token, data) => {
+  return axios.post(`${API_URL}/profile`, JSON.stringify(data), {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const updateProfile = (token, data) => {
+  return axios.put(`${API_URL}/profile`, JSON.stringify(data), {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
