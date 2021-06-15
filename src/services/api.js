@@ -42,3 +42,27 @@ export const updateProfile = (token, data) => {
     },
   });
 };
+
+export const getBankDetails = token => {
+  return axios.get(`${API_URL}/bankdetails`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const addBankDetail = (token, data) => {
+  return axios.post(`${API_URL}/bankdetails`, JSON.stringify(data), {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const updateBankDetail = (token, data) => {
+  return axios.put(`${API_URL}/bankdetails`, JSON.stringify(data), {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
