@@ -90,4 +90,3 @@ export const updateNextOfKin = (token, data) => {
     },
   });
 };
-nextofkin;

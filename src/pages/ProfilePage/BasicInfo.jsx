@@ -107,7 +107,7 @@ export const ProfileInfoForm = ({ data }) => {
 
 export const BasicInfo = ({ data }) => (
   <HStack spacing="5">
-    <Stack spacing="5">
+    <Stack spacing="5" w="50%">
       <TitleDetail title="First Name" value={data.firstName} />
       <TitleDetail title="Email" value={data.email} textTransform="lowercase" />
     </Stack>
@@ -125,7 +125,7 @@ export const ProfileInfo = ({ data }) => {
         PROFILE
       </Heading>
       <HStack spacing="5">
-        <Stack spacing="5">
+        <Stack spacing="5" w="50%">
           <TitleDetail title="Title" value={data.title} />
           <TitleDetail
             title="Mother's Maiden Name"

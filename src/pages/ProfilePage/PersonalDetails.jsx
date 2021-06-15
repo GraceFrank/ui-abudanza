@@ -23,10 +23,10 @@ const PersonalDetails = () => {
       .catch(err => {
         console.log(err);
       });
-  });
+  }, []);
 
   return (
-    <Card background="white">
+    <Card maxW="95%" mb="5" pb="10" px="5" background="white">
       <Heading as="h2" size="md" color="abudanza.primary">
         Profile Details
       </Heading>

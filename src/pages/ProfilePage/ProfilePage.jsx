@@ -1,17 +1,29 @@
-import { Box, Wrap } from '@chakra-ui/layout';
+import { Box, Flex } from '@chakra-ui/layout';
+import { useMediaQuery } from '@chakra-ui/react';
 import React from 'react';
 import Layout from '../../components/common/Layout';
+import BankDetails from './BankDetails';
+import NextOfKin from './NextOfKin';
 import PersonalDetails from './PersonalDetails';
 import './style.css';
 
 const ProfilePage = () => {
+  const [isMobileView] = useMediaQuery('(max-width: 600px)');
+
   return (
     <Layout>
       <main className="main-profile">
         <Box p="5">
-          <Wrap>
+          <Flex
+            justifyContent="space-around"
+            direction={isMobileView ? 'column' : 'row'}
+          >
             <PersonalDetails />
-          </Wrap>
+            <Box minW="40%">
+              <BankDetails />
+              <NextOfKin />
+            </Box>
+          </Flex>
         </Box>
       </main>
     </Layout>
