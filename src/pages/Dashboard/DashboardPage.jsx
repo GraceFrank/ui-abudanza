@@ -1,4 +1,4 @@
-import { Box, Heading } from '@chakra-ui/layout';
+import { Box } from '@chakra-ui/layout';
 import React from 'react';
 import Layout from '../../components/common/Layout';
 import { PRIMARY, BACKGROUND } from '../../constants/colors.json';

@@ -20,7 +20,7 @@ import EmailErrorSvg from '../images/email_error.svg';
 import {
   resendConfrimationEmail,
   validateConfirmationToken,
-} from '../services/api/api';
+} from '../services/api';
 
 const VerificationPage = () => {
   const history = useHistory();

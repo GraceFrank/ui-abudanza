@@ -43,11 +43,17 @@ const menuOptions = [
 ];
 export const MenuItems = () => {
   const { pathname } = useLocation();
-  const menuItems = menuOptions.map(item => {
+  const menuItems = menuOptions.map((item, index) => {
     const { path } = item;
     const color = pathname === path ? HIGHLIGHT : PRIMARY;
     return (
-      <Box w="80%" display="flex" justifyContent="start" alignItems="center">
+      <Box
+        key={index}
+        w="80%"
+        display="flex"
+        justifyContent="start"
+        alignItems="center"
+      >
         <Icon as={item.svg} boxSize="6" color={color} />
         <Link href={item.path}>
           <Heading as="h5" size="sm" mx="4" color={color}>

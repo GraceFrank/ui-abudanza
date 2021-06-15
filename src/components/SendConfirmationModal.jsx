@@ -15,7 +15,7 @@ import {
   ModalContent,
   Modal,
 } from '@chakra-ui/modal';
-import { resendConfrimationEmail } from '../services/api/api';
+import { resendConfrimationEmail } from '../services/api';
 
 function SendConfirmationEmailModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();

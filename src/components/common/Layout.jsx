@@ -1,5 +1,4 @@
 import { Box } from '@chakra-ui/layout';
-import { Flex } from '@chakra-ui/layout';
 
 import { useMediaQuery } from '@chakra-ui/media-query';
 import React from 'react';

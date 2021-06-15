@@ -8,7 +8,7 @@ import { Box, Heading, VStack, Link, Center, Text } from '@chakra-ui/layout';
 import React, { useContext, useState } from 'react';
 import 'react-phone-number-input/style.css';
 import HighlightButton from './common/HighlightButton';
-import { login } from '../services/api/api';
+import { login } from '../services/api';
 import { AuthContext } from '../context/AuthContext';
 import { useToast } from '@chakra-ui/toast';
 import { useHistory } from 'react-router';

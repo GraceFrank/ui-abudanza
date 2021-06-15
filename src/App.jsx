@@ -16,6 +16,7 @@ import RegistrationSuccessfulPage from './pages/RegistrationSuccessfulPage';
 import VerificationPage from './pages/EmailVerificationPage';
 import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
+import ProfilePage from './pages/ProfilePage/ProfilePage';
 
 function App() {
   return (
@@ -32,6 +33,8 @@ function App() {
               component={RegistrationSuccessfulPage}
             />
             <PrivateRoute path="/dashboard" component={DashboardPage} />
+            <PrivateRoute path="/profile" component={ProfilePage} />
+
             <Route path="/404" component={NotFoundPage} />
             <Redirect to="/404" />
           </Switch>

@@ -17,7 +17,7 @@ import { Footer } from '../components/common/Footer';
 import HighlightButton from '../components/common/HighlightButton';
 import Nav from '../components/common/Nav';
 import HiFiveSvg from '../images/High_five.svg';
-import { resendConfrimationEmail } from '../services/api/api';
+import { resendConfrimationEmail } from '../services/api';
 
 const RegistrationSuccessfulPage = () => {
   const toast = useToast();

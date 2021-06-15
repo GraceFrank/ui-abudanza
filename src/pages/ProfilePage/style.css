@@ -1,0 +1,8 @@
+.main-profile {
+  background: rgb(7, 69, 99);
+  background: linear-gradient(
+    180deg,
+    rgba(7, 69, 99, 1) 20%,
+    rgba(250, 250, 250, 1) 20%
+  );
+}

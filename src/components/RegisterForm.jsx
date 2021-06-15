@@ -10,7 +10,7 @@ import 'react-phone-number-input/style.css';
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import HighlightButton from './common/HighlightButton';
 import { useHistory } from 'react-router-dom';
-import { register } from '../services/api/api';
+import { register } from '../services/api';
 import { useToast } from '@chakra-ui/toast';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { InputGroup } from '@chakra-ui/input';
