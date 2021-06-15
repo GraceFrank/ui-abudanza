@@ -66,3 +66,28 @@ export const updateBankDetail = (token, data) => {
     },
   });
 };
+
+export const getNextOfKin = token => {
+  return axios.get(`${API_URL}/nextofkin`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const addNextOfKin = (token, data) => {
+  return axios.post(`${API_URL}/nextofkin`, JSON.stringify(data), {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const updateNextOfKin = (token, data) => {
+  return axios.put(`${API_URL}/nextofkin`, JSON.stringify(data), {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+nextofkin;
