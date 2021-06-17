@@ -1,12 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import {
-  Box,
-  Center,
-  HStack,
-  Heading,
-  Skeleton,
-  Spinner,
-} from '@chakra-ui/react';
+import { Box, Center, HStack, Heading, Spinner } from '@chakra-ui/react';
 import TitleDetail from '../../components/common/TitleDetail';
 import { getNextOfKin } from '../../services/api';
 import { AuthContext } from '../../context/AuthContext';
@@ -41,9 +34,7 @@ const NextOfKin = () => {
         setNextOfKin(res.data.payload);
         setFetchingNextOfKin(false);
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(err => {});
   }, []);
 
   return (

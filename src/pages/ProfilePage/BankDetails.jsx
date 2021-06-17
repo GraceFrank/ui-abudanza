@@ -39,7 +39,6 @@ const BankDetails = () => {
         setFetchingBankDetails(false);
       })
       .catch(err => {
-        console.log(err);
       });
   }, []);
 

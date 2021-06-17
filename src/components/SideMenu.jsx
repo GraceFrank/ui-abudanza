@@ -27,7 +27,7 @@ const menuOptions = [
   },
   {
     label: 'ASSET',
-    path: '/asset',
+    path: '/assets',
     svg: GiFamilyHouse,
   },
   {

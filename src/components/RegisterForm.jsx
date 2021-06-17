@@ -7,7 +7,7 @@ import { Input } from '@chakra-ui/input';
 import { Box, Heading, VStack, Link, Center, Text } from '@chakra-ui/layout';
 import React, { useState } from 'react';
 import 'react-phone-number-input/style.css';
-import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
+import PhoneInput, { isPossiblePhoneNumber } from 'react-phone-number-input';
 import HighlightButton from './common/HighlightButton';
 import { useHistory } from 'react-router-dom';
 import { register } from '../services/api';
@@ -19,11 +19,10 @@ import { InputRightElement } from '@chakra-ui/input';
 const AuthForm = () => {
   const history = useHistory();
   const toast = useToast();
-  const [errors, setErrors] = useState({});
   const [phone, setPhone] = useState();
   const [submitting, setSubmitting] = useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
-
+  const [phoneError, setPhoneError] = useState();
   const [userDetails, setUserDetails] = useState({
     email: '',
     password: '',
@@ -41,17 +40,16 @@ const AuthForm = () => {
   };
 
   const handleSubmit = e => {
-    setSubmitting(true);
     e.preventDefault();
-    const details = { ...userDetails, phone };
-    const errors = validateForm(details);
-    if (errors) {
-      setErrors(errors);
+    const isValidPhone = phone && isPossiblePhoneNumber(phone) ? true : false;
+    if (!isValidPhone) {
+      setPhoneError('Please enter a valid phone number');
       return;
-    } else {
-      setErrors({});
     }
+    setPhoneError('');
 
+    setSubmitting(true);
+    const details = { ...userDetails, phone };
     register(details)
       .then(data => {
         setSubmitting(false);
@@ -65,10 +63,13 @@ const AuthForm = () => {
         history.push('/register-success');
       })
       .catch(err => {
+        const message = err.response
+          ? err.response.data.message
+          : 'Error Registering user contact Admin';
+
         setSubmitting(false);
         toast({
-          title: 'User with Phone Number or Email Already exiists 😔',
-          description: 'If you already signed up try logging in',
+          title: message,
           status: 'error',
           duration: 3000,
           isClosable: true,
@@ -93,18 +94,16 @@ const AuthForm = () => {
       </Center>
       <form onSubmit={handleSubmit}>
         <VStack spacing="6">
-          <FormControl id="phoneNumber" isRequired>
+          <FormControl id="phone" isRequired>
             <FormLabel>Phone Number</FormLabel>
             <PhoneInput
               international
               countryCallingCodeEditable={false}
-              defaultCountry="NG"
+              defaultCountry="RU"
               value={phone}
               onChange={setPhone}
             />
-            <FormHelperText color="red" fontSize="xs">
-              {errors.phone}
-            </FormHelperText>
+            <FormHelperText color="red">{phoneError}</FormHelperText>
           </FormControl>
 
           <FormControl id="firstName" isRequired>
@@ -113,6 +112,7 @@ const AuthForm = () => {
               variant="flushed"
               placeholder="First Name"
               id="firstName"
+              type="text"
               value={userDetails.firstName}
               onChange={handleChange}
             />
@@ -124,6 +124,7 @@ const AuthForm = () => {
               variant="flushed"
               placeholder="Last Name"
               id="lastName"
+              type="text"
               value={userDetails.lastName}
               onChange={handleChange}
             />
@@ -138,9 +139,6 @@ const AuthForm = () => {
               value={userDetails.email}
               onChange={handleChange}
             />
-            <FormHelperText color="red" fontSize="xs">
-              {errors.email}
-            </FormHelperText>
           </FormControl>
 
           <FormControl id="password" isRequired>
@@ -153,6 +151,8 @@ const AuthForm = () => {
                 type={showPassword ? 'text' : 'password'}
                 value={userDetails.password}
                 onChange={handleChange}
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
               />
               <InputRightElement>
                 {showPassword ? (
@@ -162,10 +162,6 @@ const AuthForm = () => {
                 )}
               </InputRightElement>
             </InputGroup>
-
-            <FormHelperText color="red" fontSize="xs">
-              {errors.password}
-            </FormHelperText>
           </FormControl>
 
           <HighlightButton
@@ -190,38 +186,3 @@ const AuthForm = () => {
 };
 
 export default AuthForm;
-
-function validateForm(data) {
-  const schema = [
-    {
-      label: 'email',
-      message: 'Please provide a valid email address',
-      validation: value =>
-        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-          value
-        ),
-    },
-
-    {
-      label: 'password',
-      message:
-        'Password must contain : at least 8 characters, a number and a string ',
-      validation: value => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value),
-    },
-    {
-      label: 'phone',
-      message: 'provide a valid phone number',
-      validation: value => isValidPhoneNumber(value),
-    },
-  ];
-  let errors;
-
-  for (const validation of schema) {
-    const { label } = validation;
-    if (!validation.validation(data[label])) {
-      errors = errors || {};
-      errors[label] = validation.message;
-    }
-  }
-  return errors;
-}

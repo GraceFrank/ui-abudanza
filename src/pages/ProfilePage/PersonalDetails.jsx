@@ -20,9 +20,7 @@ const PersonalDetails = () => {
         setProfileDetails(res.data.payload);
         setFetchingProfile(false);
       })
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(err => {});
   }, []);
 
   return (

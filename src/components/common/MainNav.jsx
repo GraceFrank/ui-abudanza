@@ -11,7 +11,6 @@ import { useLocation } from 'react-router-dom';
 const NavMenu = ({ nav_items, path }) => {
   return nav_items.map(item => {
     const color = item.href === path ? HIGHLIGHT : PRIMARY;
-    console.log('path', path, item.href);
     return (
       <Link key={item.label} href={item.href}>
         <Heading as="h6" size="xs" color={color}>

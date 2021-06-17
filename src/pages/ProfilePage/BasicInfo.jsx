@@ -19,7 +19,6 @@ export const ProfileInfoForm = ({ data }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log('BASIC INFO', profileInfo);
   };
   const handleChange = ({ target }) => {
     const { value, name } = target;

@@ -17,6 +17,7 @@ import VerificationPage from './pages/EmailVerificationPage';
 import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
+import AssetsPage from './pages/AssetFinance/AssetFinancePage';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             />
             <PrivateRoute path="/dashboard" component={DashboardPage} />
             <PrivateRoute path="/profile" component={ProfilePage} />
+            <PrivateRoute path="/assets" component={AssetsPage} />
 
             <Route path="/404" component={NotFoundPage} />
             <Redirect to="/404" />
