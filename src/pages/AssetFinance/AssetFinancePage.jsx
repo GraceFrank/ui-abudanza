@@ -1,27 +1,69 @@
 import { Box } from '@chakra-ui/layout';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Layout from '../../components/common/Layout';
 import MainTabs from './MainTabs';
-import { Flex, HStack, Spacer, Text, Heading, Button } from '@chakra-ui/react';
+import {
+  Flex,
+  HStack,
+  Spacer,
+  Text,
+  Heading,
+  Button,
+  useToast,
+} from '@chakra-ui/react';
 import { useState } from 'react';
-
-const fakeData = {
-  total_contribution: 0.0,
-  assets: [
-    {
-      category: 'car',
-      brand: 'toyota camry 2020',
-      price: 20000000,
-      amount_contributed: 150000,
-      start_date: '12/06/2021',
-      end_date: '12/09/2021',
-      days_remaining: 30,
-    },
-  ],
-};
+import { getAssets } from '../../services/api';
+import { AuthContext } from '../../context/AuthContext';
+import { useContext } from 'react';
 
 const AssetsFinance = () => {
-  const [activeAssets, setActiveAssets] = useState(fakeData);
+  const [user] = useContext(AuthContext);
+  const toast = useToast();
+  const [activeAssets, setActiveAssets] = useState([]);
+  const [pendingAssets, setPendingAssets] = useState([]);
+  const [totalActiveContribution, setTotalActiveContribution] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    getAssets('active')
+      .then(res => {
+        setLoading(false);
+        setTotalActiveContribution(res.data.payload.totalContribution);
+        setActiveAssets(res.data.payload.assets);
+      })
+      .catch(err => {
+        const message = err.response
+          ? err.response.data.message
+          : 'error fetching assets contact admin';
+        toast({
+          title: 'Error Fetching Assets',
+          description: message,
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+          position: 'top-right',
+        });
+      });
+
+    getAssets('pending')
+      .then(res => {
+        setPendingAssets(res.data.payload.assets);
+      })
+      .catch(err => {
+        const message = err.response
+          ? err.response.data.message
+          : 'error fetching assets contact admin';
+        toast({
+          title: 'Error Fetching Assets',
+          description: message,
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+          position: 'top-right',
+        });
+      });
+  }, []);
 
   return (
     <Layout>
@@ -30,7 +72,7 @@ const AssetsFinance = () => {
           <HStack>
             <Text color="white">Total Active Contribution</Text>
             <Heading color="white" as="h2" size="lg">
-              &#8358; {activeAssets.total_contribution.toLocaleString()}
+              &#8358; {totalActiveContribution.toLocaleString()}
             </Heading>
           </HStack>
           <Spacer />
@@ -41,7 +83,11 @@ const AssetsFinance = () => {
       </section>
       <main>
         <Box p="5" background="abudanza.background">
-          <MainTabs />
+          <MainTabs
+            activeAssets={activeAssets}
+            pendingAssets={pendingAssets}
+            loading={loading}
+          />
         </Box>
       </main>
     </Layout>

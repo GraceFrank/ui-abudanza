@@ -1,16 +1,11 @@
-import { Box, Text, Heading, HStack } from '@chakra-ui/layout';
+import { Box, Text, Heading, Spinner } from '@chakra-ui/react';
 import { TabPanels, Tab, Tabs, TabList, TabPanel } from '@chakra-ui/tabs';
+import { useState } from 'react';
 import { HIGHLIGHT } from '../../constants/colors.json';
-import HighlightButton from '../../components/common/HighlightButton';
-import { Image } from '@chakra-ui/image';
-import EmptyDeliverySvg from '../../images/empty_delivery.svg';
-import { Flex } from '@chakra-ui/layout';
-import HowItWorks from '../../components/HowItWorks';
-import { GiFamilyHouse, GiCash } from 'react-icons/gi';
-import { Icon } from '@chakra-ui/icons';
-import { Slider } from '@chakra-ui/react';
+import AssetList from './AssetDetails';
 
-const MainTabs = () => {
+const MainTabs = ({ activeAssets, pendingAssets, loading }) => {
+  const [completedAssets, setCompletedAssets] = useState([]);
   return (
     <Tabs background="white" shadow="lg">
       <TabList>
@@ -24,20 +19,25 @@ const MainTabs = () => {
 
       <TabPanels>
         {/* Finance Asset */}
+
         <TabPanel>
-          <Box>
-            <HStack>
-              <Icon as={GiFamilyHouse} boxSize="8" color="abudanza.highlight" />
-              <Box>
-                <Slider color="abudanza.highlight" />
-              </Box>
-            </HStack>
-          </Box>
+          {loading && <Spinner />}
+          {!loading && <AssetList data={activeAssets} />}
+          <Heading as="h2" size="lg">
+            Pending Asset Finances
+          </Heading>
+          <Text>
+            Investment becomes Active after payment has been confirmed. If you
+            are having issues confirmaing payment contact Support
+          </Text>
+          {loading && <Spinner />}
+          {!loading && <AssetList data={pendingAssets} />}
         </TabPanel>
 
         {/* Completed Assets */}
         <TabPanel>
-          <p>two!</p>
+          {loading && <Spinner />}
+          {!loading && <AssetList data={completedAssets} />}
         </TabPanel>
         <TabPanel>
           <p>three!</p>

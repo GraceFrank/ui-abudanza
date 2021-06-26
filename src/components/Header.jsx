@@ -11,7 +11,6 @@ import { useDisclosure } from '@chakra-ui/hooks';
 import MobileMenu from './MobileSideMenu';
 import { useMediaQuery } from '@chakra-ui/media-query';
 import { AuthContext } from '../context/AuthContext';
-import { capitalize } from '../utils/utils';
 import { useLocation } from 'react-router-dom';
 
 const Header = () => {
@@ -52,7 +51,7 @@ const Header = () => {
           ) : (
             <Icon as={FaUserAlt} color="white" />
           )}
-          <Text color="white">{capitalize(user.firstName)}</Text>
+          <Text textTransform="capitalize" color="white">{user.firstName}</Text>
         </HStack>
       </Flex>
       <Divider my="2" colorScheme="whiteAlpha" orientation="horizontal" />

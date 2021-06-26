@@ -100,6 +100,6 @@ export const createAssetFinance = (token, data) => {
   });
 };
 
-export const getAssets = (token, status = 'active') => {
+export const getAssets = (status = 'active') => {
   return instance.get(`assets?status=${status}`);
 };

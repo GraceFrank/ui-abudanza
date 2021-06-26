@@ -102,9 +102,6 @@ const AuthForm = () => {
                 value={loginDetails.password}
                 onChange={handleChange}
               />
-              <FormHelperText color="red" fontSize="xs">
-                {errors.password}
-              </FormHelperText>
             </FormControl>
 
             <HighlightButton

@@ -1,3 +1,3 @@
-export const capitalize = function (string) {
-  return string[0].toUpperCase() + string.slice(1).toLowerCase();
-};
+export function daysBetween(startDate, endDate) {
+  return Math.round((endDate - startDate) / (1000 * 60 * 60 * 24));
+}
