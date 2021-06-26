@@ -1,4 +1,5 @@
 import axios from 'axios';
+import instance from '../utils/axios';
 const API_URL = process.env.REACT_APP_API_URL;
 
 export const register = data => {
@@ -89,4 +90,16 @@ export const updateNextOfKin = (token, data) => {
       Authorization: `Bearer ${token}`,
     },
   });
+};
+
+export const createAssetFinance = (token, data) => {
+  return axios.post(`${API_URL}/assets`, JSON.stringify(data), {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const getAssets = (token, status = 'active') => {
+  return instance.get(`assets?status=${status}`);
 };
