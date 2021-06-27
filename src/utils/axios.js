@@ -17,9 +17,9 @@ instance.interceptors.response.use(
   },
   error => {
     if (error.response.status === 401) {
-      console.log('unauthorized');
+      localStorage.removeItem('user');
     }
-    return error;
+    return Promise.reject(error);
   }
 );
 

@@ -15,6 +15,7 @@ import { useState } from 'react';
 import { getAssets } from '../../services/api';
 import { AuthContext } from '../../context/AuthContext';
 import { useContext } from 'react';
+import './style.css';
 
 const AssetsFinance = () => {
   const [user] = useContext(AuthContext);

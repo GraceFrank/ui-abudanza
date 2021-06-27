@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import {
   FormControl,
   FormLabel,
@@ -16,11 +16,15 @@ const FileInput = ({ name, setFormData, formData, label }) => {
     const file = e.target.files[0];
     if (!file) {
       setError('Please select a file');
+      setFormData({ ...formData, [name]: null });
+
       return;
     }
 
     if (file.size > 1024 * 1024 * 20) {
       setError('file size should be less than');
+      setFormData({ ...formData, [name]: null });
+
       return;
     }
 
@@ -30,11 +34,12 @@ const FileInput = ({ name, setFormData, formData, label }) => {
       setError(
         'only file types of jpg, jpeg, doc, docx, png and pdf are allowed'
       );
+      setFormData({ ...formData, [name]: null });
       return;
     }
 
     setError('');
-    setFormData({ ...formData, name: file });
+    setFormData({ ...formData, [name]: file });
     console.log('changed', e.target.files[0]);
   };
 

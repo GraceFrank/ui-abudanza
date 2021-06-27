@@ -21,7 +21,7 @@ import {
   DrawerFooter,
 } from '@chakra-ui/react';
 import Card from '../../components/common/Card';
-import { daysBetween } from '../../utils/utils';
+import { convertCloudinaryUrlToJpeg, daysBetween } from '../../utils/utils';
 import { useRef } from 'react';
 
 const AssetDetail = ({ assetDetail }) => {
@@ -39,7 +39,7 @@ const AssetDetail = ({ assetDetail }) => {
         />
         <VStack align="start">
           <Heading as="h4" size="md">
-            {assetDetail.brand}
+            {assetDetail.brand} &nbsp;
             {assetDetail.model} &nbsp;
           </Heading>
           <Text>category: {assetDetail.category}</Text>
@@ -264,12 +264,17 @@ function AssetDetailDrawer({ assetDetail }) {
                 </Text>
               </HStack>
               <Heading size="sm">Proof of Payment</Heading>
-              <Image src={assetDetail.payment_proof.url} alt="payment proof" />
+              <Image
+                src={convertCloudinaryUrlToJpeg(assetDetail.payment_proof.url)}
+                alt="payment proof"
+              />
               <Heading mt="5" size="sm">
                 Proforma Invoice
               </Heading>
               <Image
-                src={assetDetail.proforma_invoice.url}
+                src={convertCloudinaryUrlToJpeg(
+                  assetDetail.proforma_invoice.url
+                )}
                 alt="proforma Invoice"
               />
             </VStack>

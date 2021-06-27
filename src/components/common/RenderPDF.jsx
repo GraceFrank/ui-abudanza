@@ -1,3 +1,5 @@
+import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
+import { Button } from '@chakra-ui/button';
 import React, { Component } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -9,19 +11,39 @@ export default class App extends Component {
     this.setState({ numPages });
   };
 
-  goToPrevPage = () =>
+  goToPrevPage = () => {
     this.setState(state => ({ pageNumber: state.pageNumber - 1 }));
+  };
   goToNextPage = () =>
     this.setState(state => ({ pageNumber: state.pageNumber + 1 }));
 
   render() {
-    const { pageNumber, numPages } = this.state;
+    const { pageNumber } = this.state;
+    const numPages = this.props.numPages;
 
     return (
       <div>
         <nav>
-          <button onClick={this.goToPrevPage}>Prev</button>
-          <button onClick={this.goToNextPage}>Next</button>
+          <Button
+            onClick={this.goToPrevPage}
+            isDisabled={pageNumber <= 1}
+            leftIcon={<ArrowBackIcon />}
+            colorScheme="blue"
+            variant="ghost"
+            size="sm"
+          >
+            Prev
+          </Button>
+          <Button
+            onClick={this.goToNextPage}
+            isDisabled={pageNumber >= numPages}
+            rightIcon={<ArrowForwardIcon />}
+            colorScheme="blue"
+            variant="ghost"
+            size="sm"
+          >
+            Next
+          </Button>
         </nav>
 
         <div style={{ width: 600 }}>

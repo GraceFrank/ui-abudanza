@@ -4,6 +4,7 @@ import { GiFamilyHouse, GiCash } from 'react-icons/gi';
 import HighlightButton from '../../components/common/HighlightButton';
 import Card from '../../components/common/Card';
 import Icon from '@chakra-ui/icon';
+import AddAssetModal from '../AssetFinance/AssetFinanceModal';
 
 const SummaryCards = () => {
   return (
@@ -22,7 +23,7 @@ const SummaryCards = () => {
           <Heading size="sm">100,000</Heading>
         </HStack>
         <Center>
-          <HighlightButton>Fund Asset</HighlightButton>
+          <AddAssetModal />
         </Center>
       </Card>
 
