@@ -92,14 +92,10 @@ export const updateNextOfKin = (token, data) => {
   });
 };
 
-export const createAssetFinance = (token, data) => {
-  return axios.post(`${API_URL}/assets`, JSON.stringify(data), {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const getAssets = (status = 'active') => {
+  return instance.get(`/assets?status=${status}`);
 };
 
-export const getAssets = (status = 'active') => {
-  return instance.get(`assets?status=${status}`);
+export const createAsset = formData => {
+  return instance.post(`/assets`, formData);
 };
