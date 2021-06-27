@@ -18,7 +18,7 @@ import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import AssetsPage from './pages/AssetFinance/AssetFinancePage';
-
+import InvestmentPage from './pages/Investments/InvestmentPage';
 function App() {
   return (
     <ChakraProvider theme={theme}>
@@ -36,6 +36,7 @@ function App() {
             <PrivateRoute path="/dashboard" component={DashboardPage} />
             <PrivateRoute path="/profile" component={ProfilePage} />
             <PrivateRoute path="/assets" component={AssetsPage} />
+            <PrivateRoute path="/investment" component={InvestmentPage} />
 
             <Route path="/404" component={NotFoundPage} />
             <Redirect to="/404" />

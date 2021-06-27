@@ -12,14 +12,12 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { getAssets } from '../../services/api';
+import { getInvestments } from '../../services/api';
 import { AuthContext } from '../../context/AuthContext';
 import { useContext } from 'react';
 import './style.css';
-import AddAssetModal from './AssetFinanceModal';
 
-const AssetsFinance = () => {
-  const [user] = useContext(AuthContext);
+const InvestmentPage = () => {
   const toast = useToast();
   const [activeAssets, setActiveAssets] = useState([]);
   const [pendingAssets, setPendingAssets] = useState([]);
@@ -28,11 +26,11 @@ const AssetsFinance = () => {
 
   useEffect(() => {
     setLoading(true);
-    getAssets('active')
+    getInvestments('active')
       .then(res => {
         setLoading(false);
         setTotalActiveContribution(res.data.payload.totalContribution);
-        setActiveAssets(res.data.payload.assets);
+        setActiveAssets(res.data.payload.investments);
       })
       .catch(err => {
         const message = err.response
@@ -48,9 +46,9 @@ const AssetsFinance = () => {
         });
       });
 
-    getAssets('pending')
+    getInvestments('pending')
       .then(res => {
-        setPendingAssets(res.data.payload.assets);
+        setPendingAssets(res.data.payload.investments);
       })
       .catch(err => {
         const message = err.response
@@ -78,7 +76,9 @@ const AssetsFinance = () => {
             </Heading>
           </HStack>
           <Spacer />
-          <AddAssetModal />
+          <Button background="white" color="abudanza.highlight">
+            Invest Now
+          </Button>
         </Flex>
       </section>
       <main>
@@ -94,4 +94,4 @@ const AssetsFinance = () => {
   );
 };
 
-export default AssetsFinance;
+export default InvestmentPage;
