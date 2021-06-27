@@ -24,7 +24,7 @@ import Card from '../../components/common/Card';
 import { convertCloudinaryUrlToJpeg, daysBetween } from '../../utils/utils';
 import { useRef } from 'react';
 
-const AssetDetail = ({ assetDetail }) => {
+export const AssetDetail = ({ assetDetail }) => {
   const { status, due_date } = assetDetail;
   const daysRemaining = due_date =>
     daysBetween(new Date(Date.now()), new Date(due_date));
@@ -63,7 +63,11 @@ const AssetDetail = ({ assetDetail }) => {
       <Box>
         {status === 'active' && (
           <>
-            <Progress mt="5" colorScheme="cyan" value={80} />
+            <Progress
+              mt="5"
+              colorScheme="cyan"
+              value={((90 - daysRemaining(due_date)) * 90) / 100}
+            />
 
             <HStack>
               <Text fontSize="xs">
@@ -84,7 +88,10 @@ const AssetDetail = ({ assetDetail }) => {
 };
 
 const AssetList = ({ data }) => {
-  const list = data.map(asset => <AssetDetail assetDetail={asset} />);
+  console.log('data', data);
+  const list = data.map(asset => (
+    <AssetDetail key={asset._id} assetDetail={asset} />
+  ));
   return <Box>{list}</Box>;
 };
 

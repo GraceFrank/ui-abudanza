@@ -5,8 +5,9 @@ import HighlightButton from '../../components/common/HighlightButton';
 import Card from '../../components/common/Card';
 import Icon from '@chakra-ui/icon';
 import AddAssetModal from '../AssetFinance/AssetFinanceModal';
+import { Link } from 'react-router-dom';
 
-const SummaryCards = () => {
+const SummaryCards = ({ totalInvestment, totalAsset }) => {
   return (
     <Flex direction={['column', 'row']} spacing="6">
       <Card minWidth="35%" background={BACKGROUND} mr="8" my="4">
@@ -20,10 +21,16 @@ const SummaryCards = () => {
         </HStack>
         <HStack my="4">
           <Text>&#8358;</Text>
-          <Heading size="sm">100,000</Heading>
+          <Heading size="sm">{Number(totalAsset).toLocaleString()}</Heading>
         </HStack>
         <Center>
-          <AddAssetModal />
+          {totalAsset < 0 ? (
+            <AddAssetModal />
+          ) : (
+            <Link to="/assets">
+              <HighlightButton href="/assets"> View Assets</HighlightButton>
+            </Link>
+          )}
         </Center>
       </Card>
 
@@ -38,10 +45,20 @@ const SummaryCards = () => {
         </HStack>
         <HStack my="4">
           <Text>&#8358;</Text>
-          <Heading size="sm">100,000</Heading>
+          <Heading size="sm">
+            {Number(totalInvestment).toLocaleString()}
+          </Heading>
         </HStack>
         <Center>
-          <HighlightButton>View Investment</HighlightButton>
+          {totalInvestment < 0 ? (
+            <AddAssetModal />
+          ) : (
+            <Link to="/investments">
+              <HighlightButton href="/investments">
+                View Investments
+              </HighlightButton>
+            </Link>
+          )}
         </Center>
       </Card>
     </Flex>

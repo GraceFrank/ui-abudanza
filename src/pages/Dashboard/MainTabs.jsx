@@ -1,4 +1,4 @@
-import { Box, Text, Heading, Spacer } from '@chakra-ui/layout';
+import { Box, Text, Heading, Spacer, Button } from '@chakra-ui/react';
 import { TabPanels, Tab, Tabs, TabList, TabPanel } from '@chakra-ui/tabs';
 import { HIGHLIGHT } from '../../constants/colors.json';
 import HighlightButton from '../../components/common/HighlightButton';
@@ -6,8 +6,10 @@ import { Image } from '@chakra-ui/image';
 import EmptyDeliverySvg from '../../images/empty_delivery.svg';
 import { Flex } from '@chakra-ui/layout';
 import HowItWorks from '../../components/HowItWorks';
+import AssetList from '../AssetFinance/AssetDetails';
+import { Link } from 'react-router-dom';
 
-const MainTabs = () => {
+const MainTabs = ({ investments, assetFinance }) => {
   return (
     <Tabs background="white" shadow="lg">
       <TabList>
@@ -22,15 +24,25 @@ const MainTabs = () => {
       <TabPanels>
         {/* Finance Asset */}
         <TabPanel>
-          <Flex direction={['column', 'row']}>
-            <Box px="5">
-              <Text my="3">You don't have any funded set</Text>
-              <HighlightButton>Fund an Asset</HighlightButton>
-            </Box>
-
-            <Spacer />
-            <Image src={EmptyDeliverySvg} />
+          <Flex size="sm" width="100%" alignItems="end">
+            <Link to="/assets">
+              <Button background="abudanza.secondary"> View All Assets</Button>
+            </Link>
           </Flex>
+          {assetFinance.totalContribution < 0 && (
+            <Flex direction={['column', 'row']}>
+              <Box px="5">
+                <Text my="3">You don't have any Active Asset Finances</Text>
+                <HighlightButton>Fund an Asset</HighlightButton>
+              </Box>
+
+              <Spacer />
+              <Image src={EmptyDeliverySvg} />
+            </Flex>
+          )}
+          {assetFinance.totalContribution > 0 && (
+            <AssetList data={[assetFinance.assets[0]]} />
+          )}
           <HowItWorks />
         </TabPanel>
 

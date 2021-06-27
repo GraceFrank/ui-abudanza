@@ -99,3 +99,7 @@ export const getAssets = (status = 'active') => {
 export const createAsset = formData => {
   return instance.post(`/assets`, formData);
 };
+
+export const getInvestments = (status = 'active') => {
+  return instance.get(`/investments?status=${status}`);
+};
