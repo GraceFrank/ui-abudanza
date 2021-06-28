@@ -2,17 +2,17 @@ import { Text, Heading, Spinner, useToast } from '@chakra-ui/react';
 import { TabPanels, Tab, Tabs, TabList, TabPanel } from '@chakra-ui/tabs';
 import { useEffect, useState } from 'react';
 import { HIGHLIGHT } from '../../constants/colors.json';
-import { getAssets } from '../../services/api';
+import { getInvestments } from '../../services/api';
 import AssetList from './InvestmentDetail';
 
-const MainTabs = ({ activeAssets, pendingAssets, loading }) => {
+const MainTabs = ({ activeInvestments, pendingInvestments, loading }) => {
   const toast = useToast();
-  const [completedAssets, setCompletedAssets] = useState([]);
+  const [completedInvestments, setCompletedInvestments] = useState([]);
 
   useEffect(() => {
-    getAssets('completed')
+    getInvestments('completed')
       .then(res => {
-        setCompletedAssets(res.data.payload.assets);
+        setCompletedInvestments(res.data.payload.investments);
       })
       .catch(err => {
         const message = err.response
@@ -45,22 +45,22 @@ const MainTabs = ({ activeAssets, pendingAssets, loading }) => {
 
         <TabPanel>
           {loading && <Spinner />}
-          {!loading && <AssetList data={activeAssets} />}
+          {!loading && <AssetList data={activeInvestments} />}
           <Heading color="abudanza.primary" as="h2" size="md">
             Pending Investments
           </Heading>
           <Text>
             Investment becomes Active after payment has been confirmed. If you
-            are having issues confirmaing payment contact Support
+            are having issues confirming payment contact Support
           </Text>
           {loading && <Spinner />}
-          {!loading && <AssetList data={pendingAssets} />}
+          {!loading && <AssetList data={pendingInvestments} />}
         </TabPanel>
 
         {/* Completed Assets */}
         <TabPanel>
           {loading && <Spinner />}
-          {!loading && <AssetList data={completedAssets} />}
+          {!loading && <AssetList data={completedInvestments} />}
         </TabPanel>
         <TabPanel>
           <p>three!</p>

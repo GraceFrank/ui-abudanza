@@ -13,14 +13,13 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { getInvestments } from '../../services/api';
-import { AuthContext } from '../../context/AuthContext';
-import { useContext } from 'react';
+
 import './style.css';
 
 const InvestmentPage = () => {
   const toast = useToast();
-  const [activeAssets, setActiveAssets] = useState([]);
-  const [pendingAssets, setPendingAssets] = useState([]);
+  const [activeInvestments, setActiveInvestments] = useState([]);
+  const [pendingInvestments, setPendingInvestments] = useState([]);
   const [totalActiveContribution, setTotalActiveContribution] = useState(0);
   const [loading, setLoading] = useState(false);
 
@@ -30,7 +29,7 @@ const InvestmentPage = () => {
       .then(res => {
         setLoading(false);
         setTotalActiveContribution(res.data.payload.totalContribution);
-        setActiveAssets(res.data.payload.investments);
+        setActiveInvestments(res.data.payload.investments);
       })
       .catch(err => {
         const message = err.response
@@ -48,7 +47,7 @@ const InvestmentPage = () => {
 
     getInvestments('pending')
       .then(res => {
-        setPendingAssets(res.data.payload.investments);
+        setPendingInvestments(res.data.payload.investments);
       })
       .catch(err => {
         const message = err.response
@@ -69,10 +68,10 @@ const InvestmentPage = () => {
     <Layout>
       <section>
         <Flex background="abudanza.primary" p="5" pt="0">
-          <HStack>
+          <HStack align="start" justify="start">
             <Text color="white">Total Active Contribution</Text>
-            <Heading color="white" as="h2" size="lg">
-              &#8358; {totalActiveContribution.toLocaleString()}
+            <Heading color="white" as="h2" size="md">
+              &#8358;{totalActiveContribution.toLocaleString()}
             </Heading>
           </HStack>
           <Spacer />
@@ -84,8 +83,8 @@ const InvestmentPage = () => {
       <main>
         <Box p="5" background="abudanza.background">
           <MainTabs
-            activeAssets={activeAssets}
-            pendingAssets={pendingAssets}
+            activeInvestments={activeInvestments}
+            pendingInvestments={pendingInvestments}
             loading={loading}
           />
         </Box>
