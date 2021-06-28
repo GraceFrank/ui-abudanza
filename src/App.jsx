@@ -14,7 +14,6 @@ import AuthProvider from './context/AuthContext';
 import { PrivateRoute } from './PrivateRoute';
 import RegistrationSuccessfulPage from './pages/RegistrationSuccessfulPage';
 import VerificationPage from './pages/EmailVerificationPage';
-import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import AssetsPage from './pages/AssetFinance/AssetFinancePage';
@@ -25,7 +24,7 @@ function App() {
       <AuthProvider>
         <Router>
           <Switch>
-            <Route path="/" exact component={HomePage} />
+            <Route path="/" exact component={LoginPage} />
             <Route path="/login" component={LoginPage} />
             <Route path="/register" component={RegisterPage} />
             <Route path="/verification" component={VerificationPage} />
@@ -37,7 +36,6 @@ function App() {
             <PrivateRoute path="/profile" component={ProfilePage} />
             <PrivateRoute path="/assets" component={AssetsPage} />
             <PrivateRoute path="/investment" component={InvestmentPage} />
-
             <Route path="/404" component={NotFoundPage} />
             <Redirect to="/404" />
           </Switch>
