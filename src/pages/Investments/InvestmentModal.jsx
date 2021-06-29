@@ -12,16 +12,16 @@ import {
 } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 
-import AssetFinanceForm from './AssetFinanceForm';
+import AssetFinanceForm from './InvestmentForm';
 import { useState } from 'react';
 import TermsAndConditions from './TermsAndConditions';
-import { createAsset } from '../../services/api';
+import { createInvestment } from '../../services/api';
 import SuccessAlert from './SuccessAlert';
 
-function AddAssetModal() {
+function InvestmentModal() {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [assetDetails, setAssetDetails] = useState({ cost: 0 });
+  const [investmentDetails, setInvestmentDetails] = useState({ cost: 0 });
   const [loading, setLoading] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
@@ -29,9 +29,7 @@ function AddAssetModal() {
 
   const handleContinue = e => {
     e.preventDefault();
-    console.log(assetDetails);
-    if (!assetDetails['proformaInvoice'] || !assetDetails['paymentProof'])
-      return;
+    if (!investmentDetails['paymentProof']) return;
     setShowTerms(true);
   };
   const handleAgreement = () => {
@@ -44,19 +42,19 @@ function AddAssetModal() {
   };
   const handleSubmit = e => {
     e.preventDefault();
-    console.log('submitteddddfghjkl;kjhgfghjkjhgfhjk');
     setLoading(true);
     const formData = new FormData();
-    for (const data in assetDetails) {
-      if (!assetDetails[data]) continue;
-      formData.append(data, assetDetails[data]);
+    for (const data in investmentDetails) {
+      if (!investmentDetails[data]) continue;
+      formData.append(data, investmentDetails[data]);
     }
+    //Todo! Reload investments, Reload Assets
 
-    createAsset(formData)
+    createInvestment(formData)
       .then(res => {
         setLoading(false);
         toast({
-          title: 'Asset Finance Request Created 🎊',
+          title: 'Investment Request Created 🎊',
           description: 'Wil be Reviewed in 24 hours',
           status: 'success',
           duration: 3000,
@@ -66,7 +64,7 @@ function AddAssetModal() {
         setAgreedToTerms(false);
         setShowTerms(false);
         setShowSuccess(true);
-        setAssetDetails({ cost: 0 });
+        setInvestmentDetails({ cost: 0 });
       })
       .catch(err => {
         setShowSuccess(false);
@@ -94,7 +92,7 @@ function AddAssetModal() {
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
-    setAssetDetails({ ...assetDetails, [name]: value });
+    setInvestmentDetails({ ...investmentDetails, [name]: value });
   };
 
   return (
@@ -116,15 +114,15 @@ function AddAssetModal() {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader color="abudanza.primary">Asset Finance </ModalHeader>
+          <ModalHeader color="abudanza.primary">Invest</ModalHeader>
           <ModalCloseButton isDisabled={loading} onClick={handleClose} />
           <ModalBody pb={6}>
             {!showTerms && !showSuccess && (
               <AssetFinanceForm
                 handleContinue={handleContinue}
                 handleChange={handleChange}
-                assetDetails={assetDetails}
-                setAssetDetails={setAssetDetails}
+                investmentDetails={investmentDetails}
+                setInvestmentDetails={setInvestmentDetails}
               />
             )}
             {showTerms && (
@@ -160,4 +158,4 @@ function AddAssetModal() {
     </>
   );
 }
-export default AddAssetModal;
+export default InvestmentModal;

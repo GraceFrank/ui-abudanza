@@ -15,6 +15,7 @@ import { useState } from 'react';
 import { getInvestments } from '../../services/api';
 
 import './style.css';
+import InvestmentModal from './InvestmentModal';
 
 const InvestmentPage = () => {
   const toast = useToast();
@@ -75,9 +76,7 @@ const InvestmentPage = () => {
             </Heading>
           </HStack>
           <Spacer />
-          <Button background="white" color="abudanza.highlight">
-            Invest Now
-          </Button>
+          <InvestmentModal />
         </Flex>
       </section>
       <main>

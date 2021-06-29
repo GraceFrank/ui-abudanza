@@ -12,12 +12,13 @@ import {
 } from '@chakra-ui/react';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import FileInput from '../../components/common/FileInput';
+import { calculateAmountDue } from '../../utils/utils';
 
 const AssetFinanceForm = ({
   handleContinue,
   handleChange,
-  assetDetails,
-  setAssetDetails,
+  investmentDetails,
+  setInvestmentDetails,
 }) => {
   return (
     <>
@@ -30,72 +31,29 @@ const AssetFinanceForm = ({
 
       <form onSubmit={handleContinue}>
         {/* Duration */}
-        <FormControl my="3" id="duration" isRequired my="5">
+        <FormControl my="3" id="duration" isRequired>
           <HStack>
-            <FormLabel fontSize="sm">Duration: </FormLabel>
-            <Heading size="sm">90 Days</Heading>
-          </HStack>
-        </FormControl>
-
-        {/* Category */}
-        <FormControl my="3" id="category" isRequired>
-          <HStack>
-            <FormLabel fontSize="sm" size="xs">
-              Category
-            </FormLabel>
+            <FormLabel fontSize="sm">Duration:</FormLabel>
             <Select
               onChange={handleChange}
-              value={assetDetails.category}
-              name="category"
-              id="category"
-              size="xs"
-              variant="flushed"
-              placeholder="Select Category"
+              value={investmentDetails.duration}
+              name="duration"
+              id="duration"
+              size="sm"
+              placeholder="Select duration"
             >
-              <option value="automobile">automobile</option>
-              <option value="electronics">electronics</option>
-              <option value="fashion">fashion</option>
-              <option value="computing/phone">automobile</option>
-              <option value="others">automobile</option>
+              <option value={90}>90 Days</option>
+              <option value={180}>180 Days</option>
+              <option value={360}>360 Days</option>
             </Select>
           </HStack>
         </FormControl>
 
-        {/* Brand */}
-        <FormControl isRequired my="3" id="brand">
-          <HStack>
-            <FormLabel fontSize="sm">Brand: </FormLabel>
-            <Input
-              onChange={handleChange}
-              value={assetDetails.brand}
-              type="text"
-              id="brand"
-              name="brand"
-              variant="flushed"
-              size="xs"
-            />
-          </HStack>
-        </FormControl>
-        <FormControl isRequired my="3" id="model">
-          <HStack>
-            <FormLabel fontSize="sm">Model: </FormLabel>
-            <Input
-              onChange={handleChange}
-              value={assetDetails.model}
-              type="text"
-              id="model"
-              name="model"
-              variant="flushed"
-              size="xs"
-            />
-          </HStack>
-        </FormControl>
-
         {/* Cost */}
-        <FormControl isRequired id="cost" my="3">
+        <FormControl isRequired id="amount_paid" my="3">
           <HStack>
-            <FormLabel fontSize="sm">Cost of Item</FormLabel>
-            <InputGroup variant="flushed" size="xs">
+            <FormLabel fontSize="sm">Principal</FormLabel>
+            <InputGroup size="sm">
               <InputLeftElement
                 pointerEvents="none"
                 color="gray.300"
@@ -103,13 +61,16 @@ const AssetFinanceForm = ({
                 children="₦"
               />
               <Input
+                size=""
                 onChange={handleChange}
-                value={assetDetails.cost}
-                id="cost"
-                name="cost"
+                value={investmentDetails.amount_paid}
+                id="amount_paid"
+                name="amount_paid"
                 placeholder="Enter amount"
                 type="number"
+                step="1"
                 min={10000}
+                title="Only Integars are allowed"
               />
             </InputGroup>
           </HStack>
@@ -118,143 +79,18 @@ const AssetFinanceForm = ({
         {/* Amount Payable  */}
         <FormControl isRequired my="3" id="amountPayable">
           <HStack>
-            <FormLabel fontSize="sm">Amount Payable: </FormLabel>
+            <FormLabel fontSize="sm">Expected Returns </FormLabel>
             <Text>
-              {' '}
-              ₦{Number((assetDetails.cost * 60) / 100).toLocaleString()}
+              ₦
+              {investmentDetails.duration &&
+                investmentDetails.amount_paid &&
+                Number(
+                  calculateAmountDue(
+                    investmentDetails.duration,
+                    investmentDetails.amount_paid
+                  )
+                ).toLocaleString()}
             </Text>
-          </HStack>
-        </FormControl>
-
-        {/* Vendor Name */}
-        <FormControl isRequired my="3" id="vendor_name">
-          <HStack>
-            <FormLabel fontSize="sm">Vendor Name: </FormLabel>
-            <Input
-              id="vendor_name"
-              name="vendor_name"
-              variant="flushed"
-              size="xs"
-              type="text"
-              onChange={handleChange}
-              value={assetDetails.vendor_name}
-            />
-          </HStack>
-        </FormControl>
-
-        {/* Vendor Phone */}
-        <FormControl isRequired my="3" id="vendor_phone">
-          <HStack>
-            <FormLabel fontSize="sm">Vendor Phone: </FormLabel>
-            <Input
-              onChange={handleChange}
-              value={assetDetails.vendor_phone}
-              pattern="^\+[0-9]{4,15}"
-              id="vendor_phone"
-              name="vendor_phone"
-              variant="flushed"
-              size="xs"
-              type="tel"
-              title="Phone number should include country code and number example: +2349996899"
-            />
-          </HStack>
-        </FormControl>
-
-        {/* Vendor Email */}
-        <FormControl my="3" id="vendor_email">
-          <HStack>
-            <FormLabel fontSize="sm">Vendor Email: </FormLabel>
-            <Input
-              onChange={handleChange}
-              value={assetDetails.vendor_email}
-              type="email"
-              id="vendor_email"
-              name="vendor_email"
-              variant="flushed"
-              size="xs"
-            />
-          </HStack>
-        </FormControl>
-
-        {/* Vendor Website */}
-        <FormControl my="3" id="vendor_website">
-          <HStack>
-            <FormLabel fontSize="sm">Vendor Website: </FormLabel>
-            <Input
-              onChange={handleChange}
-              value={assetDetails.vendor_website}
-              type="url"
-              id="vendor_website"
-              name="vendor_website"
-              variant="flushed"
-              size="xs"
-            />
-          </HStack>
-        </FormControl>
-
-        {/* Vendor Address */}
-        <FormControl my="3" id="vendor_street_address">
-          <HStack>
-            <FormLabel fontSize="sm">Vendor Address: </FormLabel>
-            <Input
-              onChange={handleChange}
-              value={assetDetails.vendor_address}
-              type="text"
-              id="vendor_street_address"
-              name="vendor_street_address"
-              variant="flushed"
-              size="xs"
-            />
-          </HStack>
-        </FormControl>
-
-        {/* Vendor City */}
-        <FormControl isRequired my="3" id="vendor_city">
-          <HStack>
-            <FormLabel fontSize="sm">Vendor City: </FormLabel>
-            <Input
-              onChange={handleChange}
-              value={assetDetails.vendor_city}
-              type="text"
-              id="vendor_city"
-              name="vendor_city"
-              variant="flushed"
-              size="xs"
-            />
-          </HStack>
-        </FormControl>
-
-        {/* Vendor Country */}
-        <FormControl my="3" id="vendor_country">
-          <HStack>
-            <FormLabel fontSize="sm">Vendor Country: </FormLabel>
-            <CountryDropdown
-              onChange={value =>
-                setAssetDetails({ ...assetDetails, vendor_country: value })
-              }
-              value={assetDetails.vendor_country}
-              required
-              id="vendor_country"
-              target={{ name: 'vendor_country' }}
-              className="select-country"
-            />
-          </HStack>
-        </FormControl>
-
-        {/* Vendor State */}
-        <FormControl my="3" id="vendor_state">
-          <HStack>
-            <FormLabel fontSize="sm">Vendor State: </FormLabel>
-            <RegionDropdown
-              onChange={value =>
-                setAssetDetails({ ...assetDetails, vendor_state: value })
-              }
-              value={assetDetails.vendor_state}
-              country={assetDetails.vendor_country}
-              id="vendor_state"
-              name="vendor_state"
-              required
-            />
           </HStack>
         </FormControl>
 
@@ -262,16 +98,8 @@ const AssetFinanceForm = ({
         <FileInput
           name="paymentProof"
           label="Proof of Payment"
-          formData={assetDetails}
-          setFormData={setAssetDetails}
-        />
-
-        {/* Proforma Invoice */}
-        <FileInput
-          name="proformaInvoice"
-          label="Proforma Invoice"
-          formData={assetDetails}
-          setFormData={setAssetDetails}
+          formData={investmentDetails}
+          setFormData={setInvestmentDetails}
         />
 
         {/* just Continue */}

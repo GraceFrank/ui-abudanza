@@ -51,8 +51,7 @@ const FileInput = ({ name, setFormData, formData, label }) => {
           onChange={handleFileInput}
           id={name}
           name={name}
-          variant="flushed"
-          size="xs"
+          size="sm"
           type="file"
         />
       </HStack>

@@ -6,17 +6,17 @@ import { Heading, VStack, Text, Button } from '@chakra-ui/react';
 export default function SuccessAlert({ onClose }) {
   let history = useHistory();
 
-  const viewAsset = e => {
+  const viewInvestments = e => {
     onClose(e);
-    history.push('/assets');
+    history.push('/investments');
   };
   return (
     <VStack>
       <CheckIcon w={20} h={20} color="green.500" />
-      <Heading>Asset Finance Created</Heading>
+      <Heading>Investment Created</Heading>
       <Text>Will be reviewed in 24 hours</Text>
-      <Button onClick={viewAsset} background="abudanza.secondary">
-        View Assets
+      <Button onClick={viewInvestments} background="abudanza.secondary">
+        View Investments
       </Button>
     </VStack>
   );
