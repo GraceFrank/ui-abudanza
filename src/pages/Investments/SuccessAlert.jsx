@@ -8,7 +8,7 @@ export default function SuccessAlert({ onClose }) {
 
   const viewInvestments = e => {
     onClose(e);
-    history.push('/investments');
+    history.push('/investment');
   };
   return (
     <VStack>

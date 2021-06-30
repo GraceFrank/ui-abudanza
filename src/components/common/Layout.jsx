@@ -15,7 +15,9 @@ const Layout = ({ children }) => {
       {!isMobileView && <SideMenu />}
       <Box ml={isMobileView ? '0' : '22%'} w={isMobileView ? '100%' : '78%'}>
         <Header />
-        <Box w="100%">{children}</Box>
+        <Box minHeight="72vh" w="100%">
+          {children}
+        </Box>
         <Footer2 />
       </Box>
     </Box>

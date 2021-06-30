@@ -53,10 +53,8 @@ const SummaryCards = ({ totalInvestment, totalAsset }) => {
           {totalInvestment < 0 ? (
             <AddAssetModal />
           ) : (
-            <Link to="/investments">
-              <HighlightButton href="/investments">
-                View Investments
-              </HighlightButton>
+            <Link to="/investment">
+              <HighlightButton>View Investments</HighlightButton>
             </Link>
           )}
         </Center>
