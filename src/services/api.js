@@ -2,8 +2,8 @@ import axios from 'axios';
 import instance from '../utils/axios';
 const API_URL = process.env.REACT_APP_API_URL;
 
-export const register = data => {
-  return axios.post(`${API_URL}/auth/register`, data);
+export const register = (data, ref) => {
+  return axios.post(`${API_URL}/auth/register?ref=${ref}`, data);
 };
 
 export const login = data => {
@@ -106,4 +106,8 @@ export const getInvestments = (status = 'active') => {
 
 export const createInvestment = formData => {
   return instance.post(`/investments`, formData);
+};
+
+export const getReferrals = () => {
+  return instance.get(`/referrals`);
 };

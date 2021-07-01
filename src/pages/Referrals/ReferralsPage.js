@@ -8,11 +8,12 @@ import {
   Spacer,
   Text,
   Heading,
-  Button,
+  Center,
   useToast,
+  Spinner,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { getInvestments } from '../../services/api';
+import { getReferrals } from '../../services/api';
 import { AdCard, ReferralCard } from './Cards';
 import { AuthContext } from '../../context/AuthContext';
 
@@ -20,16 +21,19 @@ const ReferralPage = () => {
   const [user] = useContext(AuthContext);
   const toast = useToast();
   const [referrals, setReferrals] = useState([]);
-  const [totalCommission, setTotalCommission] = useState(0);
+  const [totalEarned, setTotalEarned] = useState(0);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    getInvestments('active')
+    getReferrals()
       .then(res => {
         setLoading(false);
+        setReferrals(res.data.payload.referrals);
+        setTotalEarned(res.data.payload.totalEarned);
       })
       .catch(err => {
+        setLoading(false);
         const message = err.response
           ? err.response.data.message
           : 'error fetching referrals contact admin';
@@ -51,7 +55,7 @@ const ReferralPage = () => {
           <HStack align="start" justify="start">
             <Text color="white">Total Commission</Text>
             <Heading color="white" as="h2" size="md">
-              &#8358;{totalCommission.toLocaleString()}
+              &#8358;{totalEarned.toLocaleString()}
             </Heading>
           </HStack>
           <Spacer />
@@ -61,7 +65,14 @@ const ReferralPage = () => {
       <main>
         <AdCard />
         <Box p="5" background="abudanza.background">
-          <ReferralTable />
+          {!loading && referrals.length < 1 && <Center>No referrals</Center>}
+          {!loading && <ReferralTable data={referrals} />}
+
+          {loading && (
+            <Center>
+              <Spinner />
+            </Center>
+          )}
         </Box>
       </main>
     </Layout>

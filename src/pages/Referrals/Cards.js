@@ -20,7 +20,7 @@ export const AdCard = () => {
 };
 
 export const ReferralCard = ({ accountId }) => {
-  const referralLink = `${window.location.origin}/register/${accountId}`;
+  const referralLink = `${window.location.origin}/register/?ref=${accountId}`;
   return (
     <Card background=" linear-gradient(180deg, rgba(255,101,0,1) 5%, rgba(250,250,250,1) 5%)">
       <Flex>
