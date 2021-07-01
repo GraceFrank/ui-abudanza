@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 import 'react-phone-number-input/style.css';
 import PhoneInput, { isPossiblePhoneNumber } from 'react-phone-number-input';
 import HighlightButton from './common/HighlightButton';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { register } from '../services/api';
 import { useToast } from '@chakra-ui/toast';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
@@ -18,6 +18,8 @@ import { InputRightElement } from '@chakra-ui/input';
 
 const AuthForm = () => {
   const history = useHistory();
+  const query = new URLSearchParams(useLocation().search);
+
   const toast = useToast();
   const [phone, setPhone] = useState();
   const [submitting, setSubmitting] = useState(false);
@@ -48,9 +50,10 @@ const AuthForm = () => {
     }
     setPhoneError('');
 
+    const ref = query.get('ref');
     setSubmitting(true);
     const details = { ...userDetails, phone };
-    register(details)
+    register(details, ref)
       .then(data => {
         setSubmitting(false);
         toast({
@@ -151,7 +154,7 @@ const AuthForm = () => {
                 type={showPassword ? 'text' : 'password'}
                 value={userDetails.password}
                 onChange={handleChange}
-                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
                 title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
               />
               <InputRightElement>
