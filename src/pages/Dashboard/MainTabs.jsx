@@ -4,9 +4,12 @@ import { HIGHLIGHT } from '../../constants/colors.json';
 import HighlightButton from '../../components/common/HighlightButton';
 import { Image } from '@chakra-ui/image';
 import EmptyDeliverySvg from '../../images/empty_delivery.svg';
+import EmptyNotes from '../../images/EmptyNotes.svg';
 import { Flex } from '@chakra-ui/layout';
 import HowItWorks from '../../components/HowItWorks';
 import AssetList from '../AssetFinance/AssetDetails';
+import InvestmentList from '../Investments/InvestmentDetail';
+
 import { Link } from 'react-router-dom';
 
 const MainTabs = ({ investments, assetFinance }) => {
@@ -48,10 +51,30 @@ const MainTabs = ({ investments, assetFinance }) => {
 
         {/* investment */}
         <TabPanel>
-          <p>two!</p>
-        </TabPanel>
-        <TabPanel>
-          <p>three!</p>
+          <Flex size="sm" width="100%" alignItems="end">
+            <Link to="/investments">
+              <Button background="abudanza.secondary">
+                View All Investments
+              </Button>
+            </Link>
+          </Flex>
+          {investments.totalContribution < 0 && (
+            <Flex direction={['column', 'row']}>
+              <Box px="5">
+                <Text my="3">You don't have any Active Investments</Text>
+                <Link to="/investments">
+                  <HighlightButton>Invest Now</HighlightButton>
+                </Link>
+              </Box>
+
+              <Spacer />
+              <Image src={EmptyDeliverySvg} />
+            </Flex>
+          )}
+          {investments.totalContribution > 0 && (
+            <InvestmentList data={[investments.investments[0]]} />
+          )}
+          <HowItWorks />
         </TabPanel>
       </TabPanels>
     </Tabs>
