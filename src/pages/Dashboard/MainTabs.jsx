@@ -68,7 +68,7 @@ const MainTabs = ({ investments, assetFinance }) => {
               </Box>
 
               <Spacer />
-              <Image src={EmptyDeliverySvg} />
+              <Image src={EmptyNotes} />
             </Flex>
           )}
           {investments.totalContribution > 0 && (

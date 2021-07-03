@@ -111,3 +111,10 @@ export const createInvestment = formData => {
 export const getReferrals = () => {
   return instance.get(`/referrals`);
 };
+
+export const changePassword = ({ currentPassword, newPassword }) => {
+  return instance.put(`/auth/change-password`, {
+    currentPassword,
+    newPassword,
+  });
+};
