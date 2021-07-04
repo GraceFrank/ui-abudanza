@@ -29,7 +29,7 @@ export const getProfile = token => {
 };
 
 export const creatProfile = (token, data) => {
-  return axios.post(`${API_URL}/profile`, JSON.stringify(data), {
+  return axios.post(`${API_URL}/profile`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -37,7 +37,7 @@ export const creatProfile = (token, data) => {
 };
 
 export const updateProfile = (token, data) => {
-  return axios.put(`${API_URL}/profile`, JSON.stringify(data), {
+  return axios.put(`${API_URL}/profile`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -53,7 +53,7 @@ export const getBankDetails = token => {
 };
 
 export const addBankDetail = (token, data) => {
-  return axios.post(`${API_URL}/bankdetails`, JSON.stringify(data), {
+  return axios.post(`${API_URL}/bankdetails`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -61,35 +61,23 @@ export const addBankDetail = (token, data) => {
 };
 
 export const updateBankDetail = (token, data) => {
-  return axios.put(`${API_URL}/bankdetails`, JSON.stringify(data), {
+  return axios.put(`${API_URL}/bankdetails`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
 };
 
-export const getNextOfKin = token => {
-  return axios.get(`${API_URL}/nextofkin`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const getNextOfKin = () => {
+  return instance.get('/nextofkin');
 };
 
-export const addNextOfKin = (token, data) => {
-  return axios.post(`${API_URL}/nextofkin`, JSON.stringify(data), {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const addNextOfKin = data => {
+  return instance.post('/nextofkin', data);
 };
 
-export const updateNextOfKin = (token, data) => {
-  return axios.put(`${API_URL}/nextofkin`, JSON.stringify(data), {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const updateNextOfKin = data => {
+  return instance.put('/nextofkin', data);
 };
 
 export const getAssets = (status = 'active') => {

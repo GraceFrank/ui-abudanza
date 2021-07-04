@@ -53,6 +53,7 @@ const ChangePassword = () => {
         });
       })
       .catch(err => {
+        setLoading(false);
         const message = err.response
           ? err.response.data.message
           : 'error updating password  contact admin';
@@ -81,6 +82,7 @@ const ChangePassword = () => {
           <FormLabel fontSize="sm">Current Password:</FormLabel>
           <InputGroup>
             <Input
+              size="sm"
               placeholder="Current Password"
               id="currentPassword"
               type={showPassword.currentPassword ? 'text' : 'password'}
@@ -104,6 +106,7 @@ const ChangePassword = () => {
           <FormLabel fontSize="sm">New Password:</FormLabel>
           <InputGroup>
             <Input
+              size="sm"
               placeholder="New Password"
               id="newPassword"
               type={showPassword.newPassword ? 'text' : 'password'}
@@ -124,6 +127,7 @@ const ChangePassword = () => {
 
         <Center mt="3">
           <HighlightButton
+            size="sm"
             isLoading={loading}
             type="submit"
             loadingText="Saving Changes"
