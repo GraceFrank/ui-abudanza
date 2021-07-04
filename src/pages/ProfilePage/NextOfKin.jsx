@@ -179,6 +179,8 @@ const NextOfKin = () => {
         setFetchingNextOfKin(false);
       })
       .catch(err => {
+        setSaving(false);
+
         const message = err.response
           ? err.response.data.message
           : 'error fetching Next of kin, contact admin';

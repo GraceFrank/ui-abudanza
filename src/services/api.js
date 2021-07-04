@@ -20,52 +20,28 @@ export const validateConfirmationToken = token => {
   return axios.post(`${API_URL}/auth/verify`, { token });
 };
 
-export const getProfile = token => {
-  return axios.get(`${API_URL}/profile`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const getProfile = () => {
+  return instance.get('/profile');
 };
 
-export const creatProfile = (token, data) => {
-  return axios.post(`${API_URL}/profile`, data, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const creatProfile = data => {
+  return instance.post('/profile', data);
 };
 
-export const updateProfile = (token, data) => {
-  return axios.put(`${API_URL}/profile`, data, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const updateProfile = data => {
+  return instance.put('/profile', data);
 };
 
-export const getBankDetails = token => {
-  return axios.get(`${API_URL}/bankdetails`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const getBankDetails = () => {
+  return instance.get('/bankdetails');
 };
 
-export const addBankDetail = (token, data) => {
-  return axios.post(`${API_URL}/bankdetails`, data, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const addBankDetail = data => {
+  return instance.post('/bankdetails', data);
 };
 
-export const updateBankDetail = (token, data) => {
-  return axios.put(`${API_URL}/bankdetails`, data, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const updateBankDetail = data => {
+  return instance.put('/bankdetails', data);
 };
 
 export const getNextOfKin = () => {
