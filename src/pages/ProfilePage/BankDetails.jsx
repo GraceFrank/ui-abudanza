@@ -126,7 +126,7 @@ const BankDetails = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const method =
-      Object.keys(bankDetails) < 1 ? addBankDetail : updateBankDetail;
+      Object.keys(bankDetails).length < 1 ? addBankDetail : updateBankDetail;
     setSaving(true);
     method(edits)
       .then(res => {

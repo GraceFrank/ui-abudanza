@@ -1,166 +1,293 @@
-import { useState } from 'react';
 import {
   Button,
   FormControl,
   FormLabel,
   Input,
   Select,
-  VStack,
+  Center,
   HStack,
   Stack,
-  Heading,
+  Box,
+  Image,
 } from '@chakra-ui/react';
 import HighlightButton from '../../components/common/HighlightButton';
 import TitleDetail from '../../components/common/TitleDetail';
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
+import FileInput from '../../components/common/FileInput';
 
-export const ProfileInfoForm = ({ data }) => {
-  const [profileInfo, setProfileInfo] = useState({});
-  const [updating, setUpdating] = useState(false);
-
-  const handleSubmit = e => {
-    e.preventDefault();
-  };
-  const handleChange = ({ target }) => {
-    const { value, name } = target;
-    setProfileInfo({ ...profileInfo, [name]: value });
-  };
-
+export const ProfileInfoForm = ({
+  data,
+  handleSubmit,
+  handleChange,
+  loading,
+  setEditMode,
+  editMode,
+  edits,
+  setEdits,
+}) => {
   return (
-    <>
+    <Box>
       <form onSubmit={handleSubmit}>
-        <VStack>
-          <HStack>
-            <FormControl id="title" isRequired>
-              <FormLabel>Title</FormLabel>
-              <Select placeholder="Select option" variant="flushed">
-                <option value="Mr">Mr</option>
-                <option value="Mrs">Mrs</option>
-                <option value="Miss">Miss</option>
-                <option value="Ms">Ms</option>
-              </Select>
-              <Input
-                variant="flushed"
-                id="title"
-                placeholder="FirstName"
-                name="first_name"
-                type="text"
-                minlength={2}
-                maxlength={255}
-                value={profileInfo.first_name}
-                onChange={handleChange}
-              />
-            </FormControl>
-            <FormControl id="lastName" isRequired>
-              <FormLabel>Last Name</FormLabel>
-              <Input
-                variant="flushed"
-                placeholder="LastName"
-                name="first_name"
-                type="text"
-                minlength={2}
-                maxlength={255}
-                value={profileInfo.last_name}
-                onChange={handleChange}
-              />
-            </FormControl>
-          </HStack>
-          <HStack>
-            <FormControl id="email" isRequired>
-              <FormLabel>Email</FormLabel>
-              <Input
-                variant="flushed"
-                placeholder="Email"
-                id="email"
-                name="email"
-                type="email"
-                value={profileInfo.email}
-                onChange={handleChange}
-              />
-            </FormControl>
-            <FormControl id="phone" isRequired>
-              <FormLabel>Phone</FormLabel>
-              <Input
-                variant="flushed"
-                placeholder="Phone Number"
-                id="phone"
-                type="tel"
-                value={profileInfo.phone}
-                onChange={handleChange}
-              />
-            </FormControl>
-          </HStack>
-        </VStack>
-        <HighlightButton
-          isLoading={updating}
-          loadingText="Updating"
-          size="xs"
-          type="submit"
-        >
-          Update Basic Info
-        </HighlightButton>
-        <Button></Button>
+        {/* title */}
+        <FormControl id="title">
+          <FormLabel fontSize="sm">Title:</FormLabel>
+          <Select
+            id="title"
+            isRequired
+            value={editMode ? edits.title : data.title}
+            isDisabled={!editMode}
+            onChange={handleChange}
+            size="sm"
+            placeholder="Select title"
+          >
+            <option value="Mr">Mr</option>
+            <option value="Mrs">Mrs</option>
+            <option value="Miss">Miss</option>
+            <option value="Ms">Ms</option>
+          </Select>
+        </FormControl>
+
+        {/* Marital Status */}
+        <FormControl id="marital_status">
+          <FormLabel fontSize="sm">Marital Status:</FormLabel>
+          <Select
+            id="marital_status"
+            isRequired
+            value={editMode ? edits.marital_status : data.marital_status}
+            isDisabled={!editMode}
+            onChange={handleChange}
+            size="sm"
+            placeholder="Select Status"
+          >
+            <option value="single">Single</option>
+            <option value="married">Married</option>
+            <option value="widowed">Widowed</option>
+            <option value="divorced">Divorced</option>
+            <option value="separated">Separated</option>
+          </Select>
+        </FormControl>
+
+        {/* Birthday */}
+        <FormControl id="birthday">
+          <FormLabel fontSize="sm">Date of Birth:</FormLabel>
+          <Input
+            isRequired
+            type={editMode ? 'date' : 'text'}
+            size="sm"
+            id="birthday"
+            value={
+              editMode
+                ? edits.birthday
+                : new Date(data.birthday).toLocaleDateString()
+            }
+            isDisabled={!editMode}
+            onChange={handleChange}
+          />
+        </FormControl>
+
+        {/* Mother's Maiden Name */}
+        <FormControl id="mothers_maiden_name">
+          <FormLabel fontSize="sm">Mother's Maiden Name:</FormLabel>
+          <Input
+            isRequired
+            type="text"
+            size="sm"
+            id="mothers_maiden_name"
+            value={
+              editMode ? edits.mothers_maiden_name : data.mothers_maiden_name
+            }
+            isDisabled={!editMode}
+            onChange={handleChange}
+          />
+        </FormControl>
+
+        {/* Marital Status */}
+        <FormControl id="mothers_maiden_name">
+          <FormLabel fontSize="sm">BVN:</FormLabel>
+          <Input
+            isRequired
+            type="text"
+            size="sm"
+            id="mothers_maiden_name"
+            value={editMode ? edits.bvn : data.bvn}
+            isDisabled={!editMode}
+            onChange={handleChange}
+          />
+        </FormControl>
+
+        {/* Street Address */}
+        <FormControl id="street_address">
+          <FormLabel fontSize="sm">Street Address:</FormLabel>
+          <Input
+            isRequired
+            type="text"
+            size="sm"
+            id="street_address"
+            value={
+              editMode ? edits.street_address : data.address.street_address
+            }
+            isDisabled={!editMode}
+            onChange={handleChange}
+          />
+        </FormControl>
+
+        {/* Street Address2 */}
+        <FormControl id="street_address2">
+          <FormLabel fontSize="sm">Street Address 2:</FormLabel>
+          <Input
+            type="text"
+            size="sm"
+            id="street_address2"
+            value={
+              editMode ? edits.street_address2 : data.address.street_address2
+            }
+            isDisabled={!editMode}
+            onChange={handleChange}
+          />
+        </FormControl>
+
+        {/* city */}
+        <FormControl id="city">
+          <FormLabel fontSize="sm">City:</FormLabel>
+          <Input
+            isRequired
+            type="text"
+            size="sm"
+            id="city"
+            value={editMode ? edits.city : data.address.city}
+            isDisabled={!editMode}
+            onChange={handleChange}
+          />
+        </FormControl>
+
+        {/*  Country */}
+        <FormControl my="3" id="vendor_country">
+          <FormLabel fontSize="sm">Country:</FormLabel>
+          <CountryDropdown
+            isDisabled={!editMode}
+            required
+            onChange={value => setEdits({ ...edits, country: value })}
+            value={editMode ? edits.country : data.address.country}
+            id="vendor_country"
+            className="select-country"
+          />
+        </FormControl>
+
+        {/* State */}
+        <FormControl my="3" id="vendor_state">
+          <FormLabel fontSize="sm">State: </FormLabel>
+          <RegionDropdown
+            country={editMode ? edits.country : data.address.country}
+            value={editMode ? edits.state : data.address.state}
+            onChange={value => setEdits({ ...edits, state: value })}
+            className="select-country"
+            id="vendor_state"
+            name="vendor_state"
+            required
+          />
+        </FormControl>
+
+        <Center my="5">
+          {!editMode && (
+            <Button
+              onClick={() => setEditMode(true)}
+              background="abudanza.secondary"
+              size="sm"
+            >
+              Edit Profile
+            </Button>
+          )}
+          {editMode && (
+            <>
+              <Button
+                size="sm"
+                mr="3"
+                isDisabled={loading}
+                onClick={() => {
+                  setEditMode(false);
+                }}
+              >
+                Cancel
+              </Button>
+              <HighlightButton
+                loadingText={'saving'}
+                isLoading={loading}
+                type="submit"
+                size="sm"
+              >
+                Save Changes
+              </HighlightButton>
+            </>
+          )}
+        </Center>
       </form>
-    </>
+    </Box>
   );
 };
 
 export const BasicInfo = ({ data }) => (
-  <HStack spacing="5">
-    <Stack spacing="5" w="50%">
+  <>
+    <HStack spacing="5">
       <TitleDetail title="First Name" value={data.firstName} />
-      <TitleDetail title="Email" value={data.email} textTransform="lowercase" />
-    </Stack>
-    <Stack spacing="5">
       <TitleDetail title="Last Name" value={data.lastName} />
+    </HStack>
+    <Stack spacing="5">
       <TitleDetail title="Phone" value={data.phone} />
+      <TitleDetail title="Email" value={data.email} />
     </Stack>
-  </HStack>
+  </>
 );
 
-export const ProfileInfo = ({ data }) => {
-  return (
-    <>
-      <Heading pt="5" color="abudanza.primary" size="xs" as="h4">
-        PROFILE
-      </Heading>
-      <HStack spacing="5">
-        <Stack spacing="5" w="50%">
-          <TitleDetail title="Title" value={data.title} />
-          <TitleDetail
-            title="Mother's Maiden Name"
-            value={data.mothers_maiden_name}
-          />
-          <TitleDetail title="BVN" value={data.bvn} />
-        </Stack>
-        <Stack spacing="5">
-          <TitleDetail title="Marital Status" value={data.marital_status} />
-          <TitleDetail
-            title="Date of Birth"
-            value={new Date(data.birthday).toLocaleDateString()}
-          />
-          <TitleDetail title="Nationality" value={data.nationality} />
-        </Stack>
-      </HStack>
-    </>
-  );
-};
-
-export const AddressInfo = ({ data }) => (
+export const IDCard = ({
+  idCardUrl,
+  formData,
+  loading,
+  handleSubmit,
+  setFormData,
+}) => (
   <>
-    <Heading pt="5" color="abudanza.primary" size="xs" as="h4">
-      ADDRESS
-    </Heading>
-
-    <Stack>
-      <TitleDetail title="Street Address" value={data.street_address} />
-      <TitleDetail title="Street Address 2" value={data.street_address2} />
-    </Stack>
-    <Stack spacing="5">
-      <HStack spacing="5">
-        <TitleDetail title="City" value={data.city} />
-        <TitleDetail title="State" value={data.state} />
-        <TitleDetail title="Country" value={data.country} />
-      </HStack>
-    </Stack>
+    {idCardUrl && <Image src={idCardUrl} />}
+    {!idCardUrl && (
+      <form onSubmit={handleSubmit}>
+        {!idCardUrl && (
+          <>
+            <FormControl id="id_type">
+              <FormLabel fontSize="sm">ID Type:</FormLabel>
+              <Select
+                id="id_type"
+                isRequired
+                value={formData.id_type}
+                onChange={({ target }) => {
+                  setFormData({ ...setFormData, id_type: target.value });
+                }}
+                size="sm"
+                placeholder="Select ID Type"
+              >
+                <option value="voters_card">Voter's Card</option>
+                <option value="drivers_licence">Driver's Licence</option>
+                <option value="NIN">International Passport</option>
+                <option value="passport">National Identification</option>
+              </Select>
+            </FormControl>
+            <FileInput
+              name="idCard"
+              label="Upload ID"
+              formData={formData}
+              setFormData={setFormData}
+            />{' '}
+            <Center my="5">
+              <HighlightButton
+                loadingText={'saving'}
+                isLoading={loading}
+                type="submit"
+                size="sm"
+              >
+                Save Changes
+              </HighlightButton>
+            </Center>
+          </>
+        )}
+      </form>
+    )}
   </>
 );

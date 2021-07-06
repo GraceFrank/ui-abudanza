@@ -11,7 +11,6 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
-
 import AssetFinanceForm from './AssetFinanceForm';
 import { useState } from 'react';
 import TermsAndConditions from './TermsAndConditions';
@@ -44,7 +43,6 @@ function AddAssetModal() {
   };
   const handleSubmit = e => {
     e.preventDefault();
-    console.log('submitteddddfghjkl;kjhgfghjkjhgfhjk');
     setLoading(true);
     const formData = new FormData();
     for (const data in assetDetails) {

@@ -78,6 +78,7 @@ const NextOfKinDetails = ({
             isDisabled={!editMode}
             onChange={handleChange}
             size="sm"
+            id="relationship"
             placeholder="Select option"
           >
             <option value="brother">Brother</option>
@@ -141,7 +142,8 @@ const NextOfKin = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const method = Object.keys(nextOfKin) < 1 ? addNextOfKin : updateNextOfKin;
+    const method =
+      Object.keys(nextOfKin).length < 1 ? addNextOfKin : updateNextOfKin;
     setSaving(true);
     method(edits)
       .then(res => {

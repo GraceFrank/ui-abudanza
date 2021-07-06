@@ -24,12 +24,16 @@ export const getProfile = () => {
   return instance.get('/profile');
 };
 
-export const creatProfile = data => {
+export const createProfile = data => {
   return instance.post('/profile', data);
 };
 
 export const updateProfile = data => {
   return instance.put('/profile', data);
+};
+
+export const uploadID = formData => {
+  return instance.post('/profile/idcard', formData);
 };
 
 export const getBankDetails = () => {

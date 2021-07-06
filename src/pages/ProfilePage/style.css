@@ -6,3 +6,8 @@
     rgba(250, 250, 250, 1) 20%
   );
 }
+
+.select-country {
+    border: 0.5px solid #e8e8e8;
+    width: 250px
+}
