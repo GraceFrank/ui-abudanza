@@ -8,18 +8,14 @@ import {
   Spacer,
   Text,
   Heading,
-  Button,
   useToast,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { getAssets } from '../../services/api';
-import { AuthContext } from '../../context/AuthContext';
-import { useContext } from 'react';
 import './style.css';
 import AddAssetModal from './AssetFinanceModal';
 
 const AssetsFinance = () => {
-  const [user] = useContext(AuthContext);
   const toast = useToast();
   const [activeAssets, setActiveAssets] = useState([]);
   const [pendingAssets, setPendingAssets] = useState([]);

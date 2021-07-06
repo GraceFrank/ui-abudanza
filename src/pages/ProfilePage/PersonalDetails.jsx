@@ -1,11 +1,10 @@
 import Card from '../../components/common/Card';
-import { Heading } from '@chakra-ui/layout';
 import { useState } from 'react';
 import { BasicInfo, IDCard, ProfileInfoForm } from './BasicInfo';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { getProfile, updateProfile, createProfile } from '../../services/api';
-import { Divider, useToast } from '@chakra-ui/react';
+import { Divider, useToast, Heading, Spinner, Center } from '@chakra-ui/react';
 import { useEffect } from 'react';
 
 const PersonalDetails = () => {
@@ -119,16 +118,28 @@ const PersonalDetails = () => {
       <Heading my="5" as="h3" size="sm" color="abudanza.primary">
         Profile Details
       </Heading>
-      <ProfileInfoForm
-        data={profileDetails}
-        loading={saving}
-        edits={edits}
-        setEdits={setEdits}
-        editMode={editMode}
-        setEditMode={setEditMode}
-        handleSubmit={handleSubmit}
-        handleChange={handleChange}
-      />
+      {fetchingProfile ? (
+        <Center>
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="abudanza.primary"
+            size="xl"
+          />
+        </Center>
+      ) : (
+        <ProfileInfoForm
+          data={profileDetails}
+          loading={saving}
+          edits={edits}
+          setEdits={setEdits}
+          editMode={editMode}
+          setEditMode={setEditMode}
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+        />
+      )}
       <Divider my="5" />
       <Heading my="5" as="h3" size="sm" color="abudanza.primary">
         ID Card Upload

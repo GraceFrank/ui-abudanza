@@ -13,8 +13,16 @@ import { MenuItems } from './SideMenu.jsx';
 import logo from '../images/logo_md.png';
 import Icon from '@chakra-ui/icon';
 import { BiLogOut } from 'react-icons/bi';
+import { useHistory } from 'react-router-dom';
 
 function MobileSideMenu({ ref, isOpen, onClose }) {
+  const history = useHistory();
+
+  const logout = () => {
+    localStorage.removeItem('user');
+    history.push('/login');
+  };
+
   return (
     <>
       <Drawer
@@ -40,7 +48,10 @@ function MobileSideMenu({ ref, isOpen, onClose }) {
               variant="outline"
               colorScheme="blue"
               mr={3}
-              onClick={onClose}
+              onClick={() => {
+                onClose();
+                logout();
+              }}
             >
               Logout
             </Button>

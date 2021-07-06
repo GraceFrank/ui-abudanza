@@ -1,4 +1,4 @@
-import { Flex, Image, Box, Text, Heading, Button } from '@chakra-ui/react';
+import { Flex, Box, Text, Heading, Button } from '@chakra-ui/react';
 import Card from '../../components/common/Card';
 import ReferralSvg from '../../images/refer_svg';
 export const AdCard = () => {

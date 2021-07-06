@@ -1,17 +1,17 @@
 import { Image } from '@chakra-ui/image';
 import { Box, Flex, Heading, Link, Text, VStack } from '@chakra-ui/layout';
 import React from 'react';
-import Nav from '../components/common/Nav';
-import bannerImage from '../images/wocintech.jpg';
-import colors from '../constants/colors.json';
+import Nav from '../../components/common/Nav';
+import bannerImage from '../../images/wocintech.jpg';
+import colors from '../../constants/colors.json';
 import { Button } from '@chakra-ui/button';
-import RegisterForm from '../components/RegisterForm';
-import happyCoupleImage from '../images/happy-couple.jpeg';
-import logo from '../images/logo_md.png';
+import LoginForm from './LoginForm';
+import happyCoupleImage from '../../images/happy-couple.jpeg';
+import logo from '../../images/logo_md.png';
 import { useMediaQuery } from '@chakra-ui/media-query';
-import { Footer } from '../components/common/Footer';
-//ViewIcon ViewOffIcon
-const RegisterPage = props => {
+import { Footer } from '../../components/common/Footer';
+
+const LoginPage = props => {
   const [isMobileView] = useMediaQuery('(max-width: 600px)');
   return (
     <>
@@ -31,16 +31,21 @@ const RegisterPage = props => {
           fit="cover"
           opacity="0.32"
         />
+
         <section style={{ position: 'absolute', top: '250px', zIndex: '1' }}>
           <VStack spacing="6" m="6" maxW="70%">
-            <Heading as="h1" color="white">
-              Make 60% Payment Today and Get Asset in 90 Days
-            </Heading>
-            <Link href="#login">
-              <Button background={colors.HIGHLIGHT} colorScheme="orange">
-                Get Started
-              </Button>
-            </Link>
+            <div data-aos="fade-right">
+              <Heading as="h1" color="white">
+                Make 60% Payment Today and Get Asset in 90 Days
+              </Heading>
+            </div>
+            <div data-aos="fade-left">
+              <Link href="#login">
+                <Button background={colors.HIGHLIGHT} colorScheme="orange">
+                  Get Started
+                </Button>
+              </Link>
+            </div>
           </VStack>
         </section>
       </header>
@@ -65,9 +70,9 @@ const RegisterPage = props => {
                 </Heading>
               </Box>
               {!isMobileView && (
-                <VStack mt="20" spacing="5">
-                  <Image width="50%" src={logo} my="5" />
-                  <Image src={happyCoupleImage} borderRadius="lg" maxW="90%" />
+                <VStack mx="5" mt="20" spacing="5">
+                  <Image maxW="40%" src={logo} my="5" />
+                  <Image src={happyCoupleImage} borderRadius="lg" maxW="70%" />
                   <Text>
                     Lorem ipsum dolor sit amet, consectetur . Maecenas fermentum
                     cursus eros, ac convallis
@@ -76,7 +81,7 @@ const RegisterPage = props => {
               )}
             </Box>
             <Flex minWidth="30%" mx="10" my="5" maxWidth="80%">
-              <RegisterForm />
+              <LoginForm />
             </Flex>
           </Flex>
         </section>
@@ -88,4 +93,4 @@ const RegisterPage = props => {
   );
 };
 
-export default RegisterPage;
+export default LoginPage;

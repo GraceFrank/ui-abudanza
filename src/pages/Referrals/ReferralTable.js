@@ -1,12 +1,4 @@
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-} from '@chakra-ui/react';
+import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import Card from '../../components/common/Card';
 
 export default function ReferralTable({ data }) {

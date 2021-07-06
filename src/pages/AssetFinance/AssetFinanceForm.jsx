@@ -30,7 +30,7 @@ const AssetFinanceForm = ({
 
       <form onSubmit={handleContinue}>
         {/* Duration */}
-        <FormControl my="3" id="duration" isRequired my="5">
+        <FormControl id="duration" isRequired my="5">
           <HStack>
             <FormLabel fontSize="sm">Duration: </FormLabel>
             <Heading size="sm">90 Days</Heading>

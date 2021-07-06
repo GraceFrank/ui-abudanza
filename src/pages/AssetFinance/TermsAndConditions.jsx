@@ -1,11 +1,4 @@
-import {
-  Heading,
-  Form,
-  Button,
-  Checkbox,
-  Spinner,
-  HStack,
-} from '@chakra-ui/react';
+import { Heading, Button, Checkbox, Spinner, HStack } from '@chakra-ui/react';
 import DocumentReader from '../../components/common/RenderPDF';
 
 export default function TermsAndConditions({

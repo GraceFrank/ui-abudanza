@@ -7,9 +7,9 @@ import {
   Redirect,
 } from 'react-router-dom';
 import theme from './theme';
-import LoginPage from './pages/LoginPage';
+import LoginPage from './pages/LoginPage/LoginPage';
 import DashboardPage from './pages/Dashboard/DashboardPage';
-import RegisterPage from './pages/RegisterPage';
+import RegisterPage from './pages/RegisterPage/RegisterPage';
 import AuthProvider from './context/AuthContext';
 import { PrivateRoute } from './PrivateRoute';
 import RegistrationSuccessfulPage from './pages/RegistrationSuccessfulPage';

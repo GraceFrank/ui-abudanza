@@ -17,7 +17,9 @@ export const resendConfrimationEmail = email => {
 };
 
 export const validateConfirmationToken = token => {
-  return axios.post(`${API_URL}/auth/verify`, { token });
+  return axios.get(`${API_URL}/auth/verify`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
 };
 
 export const getProfile = () => {

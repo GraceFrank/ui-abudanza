@@ -1,4 +1,4 @@
-import { GiFamilyHouse, GiCash } from 'react-icons/gi';
+import { GiFamilyHouse } from 'react-icons/gi';
 import { Icon } from '@chakra-ui/icons';
 import {
   Image,

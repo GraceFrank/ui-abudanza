@@ -8,9 +8,9 @@ import { Box, Heading, VStack, Link, Center, Text } from '@chakra-ui/layout';
 import React, { useState } from 'react';
 import 'react-phone-number-input/style.css';
 import PhoneInput, { isPossiblePhoneNumber } from 'react-phone-number-input';
-import HighlightButton from './common/HighlightButton';
+import HighlightButton from '../../components/common/HighlightButton';
 import { useHistory, useLocation } from 'react-router-dom';
-import { register } from '../services/api';
+import { register } from '../../services/api';
 import { useToast } from '@chakra-ui/toast';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { InputGroup } from '@chakra-ui/input';
@@ -78,6 +78,7 @@ const AuthForm = () => {
           isClosable: true,
           position: 'top-right',
         });
+        localStorage.removeItem('user');
       });
   };
 

@@ -1,23 +1,19 @@
-import {
-  FormControl,
-  FormHelperText,
-  FormLabel,
-} from '@chakra-ui/form-control';
+import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { Input } from '@chakra-ui/input';
 import { Box, Heading, VStack, Link, Center, Text } from '@chakra-ui/layout';
 import React, { useContext, useState } from 'react';
 import 'react-phone-number-input/style.css';
-import HighlightButton from './common/HighlightButton';
-import { login } from '../services/api';
-import { AuthContext } from '../context/AuthContext';
+import HighlightButton from '../../components/common/HighlightButton';
+import { login } from '../../services/api';
+import { AuthContext } from '../../context/AuthContext';
 import { useToast } from '@chakra-ui/toast';
 import { useHistory } from 'react-router';
-import SendConfirmationEmailModal from './SendConfirmationModal.jsx';
+import SendConfirmationEmailModal from '../../components/SendConfirmationModal.jsx';
 
 const AuthForm = () => {
   const history = useHistory();
   const [loggingIn, setLoggingIn] = useState(false);
-  const [user, setUser] = useContext(AuthContext);
+  const setUser = useContext(AuthContext)[1];
   const toast = useToast();
   const [errors, setErrors] = useState({});
   const [loginDetails, setLoginDetails] = useState({
