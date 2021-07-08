@@ -165,6 +165,7 @@ const BankDetails = () => {
         setLoading(false);
       })
       .catch(err => {
+        setLoading(false);
         const message = err.response
           ? err.response.data.message
           : 'error fetching Next of kin, contact admin';

@@ -92,6 +92,7 @@ const PersonalDetails = () => {
         });
       })
       .catch(err => {
+        setFetchingProfile(false);
         const message = err.response
           ? err.response.data.message
           : 'error updating Profile contact Admin';
