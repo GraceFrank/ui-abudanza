@@ -103,7 +103,7 @@ const AuthForm = () => {
             <PhoneInput
               international
               countryCallingCodeEditable={false}
-              defaultCountry="RU"
+              defaultCountry="NG"
               value={phone}
               onChange={setPhone}
             />
