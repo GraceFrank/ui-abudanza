@@ -11,7 +11,7 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import DashboardPage from './pages/Dashboard/DashboardPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
 import AuthProvider from './context/AuthContext';
-import { PrivateRoute } from './PrivateRoute';
+import { AdminRoute, PrivateRoute } from './PrivateRoute';
 import RegistrationSuccessfulPage from './pages/RegistrationSuccessfulPage';
 import VerificationPage from './pages/EmailVerificationPage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -20,6 +20,7 @@ import AssetsPage from './pages/AssetFinance/AssetFinancePage';
 import InvestmentPage from './pages/Investments/InvestmentPage';
 import ReferralsPage from './pages/Referrals/ReferralsPage';
 import AdminLoginPage from './pages/Admin/AdminLoginPage';
+import AdminDashboardPage from './pages/Admin/AdminDashboard/AdminDashboardPage';
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
       <AuthProvider>
         <Router>
           <Switch>
-            <Route path="/" exact component={LoginPage} />
+            <PrivateRoute path="/" exact component={DashboardPage} />
             <Route path="/login" component={LoginPage} />
             <Route path="/register" component={RegisterPage} />
             <Route path="/verification" component={VerificationPage} />
@@ -41,6 +42,7 @@ function App() {
             <PrivateRoute path="/assets" component={AssetsPage} />
             <PrivateRoute path="/investment" component={InvestmentPage} />
             <PrivateRoute path="/referral" component={ReferralsPage} />
+            <AdminRoute path="/admin/" component={AdminDashboardPage} />
 
             <Route path="/404" component={NotFoundPage} />
             <Redirect to="/404" />
