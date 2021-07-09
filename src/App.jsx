@@ -19,6 +19,7 @@ import ProfilePage from './pages/ProfilePage/ProfilePage';
 import AssetsPage from './pages/AssetFinance/AssetFinancePage';
 import InvestmentPage from './pages/Investments/InvestmentPage';
 import ReferralsPage from './pages/Referrals/ReferralsPage';
+import AdminLoginPage from './pages/Admin/AdminLoginPage';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
               path="/register-success"
               component={RegistrationSuccessfulPage}
             />
+            <Route path="/admin/login" component={AdminLoginPage} />
             <PrivateRoute path="/dashboard" component={DashboardPage} />
             <PrivateRoute path="/profile" component={ProfilePage} />
             <PrivateRoute path="/assets" component={AssetsPage} />

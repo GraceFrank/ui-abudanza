@@ -88,3 +88,10 @@ export const changePassword = ({ currentPassword, newPassword }) => {
     newPassword,
   });
 };
+
+
+export const adminLogin = data => {
+  return axios
+    .post(`${API_URL}/admin/login`, data)
+    .then(response => response.data);
+};

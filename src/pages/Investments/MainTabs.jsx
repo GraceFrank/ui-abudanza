@@ -1,4 +1,4 @@
-import { Text, Heading, Spinner, useToast } from '@chakra-ui/react';
+import { Text, Heading, Spinner, useToast, Box } from '@chakra-ui/react';
 import { TabPanels, Tab, Tabs, TabList, TabPanel } from '@chakra-ui/tabs';
 import { useEffect, useState } from 'react';
 import { HIGHLIGHT } from '../../constants/colors.json';
@@ -46,6 +46,11 @@ const MainTabs = ({ activeInvestments, pendingInvestments, loading }) => {
         <TabPanel>
           {loading && <Spinner />}
           {!loading && <AssetList data={activeInvestments} />}
+          {!loading && !activeInvestments.length && (
+            <Box py="5" h="200px">
+              <Heading size="sm">You don't have any Active Investments</Heading>
+            </Box>
+          )}
           <Heading color="abudanza.primary" as="h2" size="md">
             Pending Investments
           </Heading>
