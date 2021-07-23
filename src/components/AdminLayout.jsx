@@ -8,6 +8,7 @@ import {
   Badge,
   Text,
   Flex,
+  propNames,
 } from '@chakra-ui/react';
 import { ProSidebar, SidebarHeader, Menu, MenuItem } from 'react-pro-sidebar';
 import { FaUserAlt } from 'react-icons/fa';
@@ -20,7 +21,7 @@ import './styles.scss';
 import { Icon } from '@chakra-ui/icons';
 import React, { useContext } from 'react';
 
-export default function AdminLayout() {
+export default function AdminLayout(props) {
   const [isMobileView] = useMediaQuery('(max-width: 600px)');
   const [user] = useContext(AuthContext);
 
@@ -68,6 +69,7 @@ export default function AdminLayout() {
             <Icon as={FaUserAlt} color="abudanza.primary" />
           </HStack>
         </Box>
+        {props.children}
       </Box>
     </Box>
   );
