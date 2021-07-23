@@ -1,8 +1,10 @@
-import { Box } from "@chakra-ui/react";
+import { Heading } from '@chakra-ui/react';
+import Layout from '../../../components/AdminLayout';
 
-
-export default function AdminDashboardPage(){
-    return (<Box>
-        Hello
-    </Box>)
+export default function AdminDashboardPage() {
+  return (
+    <Layout>
+      <Heading>DASHBOARD</Heading>
+    </Layout>
+  );
 }
