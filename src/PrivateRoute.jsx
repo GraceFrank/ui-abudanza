@@ -16,7 +16,7 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
 );
 export const AdminRoute = ({ component: Component, ...rest }) => {
   const user = localStorage.getItem('user');
-  const { role } = user && JSON.parse(user);
+  const { role } = user ? JSON.parse(user) : '';
   return (
     <Route
       {...rest}

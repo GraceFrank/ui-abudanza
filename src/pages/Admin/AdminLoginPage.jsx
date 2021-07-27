@@ -49,7 +49,7 @@ export default function AdminLoginPage() {
         });
         setUser(data.payload);
         localStorage.setItem('user', JSON.stringify(data.payload));
-        history.push('/dashboard');
+        history.push('/admin');
       })
       .catch(err => {
         setLoggingIn(false);
