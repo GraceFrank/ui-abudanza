@@ -14,8 +14,8 @@ export default function searchBar({
   searchValues,
   statusOptions,
 }) {
-  const options = statusOptions.map(({ value, title }) => (
-    <option value={value}>{title}</option>
+  const options = statusOptions.map(option => (
+    <option value={option}>{option}</option>
   ));
 
   return (
@@ -26,7 +26,7 @@ export default function searchBar({
           value={searchValues.status}
           id="status"
           variant="filled"
-          placeholder="Select option"
+          size="sm"
         >
           {options}
         </Select>
@@ -39,11 +39,14 @@ export default function searchBar({
             value={searchValues.searchString}
             id="searchString"
             type="text"
+            size="sm"
             placeholder="search"
             onChange={handleChange}
           />
         </InputGroup>
-        <Button size="xs">Search</Button>
+        <Button type="submit" size="sm">
+          Search
+        </Button>
       </HStack>
     </form>
   );

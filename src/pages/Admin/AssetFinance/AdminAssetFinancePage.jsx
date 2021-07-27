@@ -1,17 +1,30 @@
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Divider, Heading, HStack } from '@chakra-ui/react';
 import { useState } from 'react';
 import Layout from '../../../components/common/AdminLayout';
 import DataTable from './Table';
+import SearchBar from '../../../components/common/search';
 
 export default function AdminAssetFinancePage() {
-  const [status, setStatus] = useState('pending');
+  const [searchValues, setSearchValues] = useState({
+    status: 'pending',
+    searchString: '',
+  });
+  const statusOptions = ['pending', 'active', 'completed'];
   return (
     <Layout>
-      <Heading as="h1" color="abudanza.primary" size="md" m="5">
-        ASSET FINANCE
-      </Heading>
+      <HStack mx="5" spacing="10">
+        <Heading as="h1" color="abudanza.primary" size="md" m="5">
+          ASSET FINANCE
+        </Heading>
+        <SearchBar
+          handleSearch
+          handleChange
+          searchValues
+          statusOptions={statusOptions}
+        />
+      </HStack>
       <Box mx="5">
-        <DataTable status={status} />
+        <DataTable status={searchValues.status} />
       </Box>
     </Layout>
   );
