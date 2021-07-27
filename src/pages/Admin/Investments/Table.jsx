@@ -13,34 +13,9 @@ import {
   Button,
 } from '@chakra-ui/react';
 import Card from '../../../components/common/Card';
+import { InvestmentDetailDrawer } from '../../Investments/InvestmentDetail';
 
-const fakeData = new Array(10);
-fakeData.fill({
-  payment_proof: {
-    url: 'https://res.cloudinary.com/gracefrank/image/upload/v1627209199/abudanza_test/investments/60fafeb2ba17fa3567200dc6_06pu27uCRts0yKvG-4AKV.pdf',
-    public_id:
-      'abudanza_test/investments/60fafeb2ba17fa3567200dc6_06pu27uCRts0yKvG-4AKV',
-  },
-  status: 'active',
-  duration: 90,
-  _id: '60fd3defd6fb04c35dd349cf',
-  amount_paid: 50000,
-  user: {
-    _id: '60fafeb2ba17fa3567200dc6',
-    first_name: 'grace',
-    last_name: 'frank',
-    account_id: 'e8J0Cs',
-  },
-  amount_due: 57500,
-  interest_rate: 15,
-  createdAt: '2021-07-25T10:33:19.962Z',
-  updatedAt: '2021-07-25T11:24:29.023Z',
-  __v: 0,
-  activation_date: '2021-07-25T11:24:29.022Z',
-  due_date: '2021-10-23T11:24:29.022Z',
-  decline_reason: 'you suck',
-});
-export default function DataTable({ data = fakeData, status }) {
+export default function DataTable({ data, status }) {
   const tableBody = data.map((asset, index) => {
     return (
       <Tr>
@@ -76,7 +51,7 @@ export default function DataTable({ data = fakeData, status }) {
 
         <Td isNumeric>{Number(asset.amount_due).toLocaleString()}</Td>
         <Td>
-          <Button>View</Button>
+          <InvestmentDetailDrawer investmentDetail={asset} size="md" />
         </Td>
       </Tr>
     );

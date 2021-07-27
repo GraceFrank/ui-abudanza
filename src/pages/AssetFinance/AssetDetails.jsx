@@ -97,7 +97,7 @@ const AssetList = ({ data }) => {
 
 export default AssetList;
 
-export function AssetDetailDrawer({ assetDetail, size }) {
+export function AssetDetailDrawer({ assetDetail, size = 'sm' }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
 

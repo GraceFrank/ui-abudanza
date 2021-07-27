@@ -115,7 +115,7 @@ const InvestmentList = ({ data }) => {
 
 export default InvestmentList;
 
-function InvestmentDetailDrawer({ investmentDetail }) {
+export function InvestmentDetailDrawer({ investmentDetail, size = 'sm' }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
 
@@ -135,6 +135,7 @@ function InvestmentDetailDrawer({ investmentDetail }) {
         placement="right"
         onClose={onClose}
         finalFocusRef={btnRef}
+        size={size}
       >
         <DrawerOverlay />
         <DrawerContent>
