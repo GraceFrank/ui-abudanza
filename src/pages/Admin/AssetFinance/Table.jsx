@@ -88,7 +88,6 @@ export default function DataTable({ data = fakeData, status }) {
         <Td>
           <Button>View</Button>
         </Td>
-        <Td isNumeric>{asset.cost}</Td>
       </Tr>
     );
   });
@@ -113,6 +112,7 @@ export default function DataTable({ data = fakeData, status }) {
             <Th>Due Date</Th>
             <Th>Status</Th>
             <Th isNumeric>Item Cost</Th>
+            <Th></Th>
           </Tr>
         </Thead>
         <Tbody>{tableBody}</Tbody>
