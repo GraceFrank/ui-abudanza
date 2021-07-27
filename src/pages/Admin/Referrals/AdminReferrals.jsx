@@ -1,12 +1,31 @@
-import { Heading } from '@chakra-ui/react';
+import { Box, Divider, Heading, HStack } from '@chakra-ui/react';
+import { useState } from 'react';
 import Layout from '../../../components/common/AdminLayout';
+import DataTable from './Table';
+import SearchBar from '../../../components/common/search';
 
-export default function AdminReferrals() {
+export default function Referrals() {
+  const [searchValues, setSearchValues] = useState({
+    status: 'pending',
+    searchString: '',
+  });
+  const statusOptions = ['pending', 'active', 'completed'];
   return (
     <Layout>
-      <Heading as="h1" color="abudanza.primary" size="md" m="5">
-        REFERRALS
-      </Heading>
+      <HStack mx="5" spacing="10">
+        <Heading as="h1" color="abudanza.primary" size="md" m="5">
+          REFERRALS
+        </Heading>
+        <SearchBar
+          handleSearch
+          handleChange
+          searchValues
+          statusOptions={statusOptions}
+        />
+      </HStack>
+      <Box mx="5">
+        <DataTable status={searchValues.status} />
+      </Box>
     </Layout>
   );
 }

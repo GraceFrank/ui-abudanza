@@ -99,7 +99,7 @@ export default function DataTable({ data = fakeData, status }) {
         <TableCaption placement="top">
           <Heading color="black" as="h2" size="md" mb="5">
             <Text textTransform="capitalize">
-              Showing Results for {status} Assets
+              Showing Results for {status} Investments
             </Text>
           </Heading>
         </TableCaption>
