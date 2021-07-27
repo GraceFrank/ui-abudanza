@@ -97,7 +97,7 @@ const AssetList = ({ data }) => {
 
 export default AssetList;
 
-export function AssetDetailDrawer({ assetDetail, size = 'sm' }) {
+export function AssetDetailDrawer({ assetDetail, size = 'sm', children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
 
@@ -128,6 +128,7 @@ export function AssetDetailDrawer({ assetDetail, size = 'sm' }) {
 
           <DrawerBody>
             <VStack fontSize="sm" color="grey" align="start">
+              {children}
               <HStack>
                 <Text>Category:</Text>
                 <Text

@@ -75,6 +75,9 @@ export const getAllAssets = (status = '') => {
 export const createAsset = formData => {
   return instance.post(`/assets`, formData);
 };
+export const approveAsset = (id, data) => {
+  return instance.put(`/assets/${id}/approval`, data);
+};
 
 export const getInvestments = (status = 'active') => {
   return instance.get(`/investments?status=${status}`);
@@ -85,6 +88,9 @@ export const getAllInvestments = (status = '') => {
 
 export const createInvestment = formData => {
   return instance.post(`/investments`, formData);
+};
+export const approveInvestment = (id, data) => {
+  return instance.put(`/investments/${id}/approval`, data);
 };
 
 export const getReferrals = () => {
