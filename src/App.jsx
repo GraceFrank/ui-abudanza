@@ -21,6 +21,10 @@ import InvestmentPage from './pages/Investments/InvestmentPage';
 import ReferralsPage from './pages/Referrals/ReferralsPage';
 import AdminLoginPage from './pages/Admin/AdminLoginPage';
 import AdminDashboardPage from './pages/Admin/AdminDashboard/AdminDashboardPage';
+import AdminReferralsPage from './pages/Admin/Referrals/AdminReferrals';
+import AdminInvestmentPage from './pages/Admin/Investments/AdminInvestmentPage';
+import AdminAssetsPage from './pages/Admin/AssetFinance/AdminAssetFinancePage';
+import AdminUsersPage from './pages/Admin/Users/AdminUsersPage';
 
 function App() {
   return (
@@ -42,7 +46,17 @@ function App() {
             <PrivateRoute path="/assets" component={AssetsPage} />
             <PrivateRoute path="/investment" component={InvestmentPage} />
             <PrivateRoute path="/referral" component={ReferralsPage} />
-            <AdminRoute path="/admin/" component={AdminDashboardPage} />
+            <AdminRoute path="/admin/" exact component={AdminDashboardPage} />
+            <AdminRoute path="/admin/assets" component={AdminAssetsPage} />
+            <AdminRoute path="/admin/users" component={AdminUsersPage} />
+            <AdminRoute
+              path="/admin/investments"
+              component={AdminInvestmentPage}
+            />
+            <AdminRoute
+              path="/admin/referrals"
+              component={AdminReferralsPage}
+            />
 
             <Route path="/404" component={NotFoundPage} />
             <Redirect to="/404" />

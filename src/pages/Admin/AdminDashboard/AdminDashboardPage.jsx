@@ -16,7 +16,7 @@ export default function AdminDashboardPage() {
         assetSummary={fakeSummary}
         referralSummary={fakeSummary}
       />
-      <DailyPayouts />
+      {/* <DailyPayouts /> */}
     </Layout>
   );
 }

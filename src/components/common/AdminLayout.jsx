@@ -9,6 +9,7 @@ import {
   Text,
   Flex,
 } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 import { ProSidebar, SidebarHeader, Menu, MenuItem } from 'react-pro-sidebar';
 import { FaUserAlt } from 'react-icons/fa';
 import { AuthContext } from '../../context/AuthContext';
@@ -41,18 +42,23 @@ export default function AdminLayout(props) {
           )}
           <Menu iconShape="square">
             <MenuItem>
+              <Link to="/admin" />
               <Icon w="25px" h="25px" as={RiDashboard3Fill} /> Dashboard
             </MenuItem>
             <MenuItem>
+              <Link to="/admin/users" />
               <Icon w="25px" h="25px" as={FaUsersCog} /> Users
             </MenuItem>
             <MenuItem>
+              <Link to="/admin/investments" />
               <Icon w="25px" h="25px" as={GiCash} /> Investments
             </MenuItem>
             <MenuItem>
+              <Link to="/admin/assets" />
               <Icon w="25px" h="25px" as={GiSpookyHouse} /> Assets
             </MenuItem>
             <MenuItem>
+              <Link to="/admin/referrals" />
               <Icon w="25px" h="25px" as={FaUsers} /> Referrals
             </MenuItem>
           </Menu>
