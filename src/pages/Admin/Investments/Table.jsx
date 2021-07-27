@@ -1,4 +1,6 @@
 import {
+  ButtonGroup,
+  Button,
   Badge,
   Table,
   Thead,
@@ -10,10 +12,13 @@ import {
   TableCaption,
   Text,
   Heading,
-  Button,
+  useToast,
+  Input,
 } from '@chakra-ui/react';
 import Card from '../../../components/common/Card';
 import { InvestmentDetailDrawer } from '../../Investments/InvestmentDetail';
+import { approveInvestment } from '../../../services/api';
+import { useState } from 'react';
 
 export default function DataTable({ data, status }) {
   const tableBody = data.map((asset, index) => {
@@ -51,7 +56,9 @@ export default function DataTable({ data, status }) {
 
         <Td isNumeric>{Number(asset.amount_due).toLocaleString()}</Td>
         <Td>
-          <InvestmentDetailDrawer investmentDetail={asset} size="md" />
+          <InvestmentDetailDrawer investmentDetail={asset} size="md">
+            <Approval id={asset._id} />
+          </InvestmentDetailDrawer>
         </Td>
       </Tr>
     );
@@ -89,5 +96,53 @@ export default function DataTable({ data, status }) {
         </Tfoot>
       </Table>
     </Card>
+  );
+}
+
+function Approval({ id }) {
+  const toast = useToast();
+  const [loading, setLoading] = useState(false);
+  const [decline_reason, setDecline_reason] = useState('false');
+
+  const handleApproval = status => {
+    setLoading(false);
+    approveInvestment(id, { status, decline_reason }).then(() => {
+      toast({
+        title: `Success, customer has been notified`,
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    });
+  };
+
+  return (
+    <>
+      <ButtonGroup size="sm" variant="outline" spacing="6">
+        <Button
+          isLoading={loading}
+          loadingText="updating"
+          onClick={() => handleApproval('active')}
+          colorScheme="blue"
+        >
+          Approve
+        </Button>
+        <Button
+          isLoading={loading}
+          loadingText="updating"
+          onClick={() => handleApproval('declined')}
+        >
+          Cancel
+        </Button>
+
+        <Input
+          placeholder="Decline Reason"
+          type="text"
+          value={decline_reason}
+          onChange={e => setDecline_reason(e.target.value)}
+        />
+      </ButtonGroup>
+    </>
   );
 }

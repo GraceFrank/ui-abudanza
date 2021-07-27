@@ -115,9 +115,14 @@ const InvestmentList = ({ data }) => {
 
 export default InvestmentList;
 
-export function InvestmentDetailDrawer({ investmentDetail, size = 'sm' }) {
+export function InvestmentDetailDrawer({
+  investmentDetail,
+  size = 'sm',
+  children,
+}) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
+  console.log('I;NVESTMENT DETAIL', investmentDetail);
 
   return (
     <>
@@ -146,6 +151,8 @@ export function InvestmentDetailDrawer({ investmentDetail, size = 'sm' }) {
 
           <DrawerBody>
             <VStack fontSize="sm" color="grey" align="start">
+              {children}
+
               <HStack>
                 <Text>Status:</Text>
                 <Text
