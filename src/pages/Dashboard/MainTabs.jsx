@@ -52,7 +52,7 @@ const MainTabs = ({ investments, assetFinance }) => {
         {/* investment */}
         <TabPanel>
           <Flex size="sm" width="100%" alignItems="end">
-            <Link to="/investments">
+            <Link to="/investment">
               <Button background="abudanza.secondary">
                 View All Investments
               </Button>

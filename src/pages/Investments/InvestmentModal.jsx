@@ -103,7 +103,7 @@ function InvestmentModal() {
         onClick={onOpen}
         size="sm"
       >
-        Fund Asset
+        Invest Now
       </Button>
 
       <Modal

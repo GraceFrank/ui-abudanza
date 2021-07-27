@@ -3,5 +3,7 @@ $icon-bg-color: #064564;
 $highlight-color: #ff6501;
 $sidebar-color: #ffff;
 $icon-size: 50px;
+$sidebar-width: 270px;
+$sidebar-collapsed-width: 80px;
 
 @import '~react-pro-sidebar/dist/scss/styles.scss';

@@ -1,5 +1,6 @@
 import { Heading } from '@chakra-ui/react';
-import Layout from '../../../components/AdminLayout';
+import Layout from '../../../components/common/AdminLayout';
+import DailyPayouts from './DailyPayouts';
 import SummaryCards from './SumaryCards';
 
 const fakeSummary = { amount: 500000 };
@@ -15,6 +16,7 @@ export default function AdminDashboardPage() {
         assetSummary={fakeSummary}
         referralSummary={fakeSummary}
       />
+      <DailyPayouts />
     </Layout>
   );
 }

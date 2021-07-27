@@ -1,7 +1,7 @@
-import { Divider, Heading, HStack, Icon, Flex, Text } from '@chakra-ui/react';
+import { Heading, Icon, Flex, Text } from '@chakra-ui/react';
 import Card from '../../../components/common/Card';
 import { GiCash, GiSpookyHouse } from 'react-icons/gi';
-import { FaUsersCog, FaUsers, FaBell } from 'react-icons/fa';
+import { FaUsersCog } from 'react-icons/fa';
 
 function SummaryCard({ background, color, icon, title, amount }) {
   var dateObj = new Date(Date.now());
@@ -29,28 +29,30 @@ export default function SummaryCards({
   referralSummary,
 }) {
   return (
-    <Flex mx="5" direction={['column', 'row']} justifyContent="space-evenly">
-      <SummaryCard
-        background="abudanza.primary"
-        color="white"
-        icon={GiCash}
-        title="Investments"
-        amount={investmentSummary.amount}
-      />
-      <SummaryCard
-        background="#FF7C26"
-        color="white"
-        icon={GiSpookyHouse}
-        title="Assets"
-        amount={assetSummary.amount}
-      />
-      <SummaryCard
-        background="abudanza.secondary"
-        color="black"
-        icon={FaUsersCog}
-        title="Referrals"
-        amount={referralSummary.amount}
-      />
-    </Flex>
+    <section>
+      <Flex mx="5" direction={['column', 'row']} justifyContent="space-evenly">
+        <SummaryCard
+          background="abudanza.primary"
+          color="white"
+          icon={GiCash}
+          title="Investments"
+          amount={investmentSummary.amount}
+        />
+        <SummaryCard
+          background="#FF7C26"
+          color="white"
+          icon={GiSpookyHouse}
+          title="Assets"
+          amount={assetSummary.amount}
+        />
+        <SummaryCard
+          background="abudanza.secondary"
+          color="black"
+          icon={FaUsersCog}
+          title="Referrals"
+          amount={referralSummary.amount}
+        />
+      </Flex>
+    </section>
   );
 }
