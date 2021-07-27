@@ -25,6 +25,9 @@ export const validateConfirmationToken = token => {
 export const getProfile = () => {
   return instance.get('/profile');
 };
+export const getAllProfiles = () => {
+  return instance.get('/profile/all');
+};
 
 export const createProfile = data => {
   return instance.post('/profile', data);
@@ -65,6 +68,9 @@ export const updateNextOfKin = data => {
 export const getAssets = (status = 'active') => {
   return instance.get(`/assets?status=${status}`);
 };
+export const getAllAssets = (status = '') => {
+  return instance.get(`/assets/all?status=${status}`);
+};
 
 export const createAsset = formData => {
   return instance.post(`/assets`, formData);
@@ -72,6 +78,9 @@ export const createAsset = formData => {
 
 export const getInvestments = (status = 'active') => {
   return instance.get(`/investments?status=${status}`);
+};
+export const getAllInvestments = (status = '') => {
+  return instance.get(`/investments/all?status=${status}`);
 };
 
 export const createInvestment = formData => {

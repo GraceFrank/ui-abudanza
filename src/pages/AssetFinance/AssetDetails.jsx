@@ -97,7 +97,7 @@ const AssetList = ({ data }) => {
 
 export default AssetList;
 
-function AssetDetailDrawer({ assetDetail }) {
+export function AssetDetailDrawer({ assetDetail, size }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
 
@@ -117,6 +117,7 @@ function AssetDetailDrawer({ assetDetail }) {
         placement="right"
         onClose={onClose}
         finalFocusRef={btnRef}
+        size={size}
       >
         <DrawerOverlay />
         <DrawerContent>

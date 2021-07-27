@@ -1,15 +1,27 @@
-import { Box, Divider, Heading, HStack } from '@chakra-ui/react';
+import { Box, Spinner, Heading, HStack } from '@chakra-ui/react';
 import { useState } from 'react';
 import Layout from '../../../components/common/AdminLayout';
 import DataTable from './Table';
 import SearchBar from '../../../components/common/search';
+import { useEffect } from 'react';
+import { getAllAssets } from '../../../services/api';
 
 export default function AdminAssetFinancePage() {
   const [searchValues, setSearchValues] = useState({
-    status: 'pending',
+    status: 'all',
     searchString: '',
   });
-  const statusOptions = ['pending', 'active', 'completed'];
+  const statusOptions = ['pending', 'active', 'all'];
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    setLoading(true);
+    getAllAssets().then(res => {
+      setLoading(false);
+      setData(res.data.payload);
+    });
+  }, []);
   return (
     <Layout>
       <HStack mx="5" spacing="10">
@@ -24,7 +36,16 @@ export default function AdminAssetFinancePage() {
         />
       </HStack>
       <Box mx="5">
-        <DataTable status={searchValues.status} />
+        {loading && (
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="blue.500"
+            size="xl"
+          />
+        )}
+        {!loading && <DataTable status={searchValues.status} data={data} />}
       </Box>
     </Layout>
   );

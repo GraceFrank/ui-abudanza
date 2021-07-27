@@ -13,6 +13,7 @@ import {
   Button,
 } from '@chakra-ui/react';
 import Card from '../../../components/common/Card';
+import { AssetDetailDrawer } from '../../AssetFinance/AssetDetails';
 
 const fakeData = new Array(10);
 fakeData.fill({
@@ -86,7 +87,7 @@ export default function DataTable({ data = fakeData, status }) {
         </Td>
         <Td isNumeric>{asset.cost}</Td>
         <Td>
-          <Button>View</Button>
+          <AssetDetailDrawer assetDetail={asset} size="md" />
         </Td>
       </Tr>
     );
