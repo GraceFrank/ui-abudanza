@@ -26,7 +26,7 @@ export default function Users() {
     <Layout>
       <HStack mx="5" spacing="10">
         <Heading as="h1" color="abudanza.primary" size="md" m="5">
-          USERS{' '}
+          USERS
         </Heading>
         <SearchBar
           handleSearch
