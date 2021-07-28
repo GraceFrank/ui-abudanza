@@ -22,46 +22,7 @@ import { AssetDetailDrawer } from '../../AssetFinance/AssetDetails';
 import { approveAsset } from '../../../services/api';
 import { useState } from 'react';
 
-const fakeData = new Array(10);
-fakeData.fill({
-  payment_proof: {
-    url: 'https://res.cloudinary.com/gracefrank/image/upload/v1627104467/abudanza_test/payment_proof/60fafeb2ba17fa3567200dc6_QtPHJNcxNZpbHIYYvWdBL.jpg',
-    public_id:
-      'abudanza_test/payment_proof/60fafeb2ba17fa3567200dc6_QtPHJNcxNZpbHIYYvWdBL',
-  },
-  proforma_invoice: {
-    url: 'https://res.cloudinary.com/gracefrank/image/upload/v1627104464/abudanza_test/porformer_invoice/60fafeb2ba17fa3567200dc6_IKFpniMFJvp16uUfTWLfm.pdf',
-    public_id:
-      'abudanza_test/porformer_invoice/60fafeb2ba17fa3567200dc6_IKFpniMFJvp16uUfTWLfm',
-  },
-  status: 'approved',
-  duration: 90,
-  _id: '60fba4d43028a87d3c2072a4',
-  brand: 'Denver',
-  category: 'electronics',
-  cost: 40000,
-  vendor_name: 'konga',
-  vendor_phone: '+8909876788',
-  vendor_street_address: '23 jkkll',
-  model: 'Some Random String',
-  vendor_city: 'some random string',
-  vendor_state: 'some random string',
-  vendor_country: 'Nigeria',
-  user: {
-    _id: '60e653adf9e0e211846dafb6',
-    first_name: 'andrew',
-    last_name: 'frank',
-    account_id: 'e8J5Cs',
-  },
-  amount_paid: 24000,
-  createdAt: '2021-07-24T05:27:48.109Z',
-  updatedAt: '2021-07-25T07:00:50.061Z',
-  __v: 0,
-  decline_reason: 'invalid Id',
-  activation_date: '2021-07-25T07:00:50.060Z',
-  due_date: '2021-10-23T07:00:50.060Z',
-});
-export default function DataTable({ data = fakeData, status }) {
+export default function DataTable({ data, status }) {
   const tableBody = data.map((asset, index) => {
     return (
       <Tr>
