@@ -14,6 +14,7 @@ import HighlightButton from '../../components/common/HighlightButton';
 import TitleDetail from '../../components/common/TitleDetail';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import FileInput from '../../components/common/FileInput';
+import { convertCloudinaryUrlToJpeg } from '../../utils/utils';
 
 export const ProfileInfoForm = ({
   data,
@@ -235,55 +236,57 @@ export const BasicInfo = ({ data }) => (
 );
 
 export const IDCard = ({
-  idCardUrl,
+  idCard = {},
   formData,
   loading,
   handleSubmit,
   setFormData,
 }) => (
   <>
-    {idCardUrl && <Image src={idCardUrl} />}
-    {!idCardUrl && (
-      <form onSubmit={handleSubmit}>
-        {!idCardUrl && (
-          <>
-            <FormControl id="id_type">
-              <FormLabel fontSize="sm">ID Type:</FormLabel>
-              <Select
-                id="id_type"
-                isRequired
-                value={formData.id_type}
-                onChange={({ target }) => {
-                  setFormData({ ...setFormData, id_type: target.value });
-                }}
-                size="sm"
-                placeholder="Select ID Type"
-              >
-                <option value="voters_card">Voter's Card</option>
-                <option value="drivers_licence">Driver's Licence</option>
-                <option value="NIN">International Passport</option>
-                <option value="passport">National Identification</option>
-              </Select>
-            </FormControl>
-            <FileInput
-              name="idCard"
-              label="Upload ID"
-              formData={formData}
-              setFormData={setFormData}
-            />{' '}
-            <Center my="5">
-              <HighlightButton
-                loadingText={'saving'}
-                isLoading={loading}
-                type="submit"
-                size="sm"
-              >
-                Save Changes
-              </HighlightButton>
-            </Center>
-          </>
-        )}
-      </form>
+    {idCard.url && (
+      <Image
+        mb="5"
+        src={convertCloudinaryUrlToJpeg(idCard.url)}
+        alt="payment proof"
+      />
     )}
+    <form onSubmit={handleSubmit}>
+      <>
+        <FormControl id="id_type">
+          <FormLabel fontSize="sm">ID Type:</FormLabel>
+          <Select
+            id="id_type"
+            isRequired
+            value={formData.id_type}
+            onChange={({ target }) => {
+              setFormData({ ...setFormData, id_type: target.value });
+            }}
+            size="sm"
+            placeholder="Select ID Type"
+          >
+            <option value="voters_card">Voter's Card</option>
+            <option value="drivers_licence">Driver's Licence</option>
+            <option value="NIN">International Passport</option>
+            <option value="passport">National Identification</option>
+          </Select>
+        </FormControl>
+        <FileInput
+          name="idCard"
+          label="Upload ID"
+          formData={formData}
+          setFormData={setFormData}
+        />{' '}
+        <Center my="5">
+          <HighlightButton
+            loadingText={'saving'}
+            isLoading={loading}
+            type="submit"
+            size="sm"
+          >
+            Save Changes
+          </HighlightButton>
+        </Center>
+      </>
+    </form>
   </>
 );

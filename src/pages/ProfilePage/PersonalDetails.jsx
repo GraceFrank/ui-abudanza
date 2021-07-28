@@ -16,12 +16,11 @@ const PersonalDetails = () => {
   const [user] = useContext(AuthContext);
   const toast = useToast();
   const [fetchingProfile, setFetchingProfile] = useState(false);
-  const [profileDetails, setProfileDetails] = useState({ address: {} });
+  const [profileDetails, setProfileDetails] = useState({ id_card: {} });
   const [saving, setSaving] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [edits, setEdits] = useState({});
   const [reload, setReload] = useState(false);
-  const [idCardUrl, setIdCardUrl] = useState('');
   const [idCardFormData, setIdCardFormData] = useState({});
   const [uploading, setUploading] = useState(false);
 
@@ -43,7 +42,7 @@ const PersonalDetails = () => {
       .then(res => {
         setUploading(false);
         setSaving(false);
-        setEditMode(false);
+        setIdCardFormData({});
         toast({
           title: 'ID Card Upload Successful',
           description: 'Will be reviewed by an admin',
@@ -180,7 +179,7 @@ const PersonalDetails = () => {
         ID Card Upload
       </Heading>
       <IDCard
-        idCardUrl={idCardUrl}
+        idCard={profileDetails.id_card}
         formData={idCardFormData}
         handleSubmit={submitFileUpload}
         setFormData={setIdCardFormData}
