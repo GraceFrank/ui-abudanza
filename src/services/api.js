@@ -36,6 +36,9 @@ export const createProfile = data => {
 export const updateProfile = data => {
   return instance.put('/profile', data);
 };
+export const uploadIdCard = data => {
+  return instance.put('/profile/upload', data);
+};
 
 export const uploadID = formData => {
   return instance.post('/profile/idcard', formData);
@@ -68,8 +71,8 @@ export const updateNextOfKin = data => {
 export const getAssets = (status = 'active') => {
   return instance.get(`/assets?status=${status}`);
 };
-export const getAllAssets = (status = '') => {
-  return instance.get(`/assets/all?status=${status}`);
+export const getAllAssets = (status = '', page = 1) => {
+  return instance.get(`/assets/all?status=${status}&page=${page}`);
 };
 
 export const createAsset = formData => {
@@ -82,8 +85,8 @@ export const approveAsset = (id, data) => {
 export const getInvestments = (status = 'active') => {
   return instance.get(`/investments?status=${status}`);
 };
-export const getAllInvestments = (status = '') => {
-  return instance.get(`/investments/all?status=${status}`);
+export const getAllInvestments = (status = '', page = 1) => {
+  return instance.get(`/investments/all?status=${status}&page=${page}`);
 };
 
 export const createInvestment = formData => {
@@ -95,6 +98,12 @@ export const approveInvestment = (id, data) => {
 
 export const getReferrals = () => {
   return instance.get(`/referrals`);
+};
+export const getAllReferrals = (invested, paid, page = 1) => {
+  const query = '';
+  if (invested) query += `&invested=${invested}`;
+  if (paid) query += `&paid=${paid}`;
+  return instance.get(`/referrals/all?page=${page}${query}`);
 };
 
 export const changePassword = ({ currentPassword, newPassword }) => {

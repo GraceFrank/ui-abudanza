@@ -123,9 +123,7 @@ export const ProfileInfoForm = ({
             type="text"
             size="sm"
             id="street_address"
-            value={
-              editMode ? edits.street_address : data.address.street_address
-            }
+            value={editMode ? edits.street_address : data.street_address}
             isDisabled={!editMode}
             onChange={handleChange}
           />
@@ -138,9 +136,7 @@ export const ProfileInfoForm = ({
             type="text"
             size="sm"
             id="street_address2"
-            value={
-              editMode ? edits.street_address2 : data.address.street_address2
-            }
+            value={editMode ? edits.street_address2 : data.street_address2}
             isDisabled={!editMode}
             onChange={handleChange}
           />
@@ -154,7 +150,7 @@ export const ProfileInfoForm = ({
             type="text"
             size="sm"
             id="city"
-            value={editMode ? edits.city : data.address.city}
+            value={editMode ? edits.city : data.city}
             isDisabled={!editMode}
             onChange={handleChange}
           />
@@ -167,7 +163,7 @@ export const ProfileInfoForm = ({
             isDisabled={!editMode}
             required
             onChange={value => setEdits({ ...edits, country: value })}
-            value={editMode ? edits.country : data.address.country}
+            value={editMode ? edits.country : data.country}
             id="vendor_country"
             className="select-country"
           />
@@ -177,8 +173,8 @@ export const ProfileInfoForm = ({
         <FormControl my="3" id="vendor_state">
           <FormLabel fontSize="sm">State: </FormLabel>
           <RegionDropdown
-            country={editMode ? edits.country : data.address.country}
-            value={editMode ? edits.state : data.address.state}
+            country={editMode ? edits.country : data.country}
+            value={editMode ? edits.state : data.state}
             onChange={value => setEdits({ ...edits, state: value })}
             className="select-country"
             id="vendor_state"

@@ -3,7 +3,12 @@ import { useState } from 'react';
 import { BasicInfo, IDCard, ProfileInfoForm } from './BasicInfo';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import { getProfile, updateProfile, createProfile } from '../../services/api';
+import {
+  getProfile,
+  updateProfile,
+  createProfile,
+  uploadIdCard,
+} from '../../services/api';
 import { Divider, useToast, Heading, Spinner, Center } from '@chakra-ui/react';
 import { useEffect } from 'react';
 
@@ -34,6 +39,35 @@ const PersonalDetails = () => {
       if (!idCardFormData[data]) continue;
       formData.append(data, idCardFormData[data]);
     }
+    uploadIdCard(formData)
+      .then(res => {
+        setUploading(false);
+        setSaving(false);
+        setEditMode(false);
+        toast({
+          title: 'ID Card Upload Successful',
+          description: 'Will be reviewed by an admin',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+          position: 'top-right',
+        });
+        setReload(!reload);
+      })
+      .catch(err => {
+        setUploading(false);
+        const message = err.response
+          ? err.response.data.message
+          : 'Error uploading ID card contact Admin';
+        toast({
+          title: message,
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+          position: 'top-right',
+        });
+        setSaving(false);
+      });
   };
 
   const handleSubmit = e => {
@@ -84,11 +118,11 @@ const PersonalDetails = () => {
           nationality: data.nationality,
           mothers_maiden_name: data.mothers_maiden_name,
           bvn: data.bvn,
-          street_address: data.address.street_address,
-          street_address2: data.address.street_address2,
-          city: data.address.city,
-          state: data.address.state,
-          country: data.address.country,
+          street_address: data.street_address,
+          street_address2: data.street_address2,
+          city: data.city,
+          state: data.state,
+          country: data.country,
         });
       })
       .catch(err => {
