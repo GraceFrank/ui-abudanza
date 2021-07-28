@@ -1,13 +1,9 @@
 import {
   Image,
-  Box,
   Text,
   Heading,
   HStack,
-  Progress,
-  Spacer,
   VStack,
-  Flex,
   useDisclosure,
   Button,
   Drawer,
@@ -18,11 +14,12 @@ import {
   DrawerHeader,
   DrawerFooter,
 } from '@chakra-ui/react';
+import { useRef } from 'react';
+import TitleDetail from '../../../components/common/TitleDetail';
 
-export function UserDetails({ investmentDetail, size = 'sm', children }) {
+export function UserDetails({ data, size = 'md', children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
-  console.log('I;NVESTMENT DETAIL', investmentDetail);
 
   return (
     <>
@@ -45,108 +42,71 @@ export function UserDetails({ investmentDetail, size = 'sm', children }) {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader color="abudanza.primary">
-            Investment Details
-          </DrawerHeader>
+          <DrawerHeader color="abudanza.primary">User Details</DrawerHeader>
 
           <DrawerBody>
-            <VStack fontSize="sm" color="grey" align="start">
+            <VStack fontSize="sm" align="start" spacing={5}>
               {children}
 
-              <HStack>
-                <Text>Status:</Text>
-                <Text
-                  textTransform="capitalize"
-                  fontWeight="medium"
-                  color={
-                    investmentDetail.status === 'pending'
-                      ? 'red.500'
-                      : 'green.500'
-                  }
-                  size="sm"
-                >
-                  {investmentDetail.status}
-                </Text>
+              <HStack spacing="10">
+                <TitleDetail title="Status" value={data.status} />
+                <TitleDetail title="Role" value={data.user.role} />
               </HStack>
 
-              <HStack>
-                <Text>Duration:</Text>
-                <Text
-                  textTransform="capitalize"
-                  fontWeight="medium"
-                  color="black"
-                  size="sm"
-                >
-                  {investmentDetail.duration} Days
-                </Text>
-              </HStack>
-              <HStack>
-                <Text>Interest Rate:</Text>
-                <Text
-                  textTransform="capitalize"
-                  fontWeight="bold"
-                  color="green.500"
-                  fontSize="md"
-                >
-                  {investmentDetail.interest_rate}%
-                </Text>
-              </HStack>
-              <HStack>
-                <Text>Expected Returns:</Text>
-                <Text
-                  textTransform="capitalize"
-                  fontWeight="bold"
-                  color="green.500"
-                  fontSize="md"
-                >
-                  ₦{Number(investmentDetail.amount_due).toLocaleString()}
-                </Text>
-              </HStack>
-              <HStack>
-                <Text>Amount Paid:</Text>
-                <Text
-                  textTransform="capitalize"
-                  fontWeight="medium"
-                  color="black"
-                  size="sm"
-                >
-                  ₦{Number(investmentDetail.amount_paid).toLocaleString()}
-                </Text>
+              <HStack spacing="10">
+                <TitleDetail title="First Name" value={data.user.first_name} />
+                <TitleDetail title="Last Name" value={data.user.last_name} />
               </HStack>
 
-              <HStack>
-                <Text>Activation Date:</Text>
-                <Text
-                  textTransform="capitalize"
-                  fontWeight="medium"
-                  color="black"
-                  size="sm"
-                >
-                  {investmentDetail.due_date &&
-                    new Date(
-                      investmentDetail.activation_date
-                    ).toLocaleDateString()}
-                </Text>
+              <HStack spacing="10">
+                <TitleDetail title="Title" value={data.title} />
+                <TitleDetail
+                  title="Marital Status"
+                  value={data.marital_status}
+                />
               </HStack>
-              <HStack>
-                <Text>Due Date:</Text>
-                <Text
-                  textTransform="capitalize"
-                  fontWeight="medium"
-                  color="black"
-                  size="sm"
-                >
-                  {investmentDetail.due_date &&
-                    new Date(investmentDetail.due_date).toLocaleDateString()}
-                </Text>
+
+              <HStack spacing="10">
+                <TitleDetail title="Phone Number" value={data.user.phone} />
+                <TitleDetail
+                  title="Email"
+                  value={data.user.email}
+                  textTransform="lowercase"
+                />
               </HStack>
-              <Heading size="sm">Proof of Payment</Heading>
-              <Image
-                src={convertCloudinaryUrlToJpeg(
-                  investmentDetail.payment_proof.url
-                )}
-                alt="payment proof"
+
+              <HStack spacing="10">
+                <TitleDetail
+                  title="Mother's Maiden Name"
+                  value={data.mothers_maiden_name}
+                />
+                <TitleDetail title="Nationality" value={data.nationality} />
+              </HStack>
+
+              <HStack spacing="10">
+                <TitleDetail
+                  title="Date of Birth"
+                  value={new Date(data.birthday).toLocaleDateString()}
+                />
+                <TitleDetail title="BVN" value={data.bvn} />
+              </HStack>
+
+              <TitleDetail title="Street Address" value={data.street_address} />
+              <TitleDetail
+                title="Street Address 2"
+                value={data.street_address2}
               />
+              <TitleDetail title="City" value={data.city} />
+
+              <HStack spacing="10">
+                <TitleDetail title="State" value={data.state} />
+                <TitleDetail title="Country" value={data.country} />
+              </HStack>
+              <Heading size="sm">ID card</Heading>
+              {/* <Image
+                src={convertCloudinaryUrlToJpeg(data.payment_proof.url)}
+                alt="payment proof"
+              /> */}
             </VStack>
           </DrawerBody>
 

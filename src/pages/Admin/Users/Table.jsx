@@ -13,6 +13,7 @@ import {
   Button,
 } from '@chakra-ui/react';
 import Card from '../../../components/common/Card';
+import { UserDetails } from './UserDetails';
 
 const fakeData = new Array(10);
 fakeData.fill({
@@ -61,7 +62,7 @@ export default function DataTable({ data = fakeData, status }) {
         </Td>
         <Td>
           <Td>
-            <Text textTransform="capitalize">{asset.user.email}</Text>
+            <Text>{asset.user.email}</Text>
           </Td>
         </Td>
         <Td>
@@ -77,11 +78,9 @@ export default function DataTable({ data = fakeData, status }) {
         <Td>
           <Badge colorScheme="green">{asset.status}</Badge>
         </Td>
-        <Td isNumeric>{asset.cost}</Td>
         <Td>
-          <Button>View</Button>
+          <UserDetails data={asset} />
         </Td>
-        <Td isNumeric>{asset.cost}</Td>
       </Tr>
     );
   });
